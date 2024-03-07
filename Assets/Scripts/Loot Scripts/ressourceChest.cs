@@ -8,12 +8,14 @@ public class ressourceChest : MonoBehaviour
     ressourceBehavior wood = new ressourceBehavior("Wood", 1, 1);
     ressourceBehavior coal = new ressourceBehavior("Coal", 2, 1);
     ressourceBehavior iron = new ressourceBehavior("Iron", 3, 1);
+    
 
     void Start()
     {
         OpenChestRessource();
 
     }
+    //Method to open the chest and get a random ressource with a random amount
     public ressourceBehavior OpenChestRessource()
     {
         int random = Random.Range(0, 100);
@@ -23,7 +25,6 @@ public class ressourceChest : MonoBehaviour
             wood.amount = Random.Range(15, 25);
             Debug.Log("wood amount: " + wood.amount);
             Debug.Log(random);
-
             return wood;
         }
         else if (random < 80)
