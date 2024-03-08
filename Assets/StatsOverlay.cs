@@ -18,6 +18,8 @@ public class StatsOverlay : MonoBehaviour
     [SerializeField] private TMP_Text attacksText;
     [SerializeField] private Canvas _stats;
 
+    private string attackString;
+
     void Awake()
     {
 
@@ -51,9 +53,9 @@ public class StatsOverlay : MonoBehaviour
     {
         #region updateAttributes
 
-        _health = _character.GetComponent<Character>().health;
-        _AP = _character.GetComponent<Character>().AP;
-        _MP = _character.GetComponent<Character>().MP;
+        _health = _character.health;
+        _AP = _character.AP;
+        _MP = _character.MP;
 
         #endregion
 
@@ -62,12 +64,12 @@ public class StatsOverlay : MonoBehaviour
 
         //get enum values from Character.cs and display them
         string[] attackNames = System.Enum.GetNames(typeof(Character.AttackType));
-        string attackString = "Attacks: \n";
+        attackString = "Attacks: \n";
         for (int i = 0; i < attackNames.Length; i++)
         {
             attackString += attackNames[i] + "\n";
         }
-        attacksText.text = attackString;
+        
         
         #endregion
     }
@@ -75,5 +77,7 @@ public class StatsOverlay : MonoBehaviour
     void displayStats()
     {
         attributesText.text = "Attacks: \n" + "Health: " + _health + "\n" + "AP: " + _AP + "\n" + "MP: " + _MP;
+
+        attacksText.text = attackString;
     }
 }
