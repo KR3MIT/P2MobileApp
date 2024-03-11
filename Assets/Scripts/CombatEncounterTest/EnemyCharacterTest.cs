@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class EnemyCharacterTest : MonoBehaviour
 {
-
-
-    public int health;
+    public float Health;
     public int attackPower;
     public int defense;
 
