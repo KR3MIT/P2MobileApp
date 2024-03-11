@@ -247,14 +247,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f88ceee1b9b50fe41886069e8ac25055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accessToken: sk.eyJ1IjoibWFkc2JlbiIsImEiOiJjbHRrM3hrd28wYmJiMmxteTBzZ2t3bXNkIn0.uxJfgiIsP-g8DJzEQndc3g
-  mapStyle: 2
+  accessToken: pk.eyJ1IjoibWFkc2JlbiIsImEiOiJjbHRrMXA1a3UwdWdsMnBxdmx3anRjOHB5In0.WcbYEU3wnJ8jnCQHvyy21A
+  mapStyle: 5
   mapResolution: 1
   boundingBox:
-  - 55.74836626719863
-  - 12.531936374156961
-  - 55.744529929904054
-  - 12.555213109443265
+  - 12.5403
+  - 55.6488
+  - 12.5437
+  - 55.65
 --- !u!64 &1328753554
 MeshCollider:
   m_ObjectHideFlags: 0

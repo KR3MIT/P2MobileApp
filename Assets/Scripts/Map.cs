@@ -69,6 +69,7 @@ public class Map : MonoBehaviour
     IEnumerator GetMapbox()
     {
         url = "https://api.mapbox.com/styles/v1/mapbox/" + styleStr[(int)mapStyle] + "/static/[" + boundingBox[0] + "," + boundingBox[1] + "," + boundingBox[2] + "," + boundingBox[3] + "]/" + mapWidthPx + "x" + mapHeightPx + "?" + "access_token=" + accessToken;
+        Debug.Log(url);
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
         yield return www.SendWebRequest();
         if (www.result != UnityWebRequest.Result.Success)
@@ -90,16 +91,25 @@ public class Map : MonoBehaviour
         double planeWidthScale = planeHeightScale * Camera.main.aspect;
         gameObject.transform.localScale = new Vector3((float)planeWidthScale, 1, (float)planeHeightScale);
         //Set map width and height in pixel based on view aspec ratio
-        //if (Camera.main.aspect > 1) //Width is bigger than height
-        //{
-        //    mapWidthPx = 1280; //Mapbox width should be a number between 1 and 1280 pixels.
-        //    mapHeightPx = (int)Math.Round(1280 / Camera.main.aspect); //Height is proportional to to view aspect ratio
-        //}
-        //else //Height is bigger than width
-        //{
-        //    mapHeightPx = 1280; //Mapbox height should be a number between 1 and 1280 pixels.
-        //    mapWidthPx = (int)Math.Round(1280 / Camera.main.aspect); //Width is proportional to to view aspect ratio
-        //}
+        if (Camera.main.aspect > 1) //Width is bigger than height
+        {
+            mapWidthPx = 1280; //Mapbox width should be a number between 1 and 1280 pixels.
+            mapHeightPx = (int)Math.Round(1280 / Camera.main.aspect); //Height is proportional to to view aspect ratio
+        }
+        else //Height is bigger than width
+        {
+            mapHeightPx = 1280; //Mapbox height should be a number between 1 and 1280 pixels.
+            mapWidthPx = (int)Math.Round(1280 / Camera.main.aspect); //Width is proportional to to view aspect ratio
+        }
+        // the following code will force the map tp have a width between 1 and 1280 pixels
+        if (mapWidthPx < 1)
+        {
+            mapWidthPx = 1;
+        }
+        else if (mapWidthPx > 1280)
+        {
+            mapWidthPx = 1280;
+        }
     }
 
 
