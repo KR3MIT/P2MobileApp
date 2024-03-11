@@ -27,7 +27,10 @@ public class ressourceChest : MonoBehaviour
             wood.amount = Random.Range(20, 25);
             Debug.Log("wood amount: " + wood.amount);
             Debug.Log(random);
+       //set oppenbutton to false
             return wood;
+          
+            
         }
         else if (random < 50)
         {
