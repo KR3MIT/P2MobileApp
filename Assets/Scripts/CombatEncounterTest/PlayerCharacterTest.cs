@@ -1,13 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCharacterTest : MonoBehaviour
 {
     // Reference to the enemy character instance
-    private EnemyCharacterTest enemyCharacter;
+    public EnemyCharacterTest enemyCharacter;
+    public TMP_Text playerHealthText;
+    public Slider playerHealthBar;
+    public TMP_Text enemyHealthText;
+    public Slider enemyHealthBar;
 
-    int health = 100;
+
+    float playerMaxHealth = 100;
+    float playerHealth = 100;
+    float enemyMaxHealth;
+    float enemyHealth;
     int attackPower = 10;
     int defense = 5;
 
@@ -17,23 +27,24 @@ public class PlayerCharacterTest : MonoBehaviour
         InitiateCombat();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void InitiateCombat()
     {
         // Create an instance of the EnemyCharacterTest class
         enemyCharacter = new EnemyCharacterTest();
 
         // Modify the variables of the enemy character instance
-        enemyCharacter.health = Random.Range(50, 80);
-        enemyCharacter.attackPower = Random.Range(6, 8);
-        enemyCharacter.defense = Random.Range(3, 5);
+        enemyHealth = enemyCharacter.Health = (float)Random.Range(80, 100);
+        enemyMaxHealth = enemyCharacter.Health;
+        enemyCharacter.attackPower = Random.Range(8, 10);
+        enemyCharacter.defense = Random.Range(4, 5);
 
-        while (health > 0 && enemyCharacter.health > 0)
+        StartCoroutine(CombatSequence());
+
+    }
+    IEnumerator CombatSequence()
+    {
+
+        while (playerHealth > 0 && enemyHealth > 0)
         {
 
             int playerAttack = attackPower + Random.Range(-2, 2);
@@ -42,30 +53,38 @@ public class PlayerCharacterTest : MonoBehaviour
             int enemyDefense = enemyCharacter.defense + Random.Range(-2, 2);
 
             // Player attacks the enemy
-            enemyCharacter.health -= playerAttack - enemyDefense;
+            enemyHealth -= playerAttack - enemyDefense;
 
             Debug.Log("Player attacked enemy for: " + playerAttack);
             Debug.Log("Enemy defended for: " + enemyDefense);
-            Debug.Log("Enemy health: " + enemyCharacter.health);
+            Debug.Log("Enemy health: " + enemyHealth);
 
-            if (enemyCharacter.health <= 0)
+            HealthBar.UpdateHealthBar(enemyHealth, enemyMaxHealth, enemyHealthBar, enemyHealthText);
+
+            if (enemyHealth < 0)
             {
-                Debug.Log("Player wins!");
                 break;
             }
 
             // Enemy attacks the player
-            health -= enemyAttack - playerDefense;
+            playerHealth -= enemyAttack - playerDefense;
 
             Debug.Log("Enemy attacked player for: " + enemyAttack);
             Debug.Log("Player defended for: " + playerDefense);
-            Debug.Log("Player health: " + health);
+            Debug.Log("Player health: " + playerHealth);
 
-            if (health <= 0)
-            {
-                Debug.Log("Enemy wins!");
-                break;
-            }
+            HealthBar.UpdateHealthBar(playerHealth, playerMaxHealth, playerHealthBar, playerHealthText);
+
+            yield return new WaitForSeconds(1);
+        }
+
+        if (playerHealth < enemyHealth)
+        {
+            Debug.Log("Player has been defeated");
+        }
+        else
+        {
+            Debug.Log("Enemy has been defeated");
         }
 
     }
