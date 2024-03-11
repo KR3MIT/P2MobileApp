@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ressourceBehavior : MonoBehaviour
 {
-// Create a base class called Item that defines common properties and methods for all loot items, such as name, rarity and value
+//Constructor that creates a new ressource with a name, value, and amount
     public new string name;
     public int value;
     public int amount;
