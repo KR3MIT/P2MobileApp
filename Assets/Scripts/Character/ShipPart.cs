@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class ShipPart : MonoBehaviour
 {
-    public string partName;
-    public int lvl = 1;
-    public int AD;
-    public int def;
-    public int health;
+    public string partName {  get; private set; }
+    public int lvl {  get; private set; }
+    public int AD { get; private set; }
+    public int def { get; private set; }
+    public int health { get; private set; }
+    public int upgradeCost { get; private set; }
+
+    public GameObject instanciateShipPart { get; private set; }
+    public GameObject instanciateShipCost { get; private set; }
 
     public ShipPart(string partName)
     {
@@ -18,7 +22,7 @@ public class ShipPart : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        lvl = 1;
     }
 
     // Update is called once per frame
@@ -30,5 +34,14 @@ public class ShipPart : MonoBehaviour
     public void LevelUp(ref int StatToGrow)
     {
         StatToGrow += 3;
+    }
+
+    public void SetInstanciated(GameObject part, GameObject cost)
+    {
+        instanciateShipPart = part;
+        instanciateShipCost = cost;
+
+
+
     }
 }
