@@ -22,6 +22,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System;
+using System.Globalization;
+using UnityEngine.InputSystem;
 
 public class Map : MonoBehaviour
 {
@@ -41,11 +43,10 @@ public class Map : MonoBehaviour
     private double planeWidth;
     private double planeHeight;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        MatchPlaneToScreenSize();
+       // MatchPlaneToScreenSize();
         if (gameObject.GetComponent<MeshRenderer>() == null)
         {
             gameObject.AddComponent<MeshRenderer>();
@@ -55,8 +56,26 @@ public class Map : MonoBehaviour
         StartCoroutine(GetMapbox());
     }
 
-    // Update is called once per frame void Update(){ }
+    public void UpdateBoundingBox(double userLongitude, double userLatitude)
+    {
+        // Define a desired radius around the user location (adjust as needed)
+        double radiusInMeters = 1000; // Adjust for desired zoom level
 
+        // Calculate bounding box based on user location and radius
+        double deltaLatitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * userLatitude)));
+        double deltaLongitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * userLatitude)));
+
+        boundingBox[0] = userLongitude - deltaLongitude;
+        boundingBox[1] = userLatitude - deltaLatitude;
+        boundingBox[2] = userLongitude + deltaLongitude;
+        boundingBox[3] = userLatitude + deltaLatitude;
+
+        // Regenerate map with updated bounding box
+        StartCoroutine(GetMapbox());
+    }
+
+
+    // Update is called once per frame void Update(){ }
     public void GenerateMapOnClick()
     {
         StartCoroutine(GetMapbox());
@@ -65,8 +84,15 @@ public class Map : MonoBehaviour
 
     IEnumerator GetMapbox()
     {
-        url = "https://api.mapbox.com/styles/v1/mapbox/" + styleStr[(int)mapStyle] + "/static/[" + boundingBox[0] + "," + boundingBox[1] + "," + boundingBox[2] + "," + boundingBox[3] + "]/" + mapWidthPx + "x" + mapHeightPx + "?" + "access_token=" + accessToken;
+        CultureInfo invariantCulture = CultureInfo.InvariantCulture;
+
+        url = "https://api.mapbox.com/styles/v1/mapbox/" + styleStr[(int)mapStyle] + "/static/["
+            + boundingBox[0].ToString(invariantCulture) + "," + boundingBox[1].ToString(invariantCulture) + ","
+            + boundingBox[2].ToString(invariantCulture) + "," + boundingBox[3].ToString(invariantCulture) + "]/"
+            + mapWidthPx + "x" + mapHeightPx + "?" + "access_token=" + accessToken;
+
         Debug.Log(url);
+        Debug.Log("that was the url");
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
         yield return www.SendWebRequest();
         if (www.result != UnityWebRequest.Result.Success)

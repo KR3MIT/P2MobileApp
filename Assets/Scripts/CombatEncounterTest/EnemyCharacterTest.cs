@@ -7,16 +7,4 @@ public class EnemyCharacterTest : MonoBehaviour
     public float Health;
     public int attackPower;
     public int defense;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
