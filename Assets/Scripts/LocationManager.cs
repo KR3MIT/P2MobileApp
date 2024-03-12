@@ -15,12 +15,18 @@ public class LocationManeger : MonoBehaviour
     private double radiusInMeters = 1000; // Adjust for desired zoom level
     private double deltaLatitude;
     private double deltaLongitude;
-    private double[] boundingBox = new double[] { 151.196023022085, -33.8777251205232, 151.216012372138, -33.8683894791246 }; //[lon(min), lat(min), lon(max), lat(max)]
+    private double[] boundingBox = new double[] {0,0,0,0}; //[lon(min), lat(min), lon(max), lat(max)]
     public Map map;
     private void Start()
     {
-        map = GameObject.Find("Map").GetComponent<Map>();
-        StartCoroutine(AskForLocation());
+        if (!UnityEngine.Android.Permission.HasUserAuthorizedPermission(UnityEngine.Android.Permission.FineLocation))
+        {
+            UnityEngine.Android.Permission.RequestUserPermission(UnityEngine.Android.Permission.FineLocation);
+        }//this code is used to ask the user for permission to use the location services
+
+        //the folowing code is used to get the location of the user and update the bounding box of the map so that the map we generate is centered around the user
+        map = GetComponent<Map>();
+        StartCoroutine(AskForLocation());// this is a coroutine that asks for the location of the user
     }
     private IEnumerator AskForLocation()
     {
