@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 public class RadarBehavior : MonoBehaviour
 {
@@ -9,17 +11,34 @@ public class RadarBehavior : MonoBehaviour
     public GameObject Sphere; // Quad is the gameobject that we wish to spawn props ontop of
     int randomItem = 0; // randomItem is set to 0
     GameObject toSpawn; // gameobjected toSpawn is created
+    public float timer = 0f;
 
-    // 3 floats to hold the different axis values for our vector3 
- 
-    void Start()
+    public bool StartScan = false; // a bool that is set to false
+    public float delay = 3f; // a float that is set to 0.5f
+   
+    
+   
+    
+    void Update()
     {
-        spawnObjects(); //this method is called once, when the game is started.
+        timer += Time.deltaTime;
+
+        if (StartScan == true && timer > delay)
+        {
+            spawnObjects();
+            StartScan = false;
+            timer = timer- delay;
+            
+        }
+       
     }
+    public void StartScanButton()
+    {
+        StartScan = true;
+    }
+
     public void spawnObjects() //we are making a new method called "spawnObjects"
     {
-
-
         MeshCollider radar = Sphere.GetComponent<MeshCollider>(); // map is the meshcollider of the sphere gameobject
 
         for (int i = 0; i < amount; i++)
@@ -31,5 +50,5 @@ public class RadarBehavior : MonoBehaviour
             Instantiate(toSpawn, randomCirclePosition, Sphere.transform.rotation); // we instantiate the chosen prop, with the new vector3 positition with a default rotation
         }
 
-    } //important to credit the same guy from the p1 project for helping me with this script
+    }
 }
