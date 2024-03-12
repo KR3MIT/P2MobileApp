@@ -35,7 +35,7 @@ public class Character : MonoBehaviour
     public List<ShipPart> shipParts = new List<ShipPart>();
 
     //Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         ShipPart cannon = new ShipPart("Cannon");
         ShipPart engine = new ShipPart("Engine");
@@ -47,7 +47,6 @@ public class Character : MonoBehaviour
         shipParts.Add(balloon);
         shipParts.Add(bow);
 
-        
     }
 
     public void SetStats()
