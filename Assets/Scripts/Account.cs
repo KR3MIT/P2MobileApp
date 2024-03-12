@@ -9,8 +9,10 @@ using TMPro;
 public class Account : MonoBehaviour
 {
     [SerializeField] private GameObject signInDisplay;
+    [SerializeField] private GameObject playerNameDisplay;
     [SerializeField] private TMP_InputField usernameInput;
     [SerializeField] private TMP_InputField passwordInput;
+    [SerializeField] private TMP_InputField playerNameInput;
 
 
     async void Start()
@@ -25,7 +27,9 @@ public class Account : MonoBehaviour
         string username = usernameInput.text;
         string password = passwordInput.text;
         await SignUpWithUsernamePassword(username, password);
-
+        //await SignInWithUsernamePassword(username, password);
+        checkSignIn();
+        playerNameDisplay.SetActive(true);
     }
 
     async Task SignUpWithUsernamePassword(string username, string password)
@@ -97,7 +101,18 @@ public class Account : MonoBehaviour
         }
     }
 
+    //Set player name
+    public async void setPlayerName()
+    {
+        string playerName = playerNameInput.text;
+        await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
+        playerNameDisplay.SetActive(false);
+        Debug.Log("Player name is set to " + playerName);
+        //Access chached player name
+        string cachedPlayerName = AuthenticationService.Instance.PlayerName;
+        Debug.Log("Cached player name is " + cachedPlayerName);
 
+    }
 
 
 
