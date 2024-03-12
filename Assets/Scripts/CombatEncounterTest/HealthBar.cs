@@ -6,6 +6,11 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
+// This script was developed with the help of Github Co-pilot.
+
+// This script handles the health bar and damage text for the player and enemy characters.
+// All methods are called through the PlayerCharacterTest class.
+
 public class HealthBar : MonoBehaviour
 {
 
