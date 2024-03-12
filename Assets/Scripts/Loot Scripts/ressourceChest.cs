@@ -16,6 +16,7 @@ public class ressourceChest : MonoBehaviour
     public void OpenChest()
     {
         OpenChestRessource();
+        animator.SetBool("ChestClicked", true);
     }
     //Method to open the chest and get a random ressource with a random amount
     public ressourceBehavior OpenChestRessource()
