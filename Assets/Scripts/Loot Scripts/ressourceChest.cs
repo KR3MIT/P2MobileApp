@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ressourceChest : MonoBehaviour
 {
+    public Animator animator;
     //example of new ressources with name, value, and random amount
     ressourceBehavior wood = new ressourceBehavior("Wood", 1, 1);
     ressourceBehavior coal = new ressourceBehavior("Coal", 2, 1);
@@ -15,7 +16,8 @@ public class ressourceChest : MonoBehaviour
     public void OpenChest()
     {
         OpenChestRessource();
-
+        animator = GetComponent<Animator>();
+        animator.SetTrigger("OpenChest");
     }
     //Method to open the chest and get a random ressource with a random amount
     public ressourceBehavior OpenChestRessource()
