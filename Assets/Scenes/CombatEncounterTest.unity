@@ -231,6 +231,10 @@ MonoBehaviour:
   playerHealthBar: {fileID: 933144544}
   enemyHealthText: {fileID: 2142715934}
   enemyHealthBar: {fileID: 817191126}
+  playerLocation: {fileID: 28699623}
+  playerBulletPrefab: {fileID: 3445672432600655737, guid: 537ff12156f7ac04eb6f4038de94d815, type: 3}
+  enemyLocation: {fileID: 1013726142}
+  enemyBulletPrefab: {fileID: 4865742710134959282, guid: 1e0ef00f086e60a4f9260c59e08ff639, type: 3}
   enemyDamageTakenText: {fileID: 7849279378205355073, guid: bdb88e245528f624dacdecfd98d57f16, type: 3}
   playerDamageTakenText: {fileID: 7580118094275978048, guid: 1565f345e2bfdf34aaee4141e50faa4d, type: 3}
   enemyDamageTakenTextLocation: {fileID: 1833192719}
