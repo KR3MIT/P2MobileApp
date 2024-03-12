@@ -8,18 +8,22 @@ public class Character : MonoBehaviour
     //Attributes
     private string playerName = "Player";
     
+    [Tooltip("Health")]
     public int health = 0;
     
+    [Tooltip("Attack Damage")]
     public int AD = 0;
     
     [Tooltip("Defence")]
     public int def = 0;
 
+    [Tooltip("Level")]
     public int lvl = 1;
-    
+
+    [Tooltip("Experience")]
     public int exp = 0;
 
-    //Resources
+    [Header("Resources")]
     public int wood = 0;
     public int metal = 0;
     public int diamonds = 0;

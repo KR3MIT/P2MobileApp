@@ -36,10 +36,7 @@ public class Map : MonoBehaviour
     private string url = "";
     private Material mapMaterial;
     private int mapWidthPx = 1280;
- 
-    
-        
-    
+
     private int mapHeightPx = 1280;
     private double planeWidth;
     private double planeHeight;
@@ -81,6 +78,7 @@ public class Map : MonoBehaviour
             gameObject.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", ((DownloadHandlerTexture)www.downloadHandler).texture);
         }
     }
+
 
 
     //Set the scale of plane to match the screen size
