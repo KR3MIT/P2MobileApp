@@ -8,6 +8,7 @@ using Unity.Services.Analytics;
 public class Analytics : MonoBehaviour
 {
     [SerializeField] private bool consentGiven = false; // A boolean to track whether the player has given consent to collect data.
+    public GameObject consentUIPrefab; // A reference to a UI element that asks for consent.
 
 
     async void Start()
