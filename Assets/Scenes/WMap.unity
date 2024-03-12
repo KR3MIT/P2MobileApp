@@ -248,13 +248,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   accessToken: pk.eyJ1IjoibWFkc2JlbiIsImEiOiJjbHRrMXA1a3UwdWdsMnBxdmx3anRjOHB5In0.WcbYEU3wnJ8jnCQHvyy21A
-  mapStyle: 5
-  mapResolution: 1
+  mapStyle: 4
+  mapResolution: 2
   boundingBox:
-  - 12.5403
-  - 55.6488
-  - 12.5437
-  - 55.65
+  - 12.5596
+  - 55.7039
+  - 12.5646
+  - 55.7067
 --- !u!64 &1328753554
 MeshCollider:
   m_ObjectHideFlags: 0
