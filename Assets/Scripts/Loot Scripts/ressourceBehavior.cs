@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ressourceBehavior : MonoBehaviour
+public struct ressourceBehavior
 {
 //Constructor that creates a new ressource with a name, value, and amount
-    public new string name;
+    public string name;
     public int value;
     public int amount;
 

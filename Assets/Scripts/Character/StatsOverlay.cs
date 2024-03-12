@@ -29,6 +29,7 @@ public class StatsOverlay : MonoBehaviour
     void Start()
     {
         _toggleStats.onClick.AddListener(toggleStats);
+        _stats.enabled = false;
     }
 
 
