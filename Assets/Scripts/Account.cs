@@ -16,19 +16,15 @@ public class Account : MonoBehaviour
     async void Start()
     {
         await UnityServices.InitializeAsync();
-        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
-        if (isSignedIn)
-        {
-            signInDisplay.SetActive(false);
-        }
-
+        checkSignIn();
     }
 
-
-    public async void create()
+    //New player SIGN UP with username and password
+    public async void signUp()
     {
         string username = usernameInput.text;
         string password = passwordInput.text;
+        await SignUpWithUsernamePassword(username, password);
 
     }
 
@@ -52,6 +48,57 @@ public class Account : MonoBehaviour
             Debug.LogException(ex);
         }
     }
+
+
+    //Existing player SIGN IN with username and password
+    public async void signIn()
+    {
+        string username = usernameInput.text;
+        string password = passwordInput.text;
+        await SignInWithUsernamePassword(username, password);
+        checkSignIn();
+    }
+
+    async Task SignInWithUsernamePassword(string username, string password)
+    {
+        try
+        {
+            await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password);
+            Debug.Log("SignIn is successful.");
+        }
+        catch (AuthenticationException ex)
+        {
+            // Compare error code to AuthenticationErrorCodes
+            // Notify the player with the proper error message
+            Debug.LogException(ex);
+        }
+        catch (RequestFailedException ex)
+        {
+            // Compare error code to CommonErrorCodes
+            // Notify the player with the proper error message
+            Debug.LogException(ex);
+        }
+    }
+
+    //Sign out
+    public async void signOut()
+    {
+        //await AuthenticationService.Instance.SignOutAsync();
+        signInDisplay.SetActive(true);
+    }
+
+  //Check if the player is signed in
+  public void checkSignIn()
+    {
+        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
+        if (isSignedIn)
+        {
+            signInDisplay.SetActive(false);
+        }
+    }
+
+
+
 
 
 
