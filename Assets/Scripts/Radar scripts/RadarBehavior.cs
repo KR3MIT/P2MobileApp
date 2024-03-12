@@ -11,24 +11,17 @@ public class RadarBehavior : MonoBehaviour
     public GameObject Sphere; // Quad is the gameobject that we wish to spawn props ontop of
     int randomItem = 0; // randomItem is set to 0
     GameObject toSpawn; // gameobjected toSpawn is created
-    public float timer = 0f;
-
-    public bool StartScan = false; // a bool that is set to false
-    public float delay = 3f; // a float that is set to 0.5f
-   
+   public bool StartScan = false;
     
-   
+
     
     void Update()
     {
-        timer += Time.deltaTime;
-
-        if (StartScan == true && timer > delay)
+       
+        if (StartScan == true)
         {
             spawnObjects();
             StartScan = false;
-            timer = timer- delay;
-            
         }
        
     }
