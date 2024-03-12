@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 public class RadarBehavior : MonoBehaviour
 {
@@ -9,19 +11,34 @@ public class RadarBehavior : MonoBehaviour
     public GameObject Sphere; // Quad is the gameobject that we wish to spawn props ontop of
     int randomItem = 0; // randomItem is set to 0
     GameObject toSpawn; // gameobjected toSpawn is created
-    float screenX;
-    float screenY;
-    float screenZ;
-    // 3 floats to hold the different axis values for our vector3 
-    Vector3 pos; // a vector3 called pos
-    void Start()
+    public float timer = 0f;
+
+    public bool StartScan = false; // a bool that is set to false
+    public float delay = 3f; // a float that is set to 0.5f
+   
+    
+   
+    
+    void Update()
     {
-        spawnObjects(); //this method is called once, when the game is started.
+        timer += Time.deltaTime;
+
+        if (StartScan == true && timer > delay)
+        {
+            spawnObjects();
+            StartScan = false;
+            timer = timer- delay;
+            
+        }
+       
     }
+    public void StartScanButton()
+    {
+        StartScan = true;
+    }
+
     public void spawnObjects() //we are making a new method called "spawnObjects"
     {
-
-
         MeshCollider radar = Sphere.GetComponent<MeshCollider>(); // map is the meshcollider of the sphere gameobject
 
         for (int i = 0; i < amount; i++)
@@ -29,14 +46,8 @@ public class RadarBehavior : MonoBehaviour
         {
             randomItem = Random.Range(0, spawnPool.Count); // here we chose one random item from the spawnpool list
             toSpawn = spawnPool[randomItem]; // that random chosen gameobject is now set to "toSpawn"
-            screenX = Random.Range(radar.bounds.min.x, radar.bounds.max.x);// limits the area where the gameobjects can spawn on the x axis to be inside the bounds of the circle   
-            screenY = Random.Range(radar.bounds.min.y, radar.bounds.max.y);// limits the area where the gameobjects can spawn on the y axis to be inside the bounds of the  circle
-            screenZ = Random.Range(radar.bounds.min.z, radar.bounds.max.z);// limits the area where the gameobjects can spawn on the z axis to be inside the bounds of the circle
-            pos = new Vector3(screenX, screenY, screenZ); // pos now gets values, which is a new vector3, that contains the xyz map bounds 
-
-
-
-            Instantiate(toSpawn, pos, toSpawn.transform.rotation); // we instantiate the chosen prop, with the new vector3 positition with a default rotation
+            var randomCirclePosition = Random.insideUnitCircle * radar.bounds.extents; // this is a new vector2 that gets a random position inside the circle
+            Instantiate(toSpawn, randomCirclePosition, Sphere.transform.rotation); // we instantiate the chosen prop, with the new vector3 positition with a default rotation
         }
 
     }
