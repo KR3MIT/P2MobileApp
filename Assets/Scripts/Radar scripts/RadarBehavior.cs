@@ -14,8 +14,8 @@ public class RadarBehavior : MonoBehaviour
     public float timer = 0f;
 
     public bool StartScan = false; // a bool that is set to false
-    public float delay = 1.5f; // a float that is set to 0.5f
-
+    public float delay = 3f; // a float that is set to 0.5f
+   
     
    
     
