@@ -6,31 +6,57 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     //Attributes
-    public float health = 100;
-    public float AP = 100;
-    public float MP = 100;
+    private string playerName = "Player";
+    
+    public int health = 0;
+    
+    public int AD = 0;
+    
+    [Tooltip("Defence")]
+    public int def = 0;
+
+    public int lvl = 1;
+    
+    public int exp = 0;
 
     //Resources
-    public float wood = 0;
-    public float metal = 0;
-    public float diamonds = 0;
-    public float gold = 0;
+    public int wood = 0;
+    public int metal = 0;
+    public int diamonds = 0;
+    public int gold = 0;
 
     //Energy
-    public float coal = 0;
+    public int coal = 0;
+
+    public List<ShipPart> shipParts = new List<ShipPart>();
 
     //Start is called before the first frame update
     void Start()
     {
+        ShipPart cannon = new ShipPart("Cannon");
+        ShipPart engine = new ShipPart("Engine");
+        ShipPart balloon = new ShipPart("Balloon");
+        ShipPart bow = new ShipPart("Bow");
+
+        shipParts.Add(cannon);
+        shipParts.Add(engine);
+        shipParts.Add(balloon);
+        shipParts.Add(bow);
+
         
     }
 
-    //Enum with different attacks
-    public enum AttackType
+    public void SetStats()
     {
-        Cannons,
-        Rockets,
-        Magic
+        health = 0;
+        AD = 0;
+        def = 0;
+        foreach (ShipPart part in shipParts)
+        {
+            health += part.health;
+            AD += part.AD;
+            def += part.def;
+        }
     }
 
     //Update is called once per frame

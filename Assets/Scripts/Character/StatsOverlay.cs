@@ -11,11 +11,11 @@ public class StatsOverlay : MonoBehaviour
     public UnityEngine.UI.Button _toggleStats;
 
     private float _health;
-    private float _AP;
-    private float _MP;
+    private float _AD;
+    private float _def;
 
     [SerializeField] private TMP_Text attributesText;
-    [SerializeField] private TMP_Text attacksText;
+    [SerializeField] private TMP_Text partsText;
     [SerializeField] private Canvas _stats;
 
     private string attackString;
@@ -54,30 +54,26 @@ public class StatsOverlay : MonoBehaviour
         #region updateAttributes
 
         _health = _character.health;
-        _AP = _character.AP;
-        _MP = _character.MP;
+        _AD = _character.AD;
+        _def = _character.def;
 
         #endregion
 
-
-        #region updateAttacks
-
-        //get enum values from Character.cs and display them
-        string[] attackNames = System.Enum.GetNames(typeof(Character.AttackType));
-        attackString = "Attacks: \n";
-        for (int i = 0; i < attackNames.Length; i++)
-        {
-            attackString += attackNames[i] + "\n";
-        }
-        
-        
-        #endregion
     }
 
     void displayStats()
     {
-        attributesText.text = "Attacks: \n" + "Health: " + _health + "\n" + "AP: " + _AP + "\n" + "MP: " + _MP;
+        attributesText.text = "Attacks: \n" + "Health: " + _health + "\n" + "AD: " + _AD + "\n" + "def: " + _def;
 
-        attacksText.text = attackString;
+
+        if (_character.shipParts == null)
+        {
+            return;   
+        }
+        partsText.text = "Parts: \n";
+        foreach (ShipPart part in _character.shipParts)
+        {
+            partsText.text += part.partName + " level " + part.lvl + "\n";
+        }
     }
 }
