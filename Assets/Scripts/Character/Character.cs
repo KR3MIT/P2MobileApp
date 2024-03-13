@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static ShipPartObject;
 
 public class Character : MonoBehaviour
 {
     //Attributes
-    private string playerName = "Player";
-    
+    [Header("Attributes")]
+    public string playerName = "Jason";
+
+    [Tooltip("Level")]
+    public int lvl = 1;
+
+    [Tooltip("Experience")]
+    public int exp = 0;
+
     [Tooltip("Health")]
     public int health = 0;
     
@@ -17,22 +25,12 @@ public class Character : MonoBehaviour
     [Tooltip("Defence")]
     public int def = 0;
 
-    [Tooltip("Level")]
-    public int lvl = 1;
 
-    [Tooltip("Experience")]
-    public int exp = 0;
 
     //[Header("Resources")]
     //public int wood, metal, diamonds, gold;
 
-    public enum ResourceType
-    {
-        Wood,
-        Metal,
-        Diamonds,
-        Gold
-    }
+
 
     [Header("ShipParts")]
     public List<ShipPartObject> shipParts = new List<ShipPartObject>();
@@ -40,7 +38,7 @@ public class Character : MonoBehaviour
     [Header("Energy")]
     public int coal = 0;
 
-    //[Header("removelater")]
+    [Header("Resource")]
 
     public Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int> 
     { 
@@ -49,6 +47,14 @@ public class Character : MonoBehaviour
         { ResourceType.Diamonds, 0 }, 
         { ResourceType.Gold, 0 } 
     };
+
+    public enum ResourceType
+    {
+        Wood,
+        Metal,
+        Diamonds,
+        Gold
+    }
 
     //Start is called before the first frame update
     void Awake()
@@ -60,10 +66,10 @@ public class Character : MonoBehaviour
         //resources.Add(ResourceType.Gold, 0);
 
 
-        ShipPartObject cannon = new ShipPartObject("Cannon", new List<ResourceType> { ResourceType.Metal, ResourceType.Gold });
-        ShipPartObject engine = new ShipPartObject("Engine", new List<ResourceType> { ResourceType.Metal, ResourceType.Diamonds });
-        ShipPartObject balloon = new ShipPartObject("Balloon", new List<ResourceType> { ResourceType.Wood, ResourceType.Metal });
-        ShipPartObject bow = new ShipPartObject("Bow", new List<ResourceType> { ResourceType.Wood, ResourceType.Gold });
+        ShipPartObject cannon = new ShipPartObject("Cannon", new List<ResourceType> { ResourceType.Metal, ResourceType.Gold }, ShipPartObject.StatType.AD);
+        ShipPartObject engine = new ShipPartObject("Engine", new List<ResourceType> { ResourceType.Metal, ResourceType.Diamonds }, ShipPartObject.StatType.def);
+        ShipPartObject balloon = new ShipPartObject("Balloon", new List<ResourceType> { ResourceType.Wood, ResourceType.Metal }, ShipPartObject.StatType.health);
+        ShipPartObject bow = new ShipPartObject("Bow", new List<ResourceType> { ResourceType.Wood, ResourceType.Gold }, ShipPartObject.StatType.AD);
 
         shipParts.Add(cannon);
         shipParts.Add(engine);
@@ -104,9 +110,21 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void LevelUpPart(ref int statToGrow, ShipPartObject partToUpgrade)
+    public void LevelUpPart(ShipPartObject partToUpgrade)
     {
-        statToGrow += partToUpgrade.upgradeImprovement;
+        switch (partToUpgrade.statToUpgrade)
+        {
+            case StatType.health:
+                partToUpgrade.health += partToUpgrade.upgradeImprovement;
+                break;
+            case StatType.def:
+                partToUpgrade.def += partToUpgrade.upgradeImprovement;
+                break;
+            case StatType.AD:
+                partToUpgrade.AD += partToUpgrade.upgradeImprovement;
+                break;
+        }
+
 
         foreach (ResourceType type in partToUpgrade.upgradeTypes)//subtracts cost from resources
         {

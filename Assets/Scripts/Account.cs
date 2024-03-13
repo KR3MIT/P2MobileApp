@@ -113,8 +113,4 @@ public class Account : MonoBehaviour
         Debug.Log("Cached player name is " + cachedPlayerName);
 
     }
-
-
-
-
 }
