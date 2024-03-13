@@ -11,21 +11,29 @@ public class ShipPartObject
     public int def;
     public int health;
 
+    public enum StatType
+    {
+        health,
+        def,
+        AD
+    }
+
     public float upgradeCost = 5;
     public List<ResourceType> upgradeTypes = new List<ResourceType>();
     public float upgradeCostScale = 2f;
 
     public int upgradeImprovement = 3;
 
-    public int statToUpgrade;
+    public StatType statToUpgrade;
 
 
     [HideInInspector] public GameObject instanciateShipPart;
     [HideInInspector] public GameObject instanciateShipCost;
 
-    public ShipPartObject(string partName, List<ResourceType> upgradeTypes)
+    public ShipPartObject(string partName, List<ResourceType> upgradeTypes, StatType statType)
     {
         this.partName = partName;
         this.upgradeTypes = upgradeTypes;
+        this.statToUpgrade = statType;
     }
 }
