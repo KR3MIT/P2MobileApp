@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UIElements;
-using UnityEngine.UI;
-using UnityEditor.Experimental.GraphView;
+using static Character;
 
 public class UpgradeScreenManager : MonoBehaviour
 {
@@ -107,16 +105,16 @@ public class UpgradeScreenManager : MonoBehaviour
             switch (type)
             {
                 case Character.ResourceType.Wood:
-                    resourceAmount = character.resources["Wood"];
+                    resourceAmount = character.resources[ResourceType.Wood];
                     break;
                 case Character.ResourceType.Metal:
-                    resourceAmount = character.resources["Scrap Metal"];
+                    resourceAmount = character.resources[ResourceType.Metal];
                     break;
                 case Character.ResourceType.Diamonds:
-                    resourceAmount = character.resources["Shiny Diamond"];
+                    resourceAmount = character.resources[ResourceType.Diamonds];
                     break;
                 case Character.ResourceType.Gold:
-                    resourceAmount = character.resources["Gold Ingot"];
+                    resourceAmount = character.resources[ResourceType.Gold];
                     break;
             }
             costText += type.ToString() + ": " + resourceAmount + "/" + selectedPart.upgradeCost + "\n";
