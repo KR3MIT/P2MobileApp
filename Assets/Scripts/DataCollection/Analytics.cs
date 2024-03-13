@@ -28,11 +28,13 @@ public class Analytics : MonoBehaviour
     private void ConsentGiven()
     {
         AnalyticsService.Instance.StartDataCollection();
+        // Destroy(consentUIPrefab);
     }
 
     private void ConsentDenied()
     {
         Debug.Log("Consent denied. Data collection will not start.");
+        // Destroy(consentUIPrefab);
     }
     private void RemoveConsent()
     {
