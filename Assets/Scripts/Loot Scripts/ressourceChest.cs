@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static Character;// so i doint have to write Character.ResourceType every time
 
 public class ressourceChest : MonoBehaviour
 {
     public Animator animator;
-    //example of new ressources with name, value, and random amount
-    //ressourceBehavior wood = new ressourceBehavior("Wood", 1);
-    //ressourceBehavior coal = new ressourceBehavior("Coal", 1);
-    //ressourceBehavior sm = new ressourceBehavior("Scrap Metal", 1);
-    //ressourceBehavior diamond = new ressourceBehavior("Shiny Diamond", 1);
-    //ressourceBehavior gold = new ressourceBehavior("Gold Ingot", 1);
-
+    private Character character;
+    public TMPro.TextMeshProUGUI resourceGainText;
+  
     private Dictionary<ResourceType, int> resourcesToGive = new Dictionary<ResourceType, int>
     {
         {ResourceType.Wood, 1},
@@ -21,42 +18,22 @@ public class ressourceChest : MonoBehaviour
         {ResourceType.Diamonds, 1}
     };
 
-    
-
-    private Character character;
-
-    public TMPro.TextMeshProUGUI resourceGainText;
-
-    //public void OpenChest1()
-    //{
-    //    OpenChestRessource();
-    //    animator.SetBool("Chest1Clicked", true);
-    //}
-    //public void OpenChest2()
-    //{
-    //    OpenChestRessource();
-    //    animator.SetBool("Chest2Clicked", true);
-    //}
-    //public void OpenChest3()
-    //{
-    //    OpenChestRessource();
-    //    animator.SetBool("Chest3Clicked", true);
-    //}
-
     private void Awake()
     {
         character = FindObjectOfType<Character>();
+      
     }
     public void OpenChest(string ChestClicked)
     {
-        OpenChestRessource();
+        OpenChestResource();
         animator.SetBool(ChestClicked, true);
     }
-    //Method to open the chest and get a random ressource with a random amount
-    public void OpenChestRessource()
+   
+    //Method to open the chest and get a random resource with a random amount
+    public void OpenChestResource()
     {
         int random = Random.Range(0, 100);
-        if (random < 30)
+        if (random < 40)
         {
             Debug.Log("Wood");
             resourcesToGive[ResourceType.Wood] = Random.Range(20, 25);
@@ -77,7 +54,7 @@ public class ressourceChest : MonoBehaviour
             character.AddResource(ResourceType.Metal, resourcesToGive[ResourceType.Metal]);
             resourceGainText.text = "You found " + resourcesToGive[ResourceType.Metal] + " " + "Scrap Metal";
         }
-        else if (random < 95)
+        else if (random < 90)
         {
             Debug.Log("Gold Ingot");
             resourcesToGive[ResourceType.Gold] = Random.Range(6, 9);
