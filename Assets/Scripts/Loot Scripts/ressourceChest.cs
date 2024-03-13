@@ -12,11 +12,21 @@ public class ressourceChest : MonoBehaviour
     ressourceBehavior diamond = new ressourceBehavior("Shiny Diamond", 3, 1);
     ressourceBehavior gold = new ressourceBehavior("Gold Ingot", 3, 1);
 
-    
-    public void OpenChest()
+
+    public void OpenChest1()
     {
         OpenChestRessource();
-        animator.SetBool("ChestClicked", true);
+        animator.SetBool("Chest1Clicked", true);
+    }
+    public void OpenChest2()
+    {
+        OpenChestRessource();
+        animator.SetBool("Chest2Clicked", true);
+    }
+    public void OpenChest3()
+    {
+        OpenChestRessource();
+        animator.SetBool("Chest3Clicked", true);
     }
     //Method to open the chest and get a random ressource with a random amount
     public ressourceBehavior OpenChestRessource()
@@ -46,7 +56,7 @@ public class ressourceChest : MonoBehaviour
             Debug.Log(random);
             return sm;
         }
-        else if (random < 90)
+        else if (random < 95)
         {
             Debug.Log("Gold Ingot");
             gold.amount = Random.Range(6, 9);
