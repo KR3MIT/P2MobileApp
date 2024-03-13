@@ -42,16 +42,22 @@ public class Character : MonoBehaviour
 
     //[Header("removelater")]
 
-    public Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
+    public Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int> 
+    { 
+        { ResourceType.Wood, 0 }, 
+        { ResourceType.Metal, 0 }, 
+        { ResourceType.Diamonds, 0 }, 
+        { ResourceType.Gold, 0 } 
+    };
 
     //Start is called before the first frame update
     void Awake()
     {
 
-        resources.Add(ResourceType.Wood, 0);
-        resources.Add(ResourceType.Metal, 0);
-        resources.Add(ResourceType.Diamonds, 0);
-        resources.Add(ResourceType.Gold, 0);
+        //resources.Add(ResourceType.Wood, 0);
+        //resources.Add(ResourceType.Metal, 0);
+        //resources.Add(ResourceType.Diamonds, 0);
+        //resources.Add(ResourceType.Gold, 0);
 
 
         ShipPartObject cannon = new ShipPartObject("Cannon", new List<ResourceType> { ResourceType.Metal, ResourceType.Gold });
@@ -80,7 +86,7 @@ public class Character : MonoBehaviour
     private void Update()
     {
         //debug log for all resources using dictionary
-        Debug.Log("Wood: " + resources[ResourceType.Wood] + " Metal: " + resources[ResourceType.Metal] + " Diamonds: " + resources[ResourceType.Diamonds] + " Gold: " + resources[ResourceType.Gold]);
+        //Debug.Log("Wood: " + resources[ResourceType.Wood] + " Metal: " + resources[ResourceType.Metal] + " Diamonds: " + resources[ResourceType.Diamonds] + " Gold: " + resources[ResourceType.Gold]);
 
 
     }
