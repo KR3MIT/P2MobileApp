@@ -9,14 +9,23 @@ public class Analytics : MonoBehaviour
 {
     [SerializeField] private bool consentGiven = false; // A boolean to track whether the player has given consent to collect data.
     public GameObject consentUIPrefab; // A reference to a UI element that asks for consent.
-    DataCollector dataCollector;
+    public bool _consentGiven = false; // A boolean to track whether the player has given consent to collect data.
 
 
     async void Start()
     {
         await UnityServices.InitializeAsync(); // Initialize the Unity Services SDK.
-
-        AskForConsent(); // Ask the player for consent to collect data.
+       
+        if (_consentGiven == false)
+        {
+            AskForConsent(); // Ask the player for consent to collect data.
+        }
+        else
+        {
+            ConsentGiven(); // Start data collection.
+        }
+      
+        
     }
     
     // This method asks the player for consent to collect data.
@@ -28,13 +37,20 @@ public class Analytics : MonoBehaviour
     private void ConsentGiven()
     {
         AnalyticsService.Instance.StartDataCollection();
-        // Destroy(consentUIPrefab);
+        _consentGiven = true;
+        if (consentUIPrefab != null)
+        {
+            Destroy(consentUIPrefab);
+        }
     }
 
     private void ConsentDenied()
     {
         Debug.Log("Consent denied. Data collection will not start.");
-        // Destroy(consentUIPrefab);
+        if (consentUIPrefab != null)
+        {
+            Destroy(consentUIPrefab);
+        }
     }
     private void RemoveConsent()
     {
