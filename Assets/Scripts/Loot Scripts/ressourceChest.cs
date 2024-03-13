@@ -56,7 +56,7 @@ public class ressourceChest : MonoBehaviour
             Debug.Log(random);
             return sm;
         }
-        else if (random < 90)
+        else if (random < 95)
         {
             Debug.Log("Gold Ingot");
             gold.amount = Random.Range(6, 9);
