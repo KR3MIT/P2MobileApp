@@ -291,8 +291,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 403.3626, y: 5.8489}
+  m_SizeDelta: {x: 593.2745, y: 228.5077}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &126791788
 MonoBehaviour:
@@ -341,14 +341,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -558,6 +558,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: {fileID: 701281227}
   _toggleStats: {fileID: 136221972}
+  adString: 
+  defString: 
+  healthString: 
   attributesText: {fileID: 566826401}
   partsText: {fileID: 1904105252}
   _stats: {fileID: 1560523445}
@@ -1128,7 +1131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8.5, y: -549.7384}
+  m_AnchoredPosition: {x: 8.5, y: -549.73834}
   m_SizeDelta: {x: 1440, y: 2349.4766}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &755652380
@@ -1733,8 +1736,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -403.0978, y: 1.665}
+  m_SizeDelta: {x: 559.8043, y: 186.6697}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1364906408
 MonoBehaviour:
@@ -1783,8 +1786,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 96
+  m_fontSizeBase: 96
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2190,6 +2193,8 @@ MonoBehaviour:
   shipPart: {fileID: 7052014213000166108, guid: c7e0b2aacd840074984516071b127f30, type: 3}
   partCost: {fileID: 7902343187729785851, guid: e2ece63954c49da48837a08eb607c00c, type: 3}
   upgradeButton: {fileID: 1325186672}
+  statsOverlay: {fileID: 219389234}
+  headerStats: {fileID: 2029558040}
 --- !u!1 &1742845653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2542,6 +2547,7 @@ GameObject:
   - component: {fileID: 2029558038}
   - component: {fileID: 2029558037}
   - component: {fileID: 2029558036}
+  - component: {fileID: 2029558040}
   m_Layer: 5
   m_Name: HeaderStats
   m_TagString: Untagged
@@ -2632,6 +2638,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2029558040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029558035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804cecbe781c34b4abb7cc789c321d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2073223585
 GameObject:
   m_ObjectHideFlags: 0

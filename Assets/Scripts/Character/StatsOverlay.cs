@@ -14,11 +14,13 @@ public class StatsOverlay : MonoBehaviour
     private float _AD;
     private float _def;
 
+    [HideInInspector] public string adString;
+    [HideInInspector] public string defString;
+    [HideInInspector] public string healthString;
+
     [SerializeField] private TMP_Text attributesText;
     [SerializeField] private TMP_Text partsText;
     [SerializeField] private Canvas _stats;
-
-    private string attackString;
 
     void Awake()
     {
@@ -64,7 +66,13 @@ public class StatsOverlay : MonoBehaviour
 
     void displayStats()
     {
-        attributesText.text = "Stats: \n" + "Health: " + _health + "\n" + "AD: " + _AD + "\n" + "def: " + _def;
+
+        attributesText.text = "Stats: \n" + 
+            "Health: " + _health + healthString + " \n" + 
+            "AD: " + _AD + adString + "\n" + 
+            "def: " + _def + defString;
+
+        
 
 
         if (_character.shipParts == null)
