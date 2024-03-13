@@ -225,7 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a3ff58ca18623439ba9997011eacb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCharacter: {fileID: 0}
   healthBars: {fileID: 0}
   playerHealthText: {fileID: 1806323967}
   playerHealthBar: {fileID: 933144544}
@@ -829,9 +828,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d4f05479580964a848491fce93a38e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 0
+  defensePower: 0
   attackPower: 8
-  defense: 4
+  health: 0
 --- !u!1 &1340362569
 GameObject:
   m_ObjectHideFlags: 0
