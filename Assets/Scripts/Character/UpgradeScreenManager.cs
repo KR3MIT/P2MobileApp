@@ -71,7 +71,7 @@ public class UpgradeScreenManager : MonoBehaviour
     {
         if(partIsSelected)
         {
-            character.LevelUpPart(ref selectedPart.AD, selectedPart);
+            character.LevelUpPart(selectedPart);
             UpdateAllText();
 
             if(character.CanLevelUp(selectedPart))
