@@ -42,22 +42,16 @@ public class Character : MonoBehaviour
 
     //[Header("removelater")]
 
-    public Dictionary<string, int> resources = new Dictionary<string, int>();
-
-    ressourceBehavior wood = new ressourceBehavior("Wood", 1);
-    //ressourceBehavior coal = new ressourceBehavior("Coal", 2, 1);
-    ressourceBehavior sm = new ressourceBehavior("Scrap Metal", 1);
-    ressourceBehavior diamond = new ressourceBehavior("Shiny Diamond", 1);
-    ressourceBehavior gold = new ressourceBehavior("Gold Ingot", 1);
+    public Dictionary<ResourceType, int> resources = new Dictionary<ResourceType, int>();
 
     //Start is called before the first frame update
     void Awake()
     {
 
-        resources.Add("Wood", 0);
-        resources.Add("Scrap Metal", 0);
-        resources.Add("Shiny Diamond", 0);
-        resources.Add("Gold Ingot", 0);
+        resources.Add(ResourceType.Wood, 0);
+        resources.Add(ResourceType.Metal, 0);
+        resources.Add(ResourceType.Diamonds, 0);
+        resources.Add(ResourceType.Gold, 0);
 
 
         ShipPartObject cannon = new ShipPartObject("Cannon", new List<ResourceType> { ResourceType.Metal, ResourceType.Gold });
@@ -70,15 +64,12 @@ public class Character : MonoBehaviour
         shipParts.Add(balloon);
         shipParts.Add(bow);
 
-        resources["Wood"] = 100;
-        resources["Scrap Metal"] = 100;
-        resources["Shiny Diamond"] = 100;
-        resources["Gold Ingot"] = 100;
-        //set resources for testing remove in build
-        //wood = 100;
-        //metal = 100;
-        //diamonds = 100;
-        //gold = 100;
+
+        //default resources for test
+        resources[ResourceType.Wood] = 100;
+        resources[ResourceType.Metal] = 100;
+        resources[ResourceType.Diamonds] = 100;
+        resources[ResourceType.Gold] = 100;
     }
 
     private void Start()
@@ -88,8 +79,9 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        //debug log for all resources
-        Debug.Log("Wood: " + resources["Wood"] + " Metal: " + resources["Scrap Metal"] + " Diamonds: " + resources["Shiny Diamond"] + " Gold: " + resources["Gold Ingot"]);
+        //debug log for all resources using dictionary
+        Debug.Log("Wood: " + resources[ResourceType.Wood] + " Metal: " + resources[ResourceType.Metal] + " Diamonds: " + resources[ResourceType.Diamonds] + " Gold: " + resources[ResourceType.Gold]);
+
 
     }
 
@@ -115,16 +107,16 @@ public class Character : MonoBehaviour
             switch (type)
             {
                 case ResourceType.Wood:
-                    resources["Wood"] -= (int)partToUpgrade.upgradeCost;
+                    resources[ResourceType.Wood] -= (int)partToUpgrade.upgradeCost;
                     break;
                 case ResourceType.Metal:
-                    resources["Scrap Metal"] -= (int)partToUpgrade.upgradeCost;
+                    resources[ResourceType.Metal] -= (int)partToUpgrade.upgradeCost;
                     break;
                 case ResourceType.Diamonds:
-                    resources["Shiny Diamond"] -= (int)partToUpgrade.upgradeCost;
+                    resources[ResourceType.Diamonds] -= (int)partToUpgrade.upgradeCost;
                     break;
                 case ResourceType.Gold:
-                    resources["Gold Ingot"] -= (int)partToUpgrade.upgradeCost;
+                    resources[ResourceType.Gold] -= (int)partToUpgrade.upgradeCost;
                     break;
             }
         }
@@ -141,16 +133,16 @@ public class Character : MonoBehaviour
             switch (type)
             {
                 case ResourceType.Wood:
-                    if (resources["Wood"] < partToLevel.upgradeCost) return false;
+                    if (resources[ResourceType.Wood] < partToLevel.upgradeCost) return false;
                     break;
                 case ResourceType.Metal:
-                    if (resources["Scrap Metal"] < partToLevel.upgradeCost) return false;
+                    if (resources[ResourceType.Metal] < partToLevel.upgradeCost) return false;
                     break;
                 case ResourceType.Diamonds:
-                    if (resources["Shiny Diamond"] < partToLevel.upgradeCost) return false;
+                    if (resources[ResourceType.Diamonds] < partToLevel.upgradeCost) return false;
                     break;
                 case ResourceType.Gold:
-                    if (resources["Gold Ingot"] < partToLevel.upgradeCost) return false;
+                    if (resources[ResourceType.Gold] < partToLevel.upgradeCost) return false;
                     break;
             }
         }
@@ -158,9 +150,9 @@ public class Character : MonoBehaviour
         return true;
     }
 
-    public void AddResource(string resource, int amount)
+    public void AddResource(ResourceType resource, int amount)
     {
         resources[resource] += amount;
-        Debug.Log("resource debug " + resources[resource]);
+        Debug.Log("resources added " + resources[resource]);
     }
 }
