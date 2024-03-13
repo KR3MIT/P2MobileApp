@@ -107,16 +107,16 @@ public class UpgradeScreenManager : MonoBehaviour
             switch (type)
             {
                 case Character.ResourceType.Wood:
-                    resourceAmount = character.wood;
+                    resourceAmount = character.resources["Wood"];
                     break;
                 case Character.ResourceType.Metal:
-                    resourceAmount = character.metal;
+                    resourceAmount = character.resources["Scrap Metal"];
                     break;
                 case Character.ResourceType.Diamonds:
-                    resourceAmount = character.diamonds;
+                    resourceAmount = character.resources["Shiny Diamond"];
                     break;
                 case Character.ResourceType.Gold:
-                    resourceAmount = character.gold;
+                    resourceAmount = character.resources["Gold Ingot"];
                     break;
             }
             costText += type.ToString() + ": " + resourceAmount + "/" + selectedPart.upgradeCost + "\n";

@@ -23,8 +23,8 @@ public class Character : MonoBehaviour
     [Tooltip("Experience")]
     public int exp = 0;
 
-    [Header("Resources")]
-    public int wood, metal, diamonds, gold;
+    //[Header("Resources")]
+    //public int wood, metal, diamonds, gold;
 
     public enum ResourceType
     {
@@ -41,11 +41,25 @@ public class Character : MonoBehaviour
     public int coal = 0;
 
     //[Header("removelater")]
-    //public List<ShipPart> shipParts = new List<ShipPart>();
+
+    public Dictionary<string, int> resources = new Dictionary<string, int>();
+
+    ressourceBehavior wood = new ressourceBehavior("Wood", 1);
+    //ressourceBehavior coal = new ressourceBehavior("Coal", 2, 1);
+    ressourceBehavior sm = new ressourceBehavior("Scrap Metal", 1);
+    ressourceBehavior diamond = new ressourceBehavior("Shiny Diamond", 1);
+    ressourceBehavior gold = new ressourceBehavior("Gold Ingot", 1);
 
     //Start is called before the first frame update
     void Awake()
     {
+
+        resources.Add("Wood", 0);
+        resources.Add("Scrap Metal", 0);
+        resources.Add("Shiny Diamond", 0);
+        resources.Add("Gold Ingot", 0);
+
+
         ShipPartObject cannon = new ShipPartObject("Cannon", new List<ResourceType> { ResourceType.Metal, ResourceType.Gold });
         ShipPartObject engine = new ShipPartObject("Engine", new List<ResourceType> { ResourceType.Metal, ResourceType.Diamonds });
         ShipPartObject balloon = new ShipPartObject("Balloon", new List<ResourceType> { ResourceType.Wood, ResourceType.Metal });
@@ -56,12 +70,15 @@ public class Character : MonoBehaviour
         shipParts.Add(balloon);
         shipParts.Add(bow);
 
-
+        resources["Wood"] = 100;
+        resources["Scrap Metal"] = 100;
+        resources["Shiny Diamond"] = 100;
+        resources["Gold Ingot"] = 100;
         //set resources for testing remove in build
-        wood = 100;
-        metal = 100;
-        diamonds = 100;
-        gold = 100;
+        //wood = 100;
+        //metal = 100;
+        //diamonds = 100;
+        //gold = 100;
     }
 
     private void Start()
@@ -72,7 +89,7 @@ public class Character : MonoBehaviour
     private void Update()
     {
         //debug log for all resources
-        //Debug.Log("Wood: " + wood + " Metal: " + metal + " Diamonds: " + diamonds + " Gold: " + gold);
+        Debug.Log("Wood: " + resources["Wood"] + " Metal: " + resources["Scrap Metal"] + " Diamonds: " + resources["Shiny Diamond"] + " Gold: " + resources["Gold Ingot"]);
 
     }
 
@@ -98,20 +115,20 @@ public class Character : MonoBehaviour
             switch (type)
             {
                 case ResourceType.Wood:
-                    wood -= (int)partToUpgrade.upgradeCost;
+                    resources["Wood"] -= (int)partToUpgrade.upgradeCost;
                     break;
                 case ResourceType.Metal:
-                    metal -= (int)partToUpgrade.upgradeCost;
+                    resources["Scrap Metal"] -= (int)partToUpgrade.upgradeCost;
                     break;
                 case ResourceType.Diamonds:
-                    diamonds -= (int)partToUpgrade.upgradeCost;
+                    resources["Shiny Diamond"] -= (int)partToUpgrade.upgradeCost;
                     break;
                 case ResourceType.Gold:
-                    gold -= (int)partToUpgrade.upgradeCost;
+                    resources["Gold Ingot"] -= (int)partToUpgrade.upgradeCost;
                     break;
             }
         }
-        Debug.Log("Wood: " + wood + " Metal: " + metal + " Diamonds: " + diamonds + " Gold: " + gold);
+        //Debug.Log("Wood: " + wood + " Metal: " + metal + " Diamonds: " + diamonds + " Gold: " + gold);
         partToUpgrade.upgradeCost *= partToUpgrade.upgradeCostScale;
         partToUpgrade.lvl++;
         SetStats();
@@ -124,20 +141,26 @@ public class Character : MonoBehaviour
             switch (type)
             {
                 case ResourceType.Wood:
-                    if (wood < partToLevel.upgradeCost) return false;
+                    if (resources["Wood"] < partToLevel.upgradeCost) return false;
                     break;
                 case ResourceType.Metal:
-                    if (metal < partToLevel.upgradeCost) return false;
+                    if (resources["Scrap Metal"] < partToLevel.upgradeCost) return false;
                     break;
                 case ResourceType.Diamonds:
-                    if (diamonds < partToLevel.upgradeCost) return false;
+                    if (resources["Shiny Diamond"] < partToLevel.upgradeCost) return false;
                     break;
                 case ResourceType.Gold:
-                    if (gold < partToLevel.upgradeCost) return false;
+                    if (resources["Gold Ingot"] < partToLevel.upgradeCost) return false;
                     break;
             }
         }
 
         return true;
+    }
+
+    public void AddResource(string resource, int amount)
+    {
+        resources[resource] += amount;
+        Debug.Log("resource debug " + resources[resource]);
     }
 }

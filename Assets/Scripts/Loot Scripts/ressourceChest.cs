@@ -6,72 +6,94 @@ public class ressourceChest : MonoBehaviour
 {
     public Animator animator;
     //example of new ressources with name, value, and random amount
-    ressourceBehavior wood = new ressourceBehavior("Wood", 1, 1);
-    ressourceBehavior coal = new ressourceBehavior("Coal", 2, 1);
-    ressourceBehavior sm = new ressourceBehavior("Scrap Metal", 3, 1);
-    ressourceBehavior diamond = new ressourceBehavior("Shiny Diamond", 3, 1);
-    ressourceBehavior gold = new ressourceBehavior("Gold Ingot", 3, 1);
+    //ressourceBehavior wood = new ressourceBehavior("Wood", 1);
+    //ressourceBehavior coal = new ressourceBehavior("Coal", 1);
+    //ressourceBehavior sm = new ressourceBehavior("Scrap Metal", 1);
+    //ressourceBehavior diamond = new ressourceBehavior("Shiny Diamond", 1);
+    //ressourceBehavior gold = new ressourceBehavior("Gold Ingot", 1);
 
+    private Dictionary<string, int> resourcesToGive = new Dictionary<string, int>
+    {
+        {"Wood", 1},
+        {"Scrap Metal", 1},
+        {"Shiny Diamond", 1},
+        {"Gold Ingot", 1}
+    };
 
-    public void OpenChest1()
+    private Character character;
+
+    public TMPro.TextMeshProUGUI resourceGainText;
+
+    //public void OpenChest1()
+    //{
+    //    OpenChestRessource();
+    //    animator.SetBool("Chest1Clicked", true);
+    //}
+    //public void OpenChest2()
+    //{
+    //    OpenChestRessource();
+    //    animator.SetBool("Chest2Clicked", true);
+    //}
+    //public void OpenChest3()
+    //{
+    //    OpenChestRessource();
+    //    animator.SetBool("Chest3Clicked", true);
+    //}
+
+    private void Awake()
     {
-        OpenChestRessource();
-        animator.SetBool("Chest1Clicked", true);
+        character = FindObjectOfType<Character>();
     }
-    public void OpenChest2()
+    public void OpenChest(string ChestClicked)
     {
         OpenChestRessource();
-        animator.SetBool("Chest2Clicked", true);
-    }
-    public void OpenChest3()
-    {
-        OpenChestRessource();
-        animator.SetBool("Chest3Clicked", true);
+        animator.SetBool(ChestClicked, true);
     }
     //Method to open the chest and get a random ressource with a random amount
-    public ressourceBehavior OpenChestRessource()
+    public void OpenChestRessource()
     {
         int random = Random.Range(0, 100);
         if (random < 30)
         {
             Debug.Log("Wood");
-            wood.amount = Random.Range(20, 25);
-            Debug.Log("wood amount: " + wood.amount);
+            resourcesToGive["Wood"] = Random.Range(20, 25);
+            Debug.Log("wood amount: " + resourcesToGive["Wood"]);
             Debug.Log(random);
-            return wood;
-        }
-        else if (random < 50)
-        {
-            Debug.Log("Coal");
-            coal.amount = Random.Range(10, 15);
-            Debug.Log("coal amount: " + coal.amount);
-            Debug.Log(random);
-            return coal;
+
+            character.AddResource("Wood", resourcesToGive["Wood"]);
+            resourceGainText.text = "You found " + resourcesToGive["Wood"] + " " + "Wood";
+
         }
         else if (random < 70)
         {
             Debug.Log("Scrap Metal");
-            sm.amount = Random.Range(20, 25);
-            Debug.Log("Scrap Metal amount: " + sm.amount);
+            resourcesToGive["Scrap Metal"] = Random.Range(20, 25);
+            Debug.Log("Scrap Metal amount: " + resourcesToGive["Scrap Metal"]);
             Debug.Log(random);
-            return sm;
+
+            character.AddResource("Scrap Metal", resourcesToGive["Scrap Metal"]);
+            resourceGainText.text = "You found " + resourcesToGive["Scrap Metal"] + " " + "Scrap Metal";
         }
         else if (random < 95)
         {
             Debug.Log("Gold Ingot");
-            gold.amount = Random.Range(6, 9);
-            Debug.Log("gold amount: " + gold.amount);
+            resourcesToGive["Gold Ingot"] = Random.Range(6, 9);
+            Debug.Log("gold amount: " + resourcesToGive["Gold Ingot"]);
             Debug.Log(random);
-            return gold;
+
+            character.AddResource("Gold Ingot", resourcesToGive["Gold Ingot"]);
+            resourceGainText.text = "You found " + resourcesToGive["Gold Ingot"] + " " + "Gold Ingot";
         }
         else
         {
             Debug.Log("Shiny Diamond");
-            diamond.amount = Random.Range(1, 4);
-            Debug.Log("diamond amount: " + diamond.amount);
+            resourcesToGive["Shiny Diamond"] = Random.Range(1, 4);
+            Debug.Log("diamond amount: " + resourcesToGive["Shiny Diamond"]);
             Debug.Log(random);
-            return diamond;
-            
+
+            character.AddResource("Shiny Diamond", resourcesToGive["Shiny Diamond"]);
+            resourceGainText.text = "You found " + resourcesToGive["Shiny Diamond"] + " " + "Shiny Diamond";
+
         }
     }
 

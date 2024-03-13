@@ -516,6 +516,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385349390}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &516717839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 516717841}
+  - component: {fileID: 516717840}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &516717840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516717839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f2b8e535ede784e864bb5630fbdd6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  AD: 0
+  def: 0
+  lvl: 1
+  exp: 0
+  coal: 0
+--- !u!4 &516717841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516717839}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 802.8595, y: 1557.2917, z: -13.269264}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,6 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 763204806}
+  resourceGainText: {fileID: 1331158537}
 --- !u!95 &763204806
 Animator:
   serializedVersion: 5
@@ -922,6 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 850839169}
+  resourceGainText: {fileID: 2104814527}
 --- !u!1 &875306529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,14 +1143,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 850839171}
         m_TargetAssemblyTypeName: ressourceChest, Assembly-CSharp
-        m_MethodName: OpenChest1
-        m_Mode: 1
+        m_MethodName: OpenChest
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Chest1Clicked
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 850839169}
@@ -1653,7 +1705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c6777d5585c00419ab501d802441e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ressourceChest: {fileID: 763204805}
   text: {fileID: 1331158537}
 --- !u!114 &1331158537
 MonoBehaviour:
@@ -1888,6 +1939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1406103641}
+  resourceGainText: {fileID: 1789996211}
 --- !u!95 &1406103641
 Animator:
   serializedVersion: 5
@@ -2254,7 +2306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c6777d5585c00419ab501d802441e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ressourceChest: {fileID: 1406103640}
   text: {fileID: 1789996211}
 --- !u!114 &1789996211
 MonoBehaviour:
@@ -2918,14 +2969,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 763204805}
         m_TargetAssemblyTypeName: ressourceChest, Assembly-CSharp
-        m_MethodName: OpenChest2
-        m_Mode: 1
+        m_MethodName: OpenChest
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Chest2Clicked
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 763204804}
@@ -3087,14 +3138,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1406103640}
         m_TargetAssemblyTypeName: ressourceChest, Assembly-CSharp
-        m_MethodName: OpenChest3
-        m_Mode: 1
+        m_MethodName: OpenChest
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Chest3Clicked
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 9100000, guid: d5062fb00e5cae144b5f5892c3772115, type: 2}
@@ -3431,7 +3482,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c6777d5585c00419ab501d802441e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ressourceChest: {fileID: 850839171}
   text: {fileID: 2104814527}
 --- !u!114 &2104814527
 MonoBehaviour:
@@ -3837,3 +3887,4 @@ SceneRoots:
   - {fileID: 543450652849447316}
   - {fileID: 763204807}
   - {fileID: 1406103642}
+  - {fileID: 516717841}
