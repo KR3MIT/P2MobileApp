@@ -14,11 +14,13 @@ public class StatsOverlay : MonoBehaviour
     private float _AD;
     private float _def;
 
+    [HideInInspector] public string adString;
+    [HideInInspector] public string defString;
+    [HideInInspector] public string healthString;
+
     [SerializeField] private TMP_Text attributesText;
     [SerializeField] private TMP_Text partsText;
     [SerializeField] private Canvas _stats;
-
-    private string attackString;
 
     void Awake()
     {
@@ -29,7 +31,7 @@ public class StatsOverlay : MonoBehaviour
     void Start()
     {
         _toggleStats.onClick.AddListener(toggleStats);
-        _stats.enabled = false;
+        _stats.enabled = true;
     }
 
 
@@ -64,7 +66,13 @@ public class StatsOverlay : MonoBehaviour
 
     void displayStats()
     {
-        attributesText.text = "Attacks: \n" + "Health: " + _health + "\n" + "AD: " + _AD + "\n" + "def: " + _def;
+
+        attributesText.text = "Stats: \n" + 
+            "Health: " + _health + healthString + " \n" + 
+            "AD: " + _AD + adString + "\n" + 
+            "def: " + _def + defString;
+
+        
 
 
         if (_character.shipParts == null)
@@ -72,7 +80,7 @@ public class StatsOverlay : MonoBehaviour
             return;   
         }
         partsText.text = "Parts: \n";
-        foreach (ShipPart part in _character.shipParts)
+        foreach (ShipPartObject part in _character.shipParts)
         {
             partsText.text += part.partName + " level " + part.lvl + "\n";
         }

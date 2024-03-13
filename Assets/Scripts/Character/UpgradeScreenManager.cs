@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UIElements;
-using UnityEngine.UI;
+using static ShipPartObject;
+using System.Drawing;
 
 public class UpgradeScreenManager : MonoBehaviour
 {
@@ -15,30 +15,32 @@ public class UpgradeScreenManager : MonoBehaviour
 
     [SerializeField] private UnityEngine.UI.Button upgradeButton;
 
-    private GameObject selectedCost;
-    private ShipPart selectedPart;
+    private ShipPartObject selectedPart;
 
     private bool partIsSelected = false;
 
     private List<GameObject> _costList = new List<GameObject>();
 
+    public StatsOverlay statsOverlay;
+
+    public HeaderStats headerStats;
+
     // Start is called before the first frame update
     void Start()
     {
-        foreach (ShipPart part in character.shipParts)
+        foreach (ShipPartObject part in character.shipParts)
         {
             GameObject _part = Instantiate(shipPart, partList.transform);
             GameObject _cost = Instantiate(partCost, partList.transform);
             
             _costList.Add(_cost);
 
-            part.SetInstanciated(_part, _cost);
-
-            _part.transform.GetChild(0).GetComponent<TMP_Text>().text = part.partName + " lvl " +part.lvl;
+            part.instanciateShipCost = _cost;
+            part.instanciateShipPart = _part;
 
             _part.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(()=>ToggleCost(_cost, part));
 
-            _cost.transform.GetChild(0).GetComponent<TMP_Text>().text = "Cost: 6969/" + part.upgradeCost;
+            UpdateText(part);
         }
 
         upgradeButton.onClick.AddListener(Upgrade);
@@ -46,7 +48,7 @@ public class UpgradeScreenManager : MonoBehaviour
 
     }
 
-    private void ToggleCost(GameObject _cost, ShipPart part)
+    private void ToggleCost(GameObject _cost, ShipPartObject part)
     {
         foreach (GameObject cost in _costList)
         {
@@ -56,11 +58,11 @@ public class UpgradeScreenManager : MonoBehaviour
         
         _cost.SetActive(!_cost.activeSelf);
 
-        if (_cost.activeSelf)
-        selectedCost = _cost;
-        
 
-        if(_cost.activeSelf)
+        ResetStatOverlayStrings();
+
+
+        if (_cost.activeSelf && character.CanLevelUp(part))
         {
             upgradeButton.interactable = true;
             partIsSelected = true;
@@ -71,17 +73,86 @@ public class UpgradeScreenManager : MonoBehaviour
             upgradeButton.interactable = false;
             partIsSelected = false;
             selectedPart = null;
+            return;//such that switch statement is not executed
         }
 
+        switch (part.statToUpgrade)
+        {
+            case StatType.health:
+                statsOverlay.healthString = "<color=green>" + " + " + part.upgradeImprovement.ToString() + "</color>";
+                break;
+            case StatType.def:
+                statsOverlay.defString = "<color=green>" + " + " + part.upgradeImprovement + "</color>";
+                break;
+            case StatType.AD:
+                statsOverlay.adString = "<color=green>" + " + " + part.upgradeImprovement + "</color>";
+                break;
+        }
+
+    }
+
+    private void ResetStatOverlayStrings()
+    {
+        statsOverlay.adString = "";
+        statsOverlay.defString = "";
+        statsOverlay.healthString = "";
     }
 
     private void Upgrade()
     {
         if(partIsSelected)
         {
-            selectedPart.LevelUp(ref character.AD);
+            character.LevelUpPart(selectedPart);
+            UpdateAllText();
+            headerStats.UpdateTexts();
+
+            if(character.CanLevelUp(selectedPart))
+            {
+                upgradeButton.interactable = true;
+            }
+            else
+            {
+                upgradeButton.interactable = false;
+            }
         }
     }
+
+    private void UpdateAllText()
+    {
+        foreach (ShipPartObject part in character.shipParts)
+        {
+            UpdateText(part);
+        }
+    }
+
+    private void UpdateText(ShipPartObject selectedPart)
+    {
+        selectedPart.instanciateShipPart.transform.GetChild(0).GetComponent<TMP_Text>().text = selectedPart.partName + " lvl " + selectedPart.lvl;
+
+        string costText = "";
+        foreach (Character.ResourceType type in selectedPart.upgradeTypes)
+        {
+            int resourceAmount = 0;
+            switch (type)
+            {
+                case Character.ResourceType.Wood:
+                    resourceAmount = character.resources[Character.ResourceType.Wood];
+                    break;
+                case Character.ResourceType.Metal:
+                    resourceAmount = character.resources[Character.ResourceType.Metal];
+                    break;
+                case Character.ResourceType.Diamonds:
+                    resourceAmount = character.resources[Character.ResourceType.Diamonds];
+                    break;
+                case Character.ResourceType.Gold:
+                    resourceAmount = character.resources[Character.ResourceType.Gold];
+                    break;
+            }
+            costText += type.ToString() + ": " + resourceAmount + "/" + selectedPart.upgradeCost + "\n";
+        }
+        selectedPart.instanciateShipCost.transform.GetChild(0).GetComponent<TMP_Text>().text = costText;
+    }
+
 
     // Update is called once per frame
     void Update()

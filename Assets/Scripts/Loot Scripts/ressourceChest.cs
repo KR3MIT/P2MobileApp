@@ -1,67 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using static Character;// so i doint have to write Character.ResourceType every time
 
 public class ressourceChest : MonoBehaviour
 {
     public Animator animator;
-    //example of new ressources with name, value, and random amount
-    ressourceBehavior wood = new ressourceBehavior("Wood", 1, 1);
-    ressourceBehavior coal = new ressourceBehavior("Coal", 2, 1);
-    ressourceBehavior sm = new ressourceBehavior("Scrap Metal", 3, 1);
-    ressourceBehavior diamond = new ressourceBehavior("Shiny Diamond", 3, 1);
-    ressourceBehavior gold = new ressourceBehavior("Gold Ingot", 3, 1);
-
-    
-    public void OpenChest()
+    private Character character;
+    public TMPro.TextMeshProUGUI resourceGainText;
+  
+    private Dictionary<ResourceType, int> resourcesToGive = new Dictionary<ResourceType, int>
     {
-        OpenChestRessource();
-        animator.SetBool("ChestClicked", true);
+        {ResourceType.Wood, 1},
+        {ResourceType.Metal, 1},
+        {ResourceType.Gold, 1},
+        {ResourceType.Diamonds, 1}
+    };
+
+    private void Awake()
+    {
+        character = FindObjectOfType<Character>();
+      
     }
-    //Method to open the chest and get a random ressource with a random amount
-    public ressourceBehavior OpenChestRessource()
+    public void OpenChest(string ChestClicked)
+    {
+        OpenChestResource();
+        animator.SetBool(ChestClicked, true);
+    }
+   
+    //Method to open the chest and get a random resource with a random amount
+    public void OpenChestResource()
     {
         int random = Random.Range(0, 100);
-        if (random < 30)
+        if (random < 40)
         {
             Debug.Log("Wood");
-            wood.amount = Random.Range(20, 25);
-            Debug.Log("wood amount: " + wood.amount);
+            resourcesToGive[ResourceType.Wood] = Random.Range(20, 25);
+            Debug.Log("wood amount: " + resourcesToGive[ResourceType.Wood]);
             Debug.Log(random);
-            return wood;
-        }
-        else if (random < 50)
-        {
-            Debug.Log("Coal");
-            coal.amount = Random.Range(10, 15);
-            Debug.Log("coal amount: " + coal.amount);
-            Debug.Log(random);
-            return coal;
+
+            character.AddResource(ResourceType.Wood, resourcesToGive[ResourceType.Wood]);
+            resourceGainText.text = "You found " + resourcesToGive[ResourceType.Wood] + " " + "Wood";
+
         }
         else if (random < 70)
         {
             Debug.Log("Scrap Metal");
-            sm.amount = Random.Range(20, 25);
-            Debug.Log("Scrap Metal amount: " + sm.amount);
+            resourcesToGive[ResourceType.Metal] = Random.Range(20, 25);
+            Debug.Log("Scrap Metal amount: " + resourcesToGive[ResourceType.Metal]);
             Debug.Log(random);
-            return sm;
+
+            character.AddResource(ResourceType.Metal, resourcesToGive[ResourceType.Metal]);
+            resourceGainText.text = "You found " + resourcesToGive[ResourceType.Metal] + " " + "Scrap Metal";
         }
         else if (random < 90)
         {
             Debug.Log("Gold Ingot");
-            gold.amount = Random.Range(6, 9);
-            Debug.Log("gold amount: " + gold.amount);
+            resourcesToGive[ResourceType.Gold] = Random.Range(6, 9);
+            Debug.Log("gold amount: " + resourcesToGive[ResourceType.Gold]);
             Debug.Log(random);
-            return gold;
+
+            character.AddResource(ResourceType.Gold, resourcesToGive[ResourceType.Gold]);
+            resourceGainText.text = "You found " + resourcesToGive[ResourceType.Gold] + " " + "Gold Ingot";
         }
         else
         {
             Debug.Log("Shiny Diamond");
-            diamond.amount = Random.Range(1, 4);
-            Debug.Log("diamond amount: " + diamond.amount);
+            resourcesToGive[ResourceType.Diamonds] = Random.Range(1, 4);
+            Debug.Log("diamond amount: " + resourcesToGive[ResourceType.Diamonds]);
             Debug.Log(random);
-            return diamond;
-            
+
+            character.AddResource(ResourceType.Diamonds, resourcesToGive[ResourceType.Diamonds]);
+            resourceGainText.text = "You found " + resourcesToGive[ResourceType.Diamonds] + " " + "Shiny Diamond";
+
         }
     }
 

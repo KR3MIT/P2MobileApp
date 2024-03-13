@@ -135,6 +135,4 @@ public class Map : MonoBehaviour
             mapWidthPx = 1280;
         }
     }
-
-
 }
