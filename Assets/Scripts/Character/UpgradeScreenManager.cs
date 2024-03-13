@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using static ShipPartObject;
+using System.Drawing;
 
 public class UpgradeScreenManager : MonoBehaviour
 {
@@ -18,6 +20,10 @@ public class UpgradeScreenManager : MonoBehaviour
     private bool partIsSelected = false;
 
     private List<GameObject> _costList = new List<GameObject>();
+
+    public StatsOverlay statsOverlay;
+
+    public HeaderStats headerStats;
 
     // Start is called before the first frame update
     void Start()
@@ -50,9 +56,13 @@ public class UpgradeScreenManager : MonoBehaviour
             cost.SetActive(false);
         }
         
-        _cost.SetActive(!_cost.activeSelf);   
+        _cost.SetActive(!_cost.activeSelf);
 
-        if(_cost.activeSelf && character.CanLevelUp(part))
+
+        ResetStatOverlayStrings();
+
+
+        if (_cost.activeSelf && character.CanLevelUp(part))
         {
             upgradeButton.interactable = true;
             partIsSelected = true;
@@ -63,8 +73,29 @@ public class UpgradeScreenManager : MonoBehaviour
             upgradeButton.interactable = false;
             partIsSelected = false;
             selectedPart = null;
+            return;//such that switch statement is not executed
         }
 
+        switch (part.statToUpgrade)
+        {
+            case StatType.health:
+                statsOverlay.healthString = "<color=green>" + " + " + part.upgradeImprovement.ToString() + "</color>";
+                break;
+            case StatType.def:
+                statsOverlay.defString = "<color=green>" + " + " + part.upgradeImprovement + "</color>";
+                break;
+            case StatType.AD:
+                statsOverlay.adString = "<color=green>" + " + " + part.upgradeImprovement + "</color>";
+                break;
+        }
+
+    }
+
+    private void ResetStatOverlayStrings()
+    {
+        statsOverlay.adString = "";
+        statsOverlay.defString = "";
+        statsOverlay.healthString = "";
     }
 
     private void Upgrade()
@@ -73,6 +104,7 @@ public class UpgradeScreenManager : MonoBehaviour
         {
             character.LevelUpPart(selectedPart);
             UpdateAllText();
+            headerStats.UpdateTexts();
 
             if(character.CanLevelUp(selectedPart))
             {
