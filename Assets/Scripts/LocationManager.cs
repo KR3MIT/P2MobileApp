@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
-public class LocationManeger : MonoBehaviour
-    // this script is used to get the location of the user and update the bounding box of the map so that the map we generate is centered around the user
+public class LocationManager : MonoBehaviour
 {
- // Firstly we must ask permission to use the androids location services
     private bool permission = false;
     private bool isLocationEnabled = false;
     private LocationInfo currentLocation;
@@ -15,37 +14,52 @@ public class LocationManeger : MonoBehaviour
     private double radiusInMeters = 1000; // Adjust for desired zoom level
     private double deltaLatitude;
     private double deltaLongitude;
-    private double[] boundingBox = new double[] { 151.196023022085, -33.8777251205232, 151.216012372138, -33.8683894791246 }; //[lon(min), lat(min), lon(max), lat(max)]
     public Map map;
+
+    // Default location (Example: Times Square, New York)
+    private double defaultLongitude = -73.9851;
+    private double defaultLatitude = 40.7580;
+
     private void Start()
     {
-        map = GameObject.Find("Map").GetComponent<Map>();
+#if UNITY_ANDROID && !UNITY_EDITOR
+        // Check for Android permission
+        if (!UnityEngine.Android.Permission.HasUserAuthorizedPermission(UnityEngine.Android.Permission.FineLocation))
+        {
+            UnityEngine.Android.Permission.RequestUserPermission(UnityEngine.Android.Permission.FineLocation);
+        }
+#endif
+
+        map = GetComponent<Map>();
+
         StartCoroutine(AskForLocation());
     }
+
     private IEnumerator AskForLocation()
     {
-        // First, check if user has location service enabled
+#if UNITY_ANDROID && !UNITY_EDITOR
+        // Android-specific code
         if (!Input.location.isEnabledByUser)
         {
             Debug.Log("Location services are not enabled");
             yield break;
         }
-        // Start service before querying location
+
         Input.location.Start();
-        // Wait until service initializes
+
         int maxWait = 20;
         while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
         {
             yield return new WaitForSeconds(1);
             maxWait--;
         }
-        // Service didn't initialize in 20 seconds
+
         if (maxWait < 1)
         {
             Debug.Log("Timed out");
             yield break;
         }
-        // Connection has failed
+
         if (Input.location.status == LocationServiceStatus.Failed)
         {
             Debug.Log("Unable to determine device location");
@@ -53,19 +67,28 @@ public class LocationManeger : MonoBehaviour
         }
         else
         {
-            // Access granted and location value could be retrieved
             permission = true;
             isLocationEnabled = true;
             currentLocation = Input.location.lastData;
             userLongitude = currentLocation.longitude;
             userLatitude = currentLocation.latitude;
-            deltaLatitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * (float)userLatitude)));
-            deltaLongitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * (float)userLatitude)));
-            boundingBox[0] = userLongitude - deltaLongitude;
-            boundingBox[1] = userLatitude - deltaLatitude;
-            boundingBox[2] = userLongitude + deltaLongitude;
-            boundingBox[3] = userLatitude + deltaLatitude;
         }
-    }
+#else
+        // Use default or simulated location for non-Android platforms and Unity Editor
+        Debug.Log("Using default location");
+        permission = true;
+        isLocationEnabled = true;
+        userLongitude = defaultLongitude;
+        userLatitude = defaultLatitude;
+#endif
 
+        // Common code for calculating bounding box, runs after platform-specific location retrieval
+        deltaLatitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * (float)userLatitude)));
+        deltaLongitude = radiusInMeters / (111320 * Mathf.Cos((float)(Mathf.Deg2Rad * (float)userLatitude)));
+        map.BoundingBox[0] = userLongitude - deltaLongitude;
+        map.BoundingBox[1] = userLatitude - deltaLatitude;
+        map.BoundingBox[2] = userLongitude + deltaLongitude;
+        map.BoundingBox[3] = userLatitude + deltaLatitude;
+        yield break;
+    }
 }

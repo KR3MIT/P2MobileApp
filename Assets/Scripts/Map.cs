@@ -32,7 +32,7 @@ public class Map : MonoBehaviour
     public style mapStyle = style.Streets;
     public enum resolution { low = 1, high = 2 };
     public resolution mapResolution = resolution.low;
-    public double[] boundingBox = new double[] { 151.196023022085, -33.8777251205232, 151.216012372138, -33.8683894791246 }; //[lon(min), lat(min), lon(max), lat(max)]
+    public double[] BoundingBox = new double[] { 151.196023022085, -33.8777251205232, 151.216012372138, -33.8683894791246 }; //[lon(min), lat(min), lon(max), lat(max)]
 
     private string[] styleStr = new string[] { "light-v10", "dark-v10", "streets-v11", "outdoors-v11", "satellite-v9", "satellite-streets-v11" };
     private string url = "";
@@ -65,10 +65,10 @@ public class Map : MonoBehaviour
         double deltaLatitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * userLatitude)));
         double deltaLongitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * userLatitude)));
 
-        boundingBox[0] = userLongitude - deltaLongitude;
-        boundingBox[1] = userLatitude - deltaLatitude;
-        boundingBox[2] = userLongitude + deltaLongitude;
-        boundingBox[3] = userLatitude + deltaLatitude;
+        BoundingBox[0] = userLongitude - deltaLongitude;
+        BoundingBox[1] = userLatitude - deltaLatitude;
+        BoundingBox[2] = userLongitude + deltaLongitude;
+        BoundingBox[3] = userLatitude + deltaLatitude;
 
         // Regenerate map with updated bounding box
         StartCoroutine(GetMapbox());
@@ -87,8 +87,8 @@ public class Map : MonoBehaviour
         CultureInfo invariantCulture = CultureInfo.InvariantCulture;
 
         url = "https://api.mapbox.com/styles/v1/mapbox/" + styleStr[(int)mapStyle] + "/static/["
-            + boundingBox[0].ToString(invariantCulture) + "," + boundingBox[1].ToString(invariantCulture) + ","
-            + boundingBox[2].ToString(invariantCulture) + "," + boundingBox[3].ToString(invariantCulture) + "]/"
+            + BoundingBox[0].ToString(invariantCulture) + "," + BoundingBox[1].ToString(invariantCulture) + ","
+            + BoundingBox[2].ToString(invariantCulture) + "," + BoundingBox[3].ToString(invariantCulture) + "]/"
             + mapWidthPx + "x" + mapHeightPx + "?" + "access_token=" + accessToken;
 
         Debug.Log(url);
