@@ -9,28 +9,32 @@ public class continueButtonBehavior : MonoBehaviour
     public Button continueButton;
     public Button[] buttons;
 
-
     private void Start()
     {
         continueButton.interactable = false;
-    }
-    private void ActivateContinueButton()
-    {
-        if (buttons[0].interactable == false && buttons[1].interactable == false && buttons[2].interactable == false )
+        for (int i = 0; i < buttons.Length; i++)
         {
-           continueButton.interactable = true;
+            buttons[i].onClick.AddListener(ActivateContinueButton);
         }
     }
-        void Update()
+    public void ActivateContinueButton()
     {
-        ActivateContinueButton();
+        bool isButtonOn = false;
+        foreach (Button button in buttons)
+        {
+            if (button.interactable)
+                isButtonOn = true;
+        }
+        if (!isButtonOn)
+        {
+            continueButton.interactable = true;
+        }
     }
+        //on click go to next scene
+        /* public void Continue()
+         {
+             UnityEngine.SceneManagement.SceneManager.LoadScene("");
+         }*/
 
-    //on click go to next scene
-   /* public void Continue()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("");
-    }*/
-
-
+    
 }
