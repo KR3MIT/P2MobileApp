@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using UnityEditor.Experimental.GraphView;
 
 public class UpgradeScreenManager : MonoBehaviour
 {
@@ -15,8 +16,7 @@ public class UpgradeScreenManager : MonoBehaviour
 
     [SerializeField] private UnityEngine.UI.Button upgradeButton;
 
-    private GameObject selectedCost;
-    private ShipPart selectedPart;
+    private ShipPartObject selectedPart;
 
     private bool partIsSelected = false;
 
@@ -25,20 +25,19 @@ public class UpgradeScreenManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (ShipPart part in character.shipParts)
+        foreach (ShipPartObject part in character.shipParts)
         {
             GameObject _part = Instantiate(shipPart, partList.transform);
             GameObject _cost = Instantiate(partCost, partList.transform);
             
             _costList.Add(_cost);
 
-            part.SetInstanciated(_part, _cost);
-
-            _part.transform.GetChild(0).GetComponent<TMP_Text>().text = part.partName + " lvl " +part.lvl;
+            part.instanciateShipCost = _cost;
+            part.instanciateShipPart = _part;
 
             _part.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(()=>ToggleCost(_cost, part));
 
-            _cost.transform.GetChild(0).GetComponent<TMP_Text>().text = "Cost: 6969/" + part.upgradeCost;
+            UpdateText(part);
         }
 
         upgradeButton.onClick.AddListener(Upgrade);
@@ -46,7 +45,7 @@ public class UpgradeScreenManager : MonoBehaviour
 
     }
 
-    private void ToggleCost(GameObject _cost, ShipPart part)
+    private void ToggleCost(GameObject _cost, ShipPartObject part)
     {
         foreach (GameObject cost in _costList)
         {
@@ -54,13 +53,9 @@ public class UpgradeScreenManager : MonoBehaviour
             cost.SetActive(false);
         }
         
-        _cost.SetActive(!_cost.activeSelf);
+        _cost.SetActive(!_cost.activeSelf);   
 
-        if (_cost.activeSelf)
-        selectedCost = _cost;
-        
-
-        if(_cost.activeSelf)
+        if(_cost.activeSelf && character.CanLevelUp(part))
         {
             upgradeButton.interactable = true;
             partIsSelected = true;
@@ -79,9 +74,56 @@ public class UpgradeScreenManager : MonoBehaviour
     {
         if(partIsSelected)
         {
-            selectedPart.LevelUp(ref character.AD);
+            character.LevelUpPart(ref selectedPart.AD, selectedPart);
+            UpdateAllText();
+
+            if(character.CanLevelUp(selectedPart))
+            {
+                upgradeButton.interactable = true;
+            }
+            else
+            {
+                upgradeButton.interactable = false;
+            }
         }
     }
+
+    private void UpdateAllText()
+    {
+        foreach (ShipPartObject part in character.shipParts)
+        {
+            UpdateText(part);
+        }
+    }
+
+    private void UpdateText(ShipPartObject selectedPart)
+    {
+        selectedPart.instanciateShipPart.transform.GetChild(0).GetComponent<TMP_Text>().text = selectedPart.partName + " lvl " + selectedPart.lvl;
+
+        string costText = "";
+        foreach (Character.ResourceType type in selectedPart.upgradeTypes)
+        {
+            int resourceAmount = 0;
+            switch (type)
+            {
+                case Character.ResourceType.Wood:
+                    resourceAmount = character.wood;
+                    break;
+                case Character.ResourceType.Metal:
+                    resourceAmount = character.metal;
+                    break;
+                case Character.ResourceType.Diamonds:
+                    resourceAmount = character.diamonds;
+                    break;
+                case Character.ResourceType.Gold:
+                    resourceAmount = character.gold;
+                    break;
+            }
+            costText += type.ToString() + ": " + resourceAmount + "/" + selectedPart.upgradeCost + "\n";
+        }
+        selectedPart.instanciateShipCost.transform.GetChild(0).GetComponent<TMP_Text>().text = costText;
+    }
+
 
     // Update is called once per frame
     void Update()

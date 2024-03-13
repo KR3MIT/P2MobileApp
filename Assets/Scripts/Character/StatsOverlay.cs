@@ -29,7 +29,7 @@ public class StatsOverlay : MonoBehaviour
     void Start()
     {
         _toggleStats.onClick.AddListener(toggleStats);
-        _stats.enabled = false;
+        _stats.enabled = true;
     }
 
 
@@ -64,7 +64,7 @@ public class StatsOverlay : MonoBehaviour
 
     void displayStats()
     {
-        attributesText.text = "Attacks: \n" + "Health: " + _health + "\n" + "AD: " + _AD + "\n" + "def: " + _def;
+        attributesText.text = "Stats: \n" + "Health: " + _health + "\n" + "AD: " + _AD + "\n" + "def: " + _def;
 
 
         if (_character.shipParts == null)
@@ -72,7 +72,7 @@ public class StatsOverlay : MonoBehaviour
             return;   
         }
         partsText.text = "Parts: \n";
-        foreach (ShipPart part in _character.shipParts)
+        foreach (ShipPartObject part in _character.shipParts)
         {
             partsText.text += part.partName + " level " + part.lvl + "\n";
         }

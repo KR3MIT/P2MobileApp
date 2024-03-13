@@ -970,7 +970,6 @@ MonoBehaviour:
   diamonds: 0
   gold: 0
   coal: 0
-  shipParts: []
 --- !u!1 &711066410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,7 +1478,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2121020601}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.5320334
+  m_Size: 0.5315592
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

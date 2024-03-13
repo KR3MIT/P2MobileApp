@@ -24,28 +24,55 @@ public class Character : MonoBehaviour
     public int exp = 0;
 
     [Header("Resources")]
-    public int wood = 0;
-    public int metal = 0;
-    public int diamonds = 0;
-    public int gold = 0;
+    public int wood, metal, diamonds, gold;
 
+    public enum ResourceType
+    {
+        Wood,
+        Metal,
+        Diamonds,
+        Gold
+    }
+
+    [Header("ShipParts")]
+    public List<ShipPartObject> shipParts = new List<ShipPartObject>();
     //Energy
+    [Header("Energy")]
     public int coal = 0;
 
-    public List<ShipPart> shipParts = new List<ShipPart>();
+    //[Header("removelater")]
+    //public List<ShipPart> shipParts = new List<ShipPart>();
 
     //Start is called before the first frame update
     void Awake()
     {
-        ShipPart cannon = new ShipPart("Cannon");
-        ShipPart engine = new ShipPart("Engine");
-        ShipPart balloon = new ShipPart("Balloon");
-        ShipPart bow = new ShipPart("Bow");
+        ShipPartObject cannon = new ShipPartObject("Cannon", new List<ResourceType> { ResourceType.Metal, ResourceType.Gold });
+        ShipPartObject engine = new ShipPartObject("Engine", new List<ResourceType> { ResourceType.Metal, ResourceType.Diamonds });
+        ShipPartObject balloon = new ShipPartObject("Balloon", new List<ResourceType> { ResourceType.Wood, ResourceType.Metal });
+        ShipPartObject bow = new ShipPartObject("Bow", new List<ResourceType> { ResourceType.Wood, ResourceType.Gold });
 
         shipParts.Add(cannon);
         shipParts.Add(engine);
         shipParts.Add(balloon);
         shipParts.Add(bow);
+
+
+        //set resources for testing remove in build
+        wood = 100;
+        metal = 100;
+        diamonds = 100;
+        gold = 100;
+    }
+
+    private void Start()
+    {
+        SetStats();
+    }
+
+    private void Update()
+    {
+        //debug log for all resources
+        //Debug.Log("Wood: " + wood + " Metal: " + metal + " Diamonds: " + diamonds + " Gold: " + gold);
 
     }
 
@@ -54,7 +81,7 @@ public class Character : MonoBehaviour
         health = 0;
         AD = 0;
         def = 0;
-        foreach (ShipPart part in shipParts)
+        foreach (ShipPartObject part in shipParts)
         {
             health += part.health;
             AD += part.AD;
@@ -62,9 +89,55 @@ public class Character : MonoBehaviour
         }
     }
 
-    //Update is called once per frame
-    void Update()
+    public void LevelUpPart(ref int statToGrow, ShipPartObject partToUpgrade)
     {
-        
+        statToGrow += partToUpgrade.upgradeImprovement;
+
+        foreach (ResourceType type in partToUpgrade.upgradeTypes)//subtracts cost from resources
+        {
+            switch (type)
+            {
+                case ResourceType.Wood:
+                    wood -= (int)partToUpgrade.upgradeCost;
+                    break;
+                case ResourceType.Metal:
+                    metal -= (int)partToUpgrade.upgradeCost;
+                    break;
+                case ResourceType.Diamonds:
+                    diamonds -= (int)partToUpgrade.upgradeCost;
+                    break;
+                case ResourceType.Gold:
+                    gold -= (int)partToUpgrade.upgradeCost;
+                    break;
+            }
+        }
+        Debug.Log("Wood: " + wood + " Metal: " + metal + " Diamonds: " + diamonds + " Gold: " + gold);
+        partToUpgrade.upgradeCost *= partToUpgrade.upgradeCostScale;
+        partToUpgrade.lvl++;
+        SetStats();
+    }
+
+    public bool CanLevelUp(ShipPartObject partToLevel)
+    {
+        foreach (ResourceType type in partToLevel.upgradeTypes)
+        {
+            switch (type)
+            {
+                case ResourceType.Wood:
+                    if (wood < partToLevel.upgradeCost) return false;
+                    break;
+                case ResourceType.Metal:
+                    if (metal < partToLevel.upgradeCost) return false;
+                    break;
+                case ResourceType.Diamonds:
+                    if (diamonds < partToLevel.upgradeCost) return false;
+                    break;
+                case ResourceType.Gold:
+                    if (gold < partToLevel.upgradeCost) return false;
+                    break;
+            }
+        }
+
+        return true;
     }
 }
