@@ -81,7 +81,7 @@ public class CloudSave : MonoBehaviour
         {
             if (playerData.TryGetValue(kvp.Key, out var keyName))
             {
-                Debug.Log($"fuck {keyName}: {keyName.Value.GetAs<string>()}");
+                Debug.Log($"fuck {kvp.Key}: {keyName.Value.GetAs<string>()}");
             }
         }
 
