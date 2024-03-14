@@ -8,8 +8,13 @@ using Unity.Services.CloudSave;
 
 public class CloudSave : MonoBehaviour
 {
+    private Character character;
+
+
     async void Start()
     {
+        character = GetComponent<Character>();
+
         await UnityServices.InitializeAsync();
        
     }
@@ -19,8 +24,15 @@ public class CloudSave : MonoBehaviour
     {
         var saveData = new Dictionary<string, object>
         {
-            { "score", 100 },
-            { "level", 5 }
+            { "playerName", character.playerName },
+            { "level", character.lvl },
+            { "experience", character.exp },
+            { "health", character.health },
+            { "attackDamage", character.AD },
+            { "defence", character.def },
+            { "coal", character.coal },
+            { "resources", character.resources },
+            { "shipParts", character.shipParts }
         };
         var result = await CloudSaveService.Instance.Data.Player.SaveAsync(saveData);
         Debug.Log($"Saved data {string.Join(',', saveData)}");
