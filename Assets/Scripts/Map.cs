@@ -27,7 +27,7 @@ using UnityEngine.InputSystem;
 
 public class Map : MonoBehaviour
 {
-    public string accessToken;
+    private string accessToken = "pk.eyJ1IjoibWFkc2JlbiIsImEiOiJjbHRrMXA1a3UwdWdsMnBxdmx3anRjOHB5In0.WcbYEU3wnJ8jnCQHvyy21A";
     public enum style { Light, Dark, Streets, Outdoors, Satellite, SatelliteStreets };
     public style mapStyle = style.Streets;
     public enum resolution { low = 1, high = 2 };
