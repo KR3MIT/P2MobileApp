@@ -11,9 +11,7 @@ public class LocationManager : MonoBehaviour
     private LocationInfo currentLocation;
     private double userLongitude;
     private double userLatitude;
-    private double radiusInMeters = 1000; // Adjust for desired zoom level
-    private double deltaLatitude;
-    private double deltaLongitude;
+
     public Map map;
 
     // Default location (Example: Times Square, New York)
@@ -22,13 +20,13 @@ public class LocationManager : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_ANDROID && !UNITY_EDITOR
+
         // Check for Android permission
         if (!UnityEngine.Android.Permission.HasUserAuthorizedPermission(UnityEngine.Android.Permission.FineLocation))
         {
             UnityEngine.Android.Permission.RequestUserPermission(UnityEngine.Android.Permission.FineLocation);
         }
-#endif
+
 
         map = GetComponent<Map>();
 
@@ -37,7 +35,7 @@ public class LocationManager : MonoBehaviour
 
     private IEnumerator AskForLocation()
     {
-#if UNITY_ANDROID && !UNITY_EDITOR
+
     // Android-specific code
     if (!Input.location.isEnabledByUser)
     {
@@ -76,18 +74,18 @@ public class LocationManager : MonoBehaviour
         userLongitude = currentLocation.longitude;
         userLatitude = currentLocation.latitude;
     }
-#else
+
         // Use default or simulated location for non-Android platforms and Unity Editor
-        UseDefaultLocation();
-#endif
+        //UseDefaultLocation();
+        map.UpdateBoundingBox(userLongitude, userLatitude);
 
         // Common code for calculating bounding box, runs after platform-specific location retrieval
-        deltaLatitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * (float)userLatitude)));
-        deltaLongitude = radiusInMeters / (111320 * Mathf.Cos((float)(Mathf.Deg2Rad * (float)userLatitude)));
-        map.BoundingBox[0] = userLongitude - deltaLongitude;
-        map.BoundingBox[1] = userLatitude - deltaLatitude;
-        map.BoundingBox[2] = userLongitude + deltaLongitude;
-        map.BoundingBox[3] = userLatitude + deltaLatitude;
+        //deltaLatitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * (float)userLatitude)));
+        //deltaLongitude = radiusInMeters / (111320 * Mathf.Cos((float)(Mathf.Deg2Rad * (float)userLatitude)));
+        //map.BoundingBox[0] = userLongitude - deltaLongitude;
+        //map.BoundingBox[1] = userLatitude - deltaLatitude;
+        //map.BoundingBox[2] = userLongitude + deltaLongitude;
+        //map.BoundingBox[3] = userLatitude + deltaLatitude;
         yield break;
     }
 
@@ -98,5 +96,6 @@ public class LocationManager : MonoBehaviour
         isLocationEnabled = true;
         userLongitude = defaultLongitude;
         userLatitude = defaultLatitude;
+        map.UpdateBoundingBox(userLongitude, userLatitude);
     }
 }
