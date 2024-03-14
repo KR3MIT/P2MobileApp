@@ -36,48 +36,49 @@ public class LocationManager : MonoBehaviour
     private IEnumerator AskForLocation()
     {
 
-    // Android-specific code
-    if (!Input.location.isEnabledByUser)
-    {
-        Debug.Log("Location services are not enabled");
-        UseDefaultLocation();
-        yield break;
-    }
+        // Android-specific code
+        if (!Input.location.isEnabledByUser)
+        {
+            Debug.Log("Location services are not enabled");
+            UseDefaultLocation();
+            yield break;
+        }
 
-    Input.location.Start();
+        Input.location.Start();
 
-    int maxWait = 20;
-    while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
-    {
-        yield return new WaitForSeconds(1);
-        maxWait--;
-    }
+        int maxWait = 20;
+        while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
+        {
+            yield return new WaitForSeconds(1);
+            maxWait--;
+        }
 
-    if (maxWait < 1)
-    {
-        Debug.Log("Timed out");
-        UseDefaultLocation();
-        yield break;
-    }
+        if (maxWait < 1)
+        {
+            Debug.Log("Timed out");
+            UseDefaultLocation();
+            yield break;
+        }
 
-    if (Input.location.status == LocationServiceStatus.Failed)
-    {
-        Debug.Log("Unable to determine device location");
-        UseDefaultLocation();
-        yield break;
-    }
-    else
-    {
-        permission = true;
-        isLocationEnabled = true;
-        currentLocation = Input.location.lastData;
-        userLongitude = currentLocation.longitude;
-        userLatitude = currentLocation.latitude;
-    }
+        if (Input.location.status == LocationServiceStatus.Failed)
+        {
+            Debug.Log("Unable to determine device location");
+            UseDefaultLocation();
+            yield break;
+        }
+        else
+        {
+            permission = true;
+            isLocationEnabled = true;
+            currentLocation = Input.location.lastData;
+            userLongitude = currentLocation.longitude;
+            userLatitude = currentLocation.latitude;
+            map.UpdateBoundingBox(userLongitude, userLatitude);
+        }
 
         // Use default or simulated location for non-Android platforms and Unity Editor
         //UseDefaultLocation();
-        map.UpdateBoundingBox(userLongitude, userLatitude);
+
 
         // Common code for calculating bounding box, runs after platform-specific location retrieval
         //deltaLatitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * (float)userLatitude)));
