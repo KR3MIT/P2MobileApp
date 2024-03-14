@@ -76,6 +76,7 @@ public class UpgradeScreenManager : MonoBehaviour
             return;//such that switch statement is not executed
         }
 
+        if (statsOverlay == null) { return; }
         switch (part.statToUpgrade)
         {
             case StatType.health:
