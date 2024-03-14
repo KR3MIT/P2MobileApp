@@ -26,17 +26,24 @@ public class CloudSave : MonoBehaviour
         saveData.Add("resources", character.resources);
         saveData.Add("shipParts", character.shipParts);
 
+        
+
+
+        await UnityServices.InitializeAsync();
+
+        
+       
+    }
+
+    public void LoadDataTest()
+    {
         List<string> list = new List<string>();
         foreach (KeyValuePair<string, object> pair in saveData)
         {
             list.Add(pair.Key);
         }
 
-
-        await UnityServices.InitializeAsync();
-
         LoadData(list);
-       
     }
 
     //Saves player data
