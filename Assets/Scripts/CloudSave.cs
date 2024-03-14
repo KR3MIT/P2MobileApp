@@ -26,6 +26,18 @@ public class CloudSave : MonoBehaviour
         Debug.Log($"Saved data {string.Join(',', saveData)}");
     }
 
+    public async void LoadData()
+    {
+        var playerData = await CloudSaveService.Instance.Data.Player.LoadAsync(new HashSet<string> { "level" });
+        if (playerData.TryGetValue("level", out var keyName))
+        {
+            Debug.Log($"fuck keyName: {keyName.Value.GetAs<string>()}");
+        }
+    }
+
+
+
+
     //Saves player data when the application is closed
     public void OnApplicationQuit()
     {
