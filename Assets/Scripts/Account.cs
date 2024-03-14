@@ -18,7 +18,7 @@ public class Account : MonoBehaviour
     async void Start()
     {
         await UnityServices.InitializeAsync();
-        checkSignIn();
+        //checkSignIn();
     }
 
     //New player SIGN UP with username and password
@@ -98,6 +98,7 @@ public class Account : MonoBehaviour
         if (isSignedIn)
         {
             signInDisplay.SetActive(false);
+            playerNameDisplay.SetActive(true);
         }
     }
 
