@@ -6,9 +6,9 @@ using static Character;// so i doint have to write Character.ResourceType every 
 
 public class ressourceChest : MonoBehaviour
 {
-    public Animator animator;
     private Character character;
     public TMPro.TextMeshProUGUI resourceGainText;
+
   
     private Dictionary<ResourceType, int> resourcesToGive = new Dictionary<ResourceType, int>
     {
@@ -18,6 +18,7 @@ public class ressourceChest : MonoBehaviour
         {ResourceType.Diamonds, 1}
     };
 
+
     private void Awake()
     {
         character = FindObjectOfType<Character>();
@@ -26,7 +27,7 @@ public class ressourceChest : MonoBehaviour
     public void OpenChest(string ChestClicked)
     {
         OpenChestResource();
-        animator.SetBool(ChestClicked, true);
+
     }
    
     //Method to open the chest and get a random resource with a random amount
