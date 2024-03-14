@@ -27,12 +27,12 @@ using UnityEngine.InputSystem;
 
 public class Map : MonoBehaviour
 {
-    private string accessToken = "pk.eyJ1IjoibWFkc2JlbiIsImEiOiJjbHRrMXA1a3UwdWdsMnBxdmx3anRjOHB5In0.WcbYEU3wnJ8jnCQHvyy21A";
+    public string accessToken = "pk.eyJ1IjoibWFkc2JlbiIsImEiOiJjbHRrMXA1a3UwdWdsMnBxdmx3anRjOHB5In0.WcbYEU3wnJ8jnCQHvyy21A";
     public enum style { Light, Dark, Streets, Outdoors, Satellite, SatelliteStreets };
     public style mapStyle = style.Streets;
     public enum resolution { low = 1, high = 2 };
     public resolution mapResolution = resolution.low;
-    public double[] BoundingBox = new double[] { 151.196023022085, -33.8777251205232, 151.216012372138, -33.8683894791246 }; //[lon(min), lat(min), lon(max), lat(max)]
+    public double[] BoundingBox = new double[4]; //[lon(min), lat(min), lon(max), lat(max)]
 
     private string[] styleStr = new string[] { "light-v10", "dark-v10", "streets-v11", "outdoors-v11", "satellite-v9", "satellite-streets-v11" };
     private string url = "";
@@ -76,10 +76,10 @@ public class Map : MonoBehaviour
 
 
     // Update is called once per frame void Update(){ }
-    public void GenerateMapOnClick()
-    {
-        StartCoroutine(GetMapbox());
-    }
+    //public void GenerateMapOnClick()
+    //{
+    //    StartCoroutine(GetMapbox());
+    //}
 
 
     IEnumerator GetMapbox()
