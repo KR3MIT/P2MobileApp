@@ -31,11 +31,12 @@ public class continueButtonBehavior : MonoBehaviour
             continueButton.interactable = true;
         }
     }
-        //on click go to next scene
-        /* public void Continue()
-         {
-             UnityEngine.SceneManagement.SceneManager.LoadScene("");
-         }*/
+        
+      // make a method that reloads current scene
+      public void ReloadScene()
+    {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        }
 
     
 }
