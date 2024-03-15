@@ -29,14 +29,14 @@ public class Friends : MonoBehaviour
 
     //var friends = await FriendsService.Instance.Friends; mega diller
 
-    async void GetFriends()
-    {
+    //async void GetFriends()
+    //{
         //var friends = await FriendsService.Instance.Friends;
-        foreach (var friend in friends)
-        {
-            Debug.Log(friend);
-        }
-    }
+        //foreach (var friend in friends)
+        //{
+          //  Debug.Log(friend);
+      //  }
+   // }
 
 
 
