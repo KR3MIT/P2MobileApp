@@ -24,6 +24,7 @@ using UnityEngine.Networking;
 using System;
 using System.Globalization;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
@@ -43,9 +44,12 @@ public class Map : MonoBehaviour
     private double planeWidth;
     private double planeHeight;
 
+    public TMPro.TMP_Text text;
+
     // Start is called before the first frame update
     void Start()
     {
+
        // MatchPlaneToScreenSize();
         if (gameObject.GetComponent<MeshRenderer>() == null)
         {
@@ -73,14 +77,6 @@ public class Map : MonoBehaviour
         // Regenerate map with updated bounding box
         StartCoroutine(GetMapbox());
     }
-
-
-    // Update is called once per frame void Update(){ }
-    //public void GenerateMapOnClick()
-    //{
-    //    StartCoroutine(GetMapbox());
-    //}
-
 
     IEnumerator GetMapbox()
     {

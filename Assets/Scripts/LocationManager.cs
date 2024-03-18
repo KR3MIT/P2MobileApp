@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
+using UnityEngine.UI;
+
 
 public class LocationManager : MonoBehaviour
 {
@@ -18,13 +18,17 @@ public class LocationManager : MonoBehaviour
     private double defaultLongitude = -73.9851;
     private double defaultLatitude = 40.7580;
 
+    public TMPro.TextMeshProUGUI locationText;
+
     private void Start()
     {
 
         // Check for Android permission
         if (!UnityEngine.Android.Permission.HasUserAuthorizedPermission(UnityEngine.Android.Permission.FineLocation))
         {
+            locationText.text = "Location permission is not granted";
             UnityEngine.Android.Permission.RequestUserPermission(UnityEngine.Android.Permission.FineLocation);
+
         }
 
 
@@ -36,9 +40,10 @@ public class LocationManager : MonoBehaviour
     private IEnumerator AskForLocation()
     {
 
-        // Android-specific code
+       
         if (!Input.location.isEnabledByUser)
         {
+           
             Debug.Log("Location services are not enabled");
             UseDefaultLocation();
             yield break;
@@ -76,17 +81,7 @@ public class LocationManager : MonoBehaviour
             map.UpdateBoundingBox(userLongitude, userLatitude);
         }
 
-        // Use default or simulated location for non-Android platforms and Unity Editor
-        //UseDefaultLocation();
-
-
-        // Common code for calculating bounding box, runs after platform-specific location retrieval
-        //deltaLatitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * (float)userLatitude)));
-        //deltaLongitude = radiusInMeters / (111320 * Mathf.Cos((float)(Mathf.Deg2Rad * (float)userLatitude)));
-        //map.BoundingBox[0] = userLongitude - deltaLongitude;
-        //map.BoundingBox[1] = userLatitude - deltaLatitude;
-        //map.BoundingBox[2] = userLongitude + deltaLongitude;
-        //map.BoundingBox[3] = userLatitude + deltaLatitude;
+      
         yield break;
     }
 
