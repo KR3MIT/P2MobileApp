@@ -304,6 +304,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4333049499487780900, guid: f3f11f126d287824e8235c2ef596e3d0, type: 3}
+      propertyPath: m_Spacing.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 4333049499487780900, guid: f3f11f126d287824e8235c2ef596e3d0, type: 3}
+      propertyPath: m_Spacing.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4333049499487780900, guid: f3f11f126d287824e8235c2ef596e3d0, type: 3}
+      propertyPath: m_CellSize.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 4333049499487780900, guid: f3f11f126d287824e8235c2ef596e3d0, type: 3}
+      propertyPath: m_CellSize.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4333049499487780900, guid: f3f11f126d287824e8235c2ef596e3d0, type: 3}
+      propertyPath: m_Padding.m_Right
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6283804261467888158, guid: f3f11f126d287824e8235c2ef596e3d0, type: 3}
       propertyPath: m_Name
       value: Scene selector
