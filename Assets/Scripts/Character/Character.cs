@@ -56,6 +56,12 @@ public class Character : MonoBehaviour
         Gold
     }
 
+    private CloudSave cloudSave;
+
+    //debug
+
+    
+
     //Start is called before the first frame update
     void Awake()
     {
@@ -87,6 +93,8 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
+        cloudSave = GetComponent<CloudSave>();
+
         SetStats();
     }
 
@@ -95,13 +103,23 @@ public class Character : MonoBehaviour
         //debug log for all resources using dictionary
         //Debug.Log("Wood: " + resources[ResourceType.Wood] + " Metal: " + resources[ResourceType.Metal] + " Diamonds: " + resources[ResourceType.Diamonds] + " Gold: " + resources[ResourceType.Gold]);
 
+
+        //foreach (ShipPartObject part in shipParts)
+        //{
+        //    Debug.Log("fuck " + part.partName + " lvl " + part.lvl);
+        //}
+
+        //foreach (KeyValuePair<ResourceType, int> kvp in resources)
+        //{
+        //    Debug.Log("fuck "+ kvp.Key + " value " + kvp.Value);
+        //}
         
     }
 
     public void SetShipParts(List<ShipPartObject> loadedShipParts)
     {
         shipParts.Clear();
-        foreach (ShipPartObject part in shipParts)
+        foreach (ShipPartObject part in loadedShipParts)
         {
             shipParts.Add(part);
         }

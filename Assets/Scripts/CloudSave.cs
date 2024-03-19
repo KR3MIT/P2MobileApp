@@ -54,6 +54,8 @@ public class CloudSave : MonoBehaviour
         character = GetComponent<Character>();//maybe remove this line
         saveData.Clear();
 
+        Debug.Log("fuck resources: " + character.resources[0]);
+
         saveData.Add("playerName", character.playerName);
         saveData.Add("level", character.lvl);
         saveData.Add("experience", character.exp);
@@ -84,6 +86,7 @@ public class CloudSave : MonoBehaviour
         if (playerData.TryGetValue(playerData["shipParts"].Key, out var playerName))
         {
             Debug.Log($"fuck {playerName.Key}: {playerName.Value.GetAs<List<ShipPartObject>>()}");
+            Debug.Log("count " + playerName.Value.GetAs<List<ShipPartObject>>().Count);
             character.SetShipParts(playerName.Value.GetAs<List<ShipPartObject>>());
         }
 
@@ -123,6 +126,11 @@ public class CloudSave : MonoBehaviour
 
     //Saves player data when the application is closed
     public void OnApplicationQuit()
+    {
+        SaveData();
+    }
+
+    public void OnDisable()
     {
         SaveData();
     }
