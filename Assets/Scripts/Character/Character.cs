@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
 {
     //Attributes
     [Header("Attributes")]
-    public string playerName = "Jason";
+    public string playerName = "";
 
     [Tooltip("Level")]
     public int lvl = 1;
@@ -94,7 +94,7 @@ public class Character : MonoBehaviour
         //debug log for all resources using dictionary
         //Debug.Log("Wood: " + resources[ResourceType.Wood] + " Metal: " + resources[ResourceType.Metal] + " Diamonds: " + resources[ResourceType.Diamonds] + " Gold: " + resources[ResourceType.Gold]);
 
-
+        Debug.Log(playerName);
     }
 
     public void SetStats()
