@@ -59,6 +59,7 @@ public class Character : MonoBehaviour
     //Start is called before the first frame update
     void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
 
         //resources.Add(ResourceType.Wood, 0);
         //resources.Add(ResourceType.Metal, 0);
@@ -94,7 +95,7 @@ public class Character : MonoBehaviour
         //debug log for all resources using dictionary
         //Debug.Log("Wood: " + resources[ResourceType.Wood] + " Metal: " + resources[ResourceType.Metal] + " Diamonds: " + resources[ResourceType.Diamonds] + " Gold: " + resources[ResourceType.Gold]);
 
-        Debug.Log(playerName);
+        
     }
 
     public void SetShipParts(List<ShipPartObject> loadedShipParts)
@@ -104,6 +105,7 @@ public class Character : MonoBehaviour
         {
             shipParts.Add(part);
         }
+        Debug.Log("Ship parts set count: " + shipParts.Count);
     }
 
     public void SetStats()
