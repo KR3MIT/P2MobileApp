@@ -4,10 +4,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using UnityEngine.TextCore.Text;
 
 public class StatsOverlay : MonoBehaviour
 {
-    public Character _character;
+    private Character _character;
     public UnityEngine.UI.Button _toggleStats;
 
     private float _health;
@@ -30,6 +31,7 @@ public class StatsOverlay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _character = GameObject.FindWithTag("Player").GetComponent<Character>();
         _toggleStats.onClick.AddListener(toggleStats);
         _stats.enabled = true;
     }

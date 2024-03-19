@@ -63,6 +63,12 @@ public class Account : MonoBehaviour
         checkSignIn();
     }
 
+    public async void signInDebug()
+    {
+        await SignInWithUsernamePassword("Matt", "Matt123!");
+        checkSignIn();
+    }
+
     async Task SignInWithUsernamePassword(string username, string password)
     {
         try

@@ -8,7 +8,7 @@ using System.Drawing;
 public class UpgradeScreenManager : MonoBehaviour
 {
     [SerializeField] private GameObject partList;
-    [SerializeField] private Character character;
+    private Character character;
 
     [SerializeField] private GameObject shipPart;
     [SerializeField] private GameObject partCost;
@@ -28,6 +28,8 @@ public class UpgradeScreenManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        character = GameObject.FindWithTag("Player").GetComponent<Character>();
+
         foreach (ShipPartObject part in character.shipParts)
         {
             GameObject _part = Instantiate(shipPart, partList.transform);
