@@ -177,6 +177,8 @@ public class Character : MonoBehaviour
         partToUpgrade.upgradeCost *= partToUpgrade.upgradeCostScale;
         partToUpgrade.lvl++;
         SetStats();
+
+        cloudSave.SaveData();
     }
 
     public bool CanLevelUp(ShipPartObject partToLevel)
