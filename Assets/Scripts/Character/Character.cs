@@ -97,6 +97,15 @@ public class Character : MonoBehaviour
         Debug.Log(playerName);
     }
 
+    public void SetShipParts(List<ShipPartObject> loadedShipParts)
+    {
+        shipParts.Clear();
+        foreach (ShipPartObject part in shipParts)
+        {
+            shipParts.Add(part);
+        }
+    }
+
     public void SetStats()
     {
         health = 0;

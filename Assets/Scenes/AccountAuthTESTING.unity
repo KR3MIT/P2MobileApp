@@ -2643,7 +2643,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1930689974}
         m_TargetAssemblyTypeName: CloudSave, Assembly-CSharp
-        m_MethodName: LoadDataTest
+        m_MethodName: LoadAllData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3175,6 +3175,10 @@ PrefabInstance:
     - target: {fileID: 80521421676826855, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637498663142678275, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: playerName
+      value: InspectorName
       objectReference: {fileID: 0}
     - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
       propertyPath: m_LocalPosition.x

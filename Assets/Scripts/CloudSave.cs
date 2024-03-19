@@ -4,8 +4,7 @@ using UnityEngine;
 using Unity.Services.Core;
 using Unity.Services.Authentication;
 using Unity.Services.CloudSave;
-using System;
-using Unity.Collections.LowLevel.Unsafe;
+using Unity.VisualScripting;
 
 
 public class CloudSave : MonoBehaviour
@@ -19,7 +18,7 @@ public class CloudSave : MonoBehaviour
     async void Start()
     {
         character = GetComponent<Character>();
-
+        
         saveData.Add("playerName", character.playerName);
         saveData.Add("level", character.lvl);
         saveData.Add("experience", character.exp);
@@ -38,7 +37,7 @@ public class CloudSave : MonoBehaviour
 
 
 
-    public void LoadDataTest()
+    public void LoadAllData()
     {
         List<string> list = new List<string>();
         foreach (KeyValuePair<string, object> pair in saveData)
@@ -85,11 +84,14 @@ public class CloudSave : MonoBehaviour
         if (playerData.TryGetValue(playerData["shipParts"].Key, out var playerName))
         {
             Debug.Log($"fuck {playerName.Key}: {playerName.Value.GetAs<List<ShipPartObject>>()}");
+            character.SetShipParts(playerName.Value.GetAs<List<ShipPartObject>>());
         }
 
         if (playerData.TryGetValue(playerData["resources"].Key, out var resources))
         {
             Debug.Log($"fuck {resources.Key}: {resources.Value.GetAs<Dictionary<Character.ResourceType, int>>()}");
+            character.resources = resources.Value.GetAs<Dictionary<Character.ResourceType, int>>();
+        
         }
 
         if (playerData.TryGetValue(playerData["experience"].Key, out var exp))
@@ -101,11 +103,13 @@ public class CloudSave : MonoBehaviour
         if (playerData.TryGetValue(playerData["level"].Key, out var lv))
         {
             Debug.Log($"fuck {lv.Key}: {lv.Value.GetAs<int>()}");
+            character.lvl = lv.Value.GetAs<int>();
         }
 
         if (playerData.TryGetValue(playerData["coal"].Key, out var coal))
         {
             Debug.Log($"fuck {coal.Key}: {coal.Value.GetAs<int>()}");
+            character.coal = coal.Value.GetAs<int>();
         }
 
         if (playerData.TryGetValue(playerData["playerName"].Key, out var name))
