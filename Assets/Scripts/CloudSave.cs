@@ -5,6 +5,7 @@ using Unity.Services.Core;
 using Unity.Services.Authentication;
 using Unity.Services.CloudSave;
 using System;
+using Unity.Collections.LowLevel.Unsafe;
 
 
 public class CloudSave : MonoBehaviour
@@ -26,7 +27,7 @@ public class CloudSave : MonoBehaviour
         saveData.Add("resources", character.resources);
         saveData.Add("shipParts", character.shipParts);
 
-        
+
 
 
         await UnityServices.InitializeAsync();
@@ -34,6 +35,8 @@ public class CloudSave : MonoBehaviour
         
        
     }
+
+
 
     public void LoadDataTest()
     {
@@ -49,6 +52,7 @@ public class CloudSave : MonoBehaviour
     //Saves player data
     public async void SaveData()
     {
+        character = GetComponent<Character>();//maybe remove this line
         saveData.Clear();
 
         saveData.Add("playerName", character.playerName);
@@ -77,31 +81,40 @@ public class CloudSave : MonoBehaviour
     {
         HashSet<string> keyNamesHS = new HashSet<string>(_keyNames);
         var playerData = await CloudSaveService.Instance.Data.Player.LoadAsync(keyNamesHS);
-        foreach(KeyValuePair<string, Unity.Services.CloudSave.Models.Item> kvp in playerData)
+
+        if (playerData.TryGetValue(playerData["shipParts"].Key, out var playerName))
         {
-            if (playerData.TryGetValue(kvp.Key, out var keyName))
-            {
-                Debug.Log($"fuck {kvp.Key}: {keyName.Value.GetAs<string>()}");
-            }
+            Debug.Log($"fuck {playerName.Key}: {playerName.Value.GetAs<List<ShipPartObject>>()}");
+        }
+
+        if (playerData.TryGetValue(playerData["resources"].Key, out var resources))
+        {
+            Debug.Log($"fuck {resources.Key}: {resources.Value.GetAs<Dictionary<Character.ResourceType, int>>()}");
+        }
+
+        if (playerData.TryGetValue(playerData["experience"].Key, out var exp))
+        {
+            Debug.Log($"fuck {exp.Key}: {exp.Value.GetAs<int>()}");
+            character.exp = exp.Value.GetAs<int>();
+        }
+
+        if (playerData.TryGetValue(playerData["level"].Key, out var lv))
+        {
+            Debug.Log($"fuck {lv.Key}: {lv.Value.GetAs<int>()}");
+        }
+
+        if (playerData.TryGetValue(playerData["coal"].Key, out var coal))
+        {
+            Debug.Log($"fuck {coal.Key}: {coal.Value.GetAs<int>()}");
+        }
+
+        if (playerData.TryGetValue(playerData["playerName"].Key, out var name))
+        {
+            Debug.Log($"fuck {name.Key}: {name.Value.GetAs<string>()}");
+            character.playerName = name.Value.GetAs<string>();
         }
 
     }
-
-
-    private async void LoadAllData()
-    {
-        foreach (KeyValuePair<string, object> pair in saveData)
-        {
-            switch (pair.Key)
-            {
-                case "playerName":
-                    LoadData(pair.Key);
-                    break;
-            }
-        }
-    }
-
-
 
 
     //Saves player data when the application is closed
