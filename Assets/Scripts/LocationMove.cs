@@ -2,18 +2,42 @@ using UnityEngine;
 
 public class LocationMove : MonoBehaviour
 {
-    public float speed = 1.0f;
-    private float move;
-    private Rigidbody2D rb;
+    GameObject map = GameObject.Find("Map");
+    private double userLatitude;
+    private double userLongitude;
+    private Vector3 previousPosition;
+    private float timeSinceLastUpdate = 0f;
+    private const float updateInterval = 10f; // Update every 10 seconds
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        previousPosition = transform.position;
     }
 
     private void Update()
     {
-        move = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        timeSinceLastUpdate += Time.deltaTime;
+
+        if (timeSinceLastUpdate >= updateInterval)
+        {
+            LocationManager locationManager = map.GetComponent<LocationManager>();
+            userLatitude = locationManager.userLatitude;
+            userLongitude = locationManager.userLongitude;
+
+            Vector3 newPosition = ConvertLatLonToUnityCoords(userLatitude, userLongitude);
+
+            // Move the object smoothly from the previous position to the new position
+            transform.position = Vector3.Lerp(previousPosition, newPosition, Time.deltaTime);
+
+            previousPosition = newPosition;
+            timeSinceLastUpdate = 0f;
+        }
+    }
+
+    private Vector3 ConvertLatLonToUnityCoords(double latitude, double longitude)
+    {
+        // Implement this function based on your map projection and scaling
+        // For now, let's just return a dummy value
+        return new Vector3((float)longitude, 0, (float)latitude);
     }
 }

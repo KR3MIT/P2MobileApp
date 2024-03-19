@@ -8,9 +8,9 @@ public class LocationManager : MonoBehaviour
 {
     private bool permission = false;
     private bool isLocationEnabled = false;
-    private LocationInfo currentLocation;
-    private double userLongitude;
-    private double userLatitude;
+    public LocationInfo currentLocation;
+    public double userLongitude;
+    public double userLatitude;
 
     public Map map;
 
@@ -94,4 +94,15 @@ public class LocationManager : MonoBehaviour
         userLatitude = defaultLatitude;
         map.UpdateBoundingBox(userLongitude, userLatitude);
     }
+    
+    void Update()
+    {
+        if (permission && isLocationEnabled)
+        {
+            currentLocation = Input.location.lastData;
+            userLongitude = currentLocation.longitude;
+            userLatitude = currentLocation.latitude;
+        }
+    }
+
 }
