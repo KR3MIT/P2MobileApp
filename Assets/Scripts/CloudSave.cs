@@ -24,8 +24,8 @@ public class CloudSave : MonoBehaviour
         saveData.Add("experience", character.exp);
         saveData.Add("coal", character.coal);
         saveData.Add("resources", character.resources);
-        saveData.Add("shipParts", character.shipParts);
-
+        //saveData.Add("shipParts", character.shipParts);
+        saveData.Add("shipParts", character.shipPartList);
 
 
 
@@ -61,8 +61,8 @@ public class CloudSave : MonoBehaviour
         saveData.Add("experience", character.exp);
         saveData.Add("coal", character.coal);
         saveData.Add("resources", character.resources);
-        saveData.Add("shipParts", character.shipParts);
-
+        //saveData.Add("shipParts", character.shipParts);
+        saveData.Add("shipParts", character.shipPartList);
         
 
         var result = await CloudSaveService.Instance.Data.Player.SaveAsync(saveData);
@@ -83,11 +83,18 @@ public class CloudSave : MonoBehaviour
         HashSet<string> keyNamesHS = new HashSet<string>(_keyNames);
         var playerData = await CloudSaveService.Instance.Data.Player.LoadAsync(keyNamesHS);
 
-        if (playerData.TryGetValue(playerData["shipParts"].Key, out var playerName))
+        //if (playerData.TryGetValue(playerData["shipParts"].Key, out var playerName))
+        //{
+        //    Debug.Log($"fuck {playerName.Key}: {playerName.Value.GetAs<List<ShipPartObject>>()}");
+        //    Debug.Log("count " + playerName.Value.GetAs<List<ShipPartObject>>().Count);
+        //    character.SetShipParts(playerName.Value.GetAs<List<ShipPartObject>>());
+        //}
+
+        if (playerData.TryGetValue(playerData["shipParts"].Key, out var shipParts))
         {
-            Debug.Log($"fuck {playerName.Key}: {playerName.Value.GetAs<List<ShipPartObject>>()}");
-            Debug.Log("count " + playerName.Value.GetAs<List<ShipPartObject>>().Count);
-            character.SetShipParts(playerName.Value.GetAs<List<ShipPartObject>>());
+            Debug.Log($"fuck {shipParts.Key}: {shipParts.Value.GetAs<List<ShipPart>>()}");
+            Debug.Log("count " + shipParts.Value.GetAs<List<ShipPart>>().Count);
+            character.CreateAndSetShipPart(shipParts.Value.GetAs<List<ShipPart>>());
         }
 
         if (playerData.TryGetValue(playerData["resources"].Key, out var resources))

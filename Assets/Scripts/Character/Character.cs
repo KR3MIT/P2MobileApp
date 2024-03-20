@@ -34,6 +34,8 @@ public class Character : MonoBehaviour
 
     [Header("ShipParts")]
     public List<ShipPartObject> shipParts = new List<ShipPartObject>();
+
+    public List<ShipPart> shipPartList = new List<ShipPart>();
     //Energy
     [Header("Energy")]
     public int coal = 0;
@@ -83,6 +85,7 @@ public class Character : MonoBehaviour
         shipParts.Add(balloon);
         shipParts.Add(bow);
 
+        MakeStructFromClass(shipParts);//makes the shippartobjects stats into a struct such that it can be used with cloudsave
 
         //default resources for test
         resources[ResourceType.Wood] = 100;
@@ -124,6 +127,34 @@ public class Character : MonoBehaviour
             shipParts.Add(part);
         }
         Debug.Log("Ship parts set count: " + shipParts.Count);
+    }
+
+    public void CreateAndSetShipPart(List<ShipPart> loadedShipParts)
+    {
+        shipParts.Clear();
+        foreach(ShipPart part in loadedShipParts)
+        {
+            ShipPartObject shipPart = new ShipPartObject(part.partName, part.resourceTypes, part.statType, part.lvl, part.AD, part.def, part.health);
+            shipParts.Add(shipPart);
+        }
+        Debug.Log("Ship parts created count: " + shipParts.Count);
+    }
+
+    public void MakeStructFromClass(List<ShipPartObject> shipParts) 
+    {
+        shipPartList.Clear();
+        foreach(ShipPartObject part in shipParts)
+        {
+            ShipPart shipPart = new ShipPart(part.partName, part.lvl, part.AD, part.def, part.health, part.upgradeTypes, part.statToUpgrade);
+            shipPartList.Add(shipPart);
+        }
+        Debug.Log("Ship parts struct created count: " + shipPartList.Count);
+    }
+
+    private void SaveData()
+    {
+        MakeStructFromClass(shipParts);
+        cloudSave.SaveData();
     }
 
     public void SetStats()
@@ -178,7 +209,7 @@ public class Character : MonoBehaviour
         partToUpgrade.lvl++;
         SetStats();
 
-        cloudSave.SaveData();
+        SaveData();
     }
 
     public bool CanLevelUp(ShipPartObject partToLevel)
