@@ -209,11 +209,11 @@ Transform:
   m_GameObject: {fileID: 212459680}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000008344649, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.89, z: -8.86}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -95.9}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1432651648}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1001 &423194339
 PrefabInstance:
@@ -435,7 +435,7 @@ Transform:
   m_GameObject: {fileID: 1328753552}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000095795656, y: -0.70710677, z: 0.7071069, w: 0.000000100070245}
-  m_LocalPosition: {x: 40, y: 1, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 308.49, y: 1, z: 308.49002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -453,6 +453,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2553a3f602b8fb469c4b87c42cb99d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userLongitude: 0
+  userLatitude: 0
   map: {fileID: 1328753553}
   locationText: {fileID: 1444913159}
 --- !u!1 &1432651643
@@ -469,7 +471,7 @@ GameObject:
   - component: {fileID: 1432651645}
   - component: {fileID: 1432651644}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,7 +489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4342c66aed56a4dbcdea2271c5778d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  map: {fileID: 1328753552}
+  locationText: {fileID: 1444913159}
 --- !u!50 &1432651645
 Rigidbody2D:
   serializedVersion: 4
@@ -621,10 +624,11 @@ Transform:
   m_GameObject: {fileID: 1432651643}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.947, y: 2.3415282, z: 87.04}
-  m_LocalScale: {x: 0.36, y: 0.4, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 87.04}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 212459683}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1444913157
@@ -1030,7 +1034,6 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 212459683}
   - {fileID: 1454038810}
   - {fileID: 1669814018}
   - {fileID: 423194339}

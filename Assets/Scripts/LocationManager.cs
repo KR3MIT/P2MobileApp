@@ -44,7 +44,6 @@ public class LocationManager : MonoBehaviour
         if (!Input.location.isEnabledByUser)
         {
            
-            Debug.Log("Location services are not enabled");
             UseDefaultLocation();
             yield break;
         }
