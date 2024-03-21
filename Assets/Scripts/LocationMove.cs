@@ -8,7 +8,7 @@ public class LocationMove : MonoBehaviour
     private double userLongitude;
     private Vector3 previousPosition;
     private float timeSinceLastUpdate = 0f;
-    private const float updateInterval = 10f; // Update every 10 seconds
+    private const float updateInterval = 5f; // Update every 10 seconds
 
     public TMPro.TextMeshProUGUI locationText;
 
@@ -59,8 +59,8 @@ public class LocationMove : MonoBehaviour
         double longitudeInMeters = longitude * 111132 * Mathf.Cos((float)(Mathf.Deg2Rad * latitude));
 
         // Convert meters to Unity units using the map scale
-        float x = (float)(longitudeInMeters / (1000 * 2));
-        float z = (float)(latitudeInMeters / (1000 * 2));
+        float x = (float)(longitudeInMeters / (100000 * 2));
+        float z = (float)(latitudeInMeters / (100000 * 2));
 
         return new Vector3(x, 0, z);
     }
