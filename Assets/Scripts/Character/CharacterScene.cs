@@ -1,43 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CharacterScene : MonoBehaviour
 {
-    [TextArea]
-    [Tooltip("Scenes in which the players visuals will be displayed ONLY UNITY SCENE ASSETS!!!!!!!!!!!!!!!!!!!!!!!!!!!!")]
-    [SerializeField] private string important_note = "ONLY PUT UNITY SCENES IN LIST";
-    [SerializeField] private List<Object> Scenes = new List<Object>();
+    [Tooltip("Scenes in which the players visuals will be displayed")]
+    [SerializeField] private List<SceneAsset> SceneAssets = new List<SceneAsset>();
     private List<string> _scenes = new List<string>();
     [SerializeField] private GameObject playerVisuals;
 
+    
     void Start()
     {
         SceneManager.activeSceneChanged += ChangedActiveScene;
 
-        foreach(Object obj in Scenes)
+        foreach(SceneAsset obj in SceneAssets)
         {
             _scenes.Add(obj.name);
         }
     }
 
-    // Update is called once per frame
-    private void ChangedActiveScene(Scene currentScene, Scene nextScene) 
+    private void ChangedActiveScene(Scene currentScene, Scene nextScene)
     {
-        string currentName = currentScene.name;
-
-        if (currentName == null)
-        {
-            // Scene1 has been removed
-            currentName = "Replaced";
-        }
-
-        Debug.Log($"CurrentScene: {currentName} NextScene: {nextScene.name}");
+        Debug.Log($"CurrentScene: {currentScene.name} NextScene: {nextScene.name}");
 
         if (_scenes.Contains(nextScene.name))
         {
             playerVisuals.SetActive(true);
-        }else { playerVisuals.SetActive(false);}
+        }
+        else { playerVisuals.SetActive(false); }
     }
 }
