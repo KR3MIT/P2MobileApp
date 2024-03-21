@@ -5,13 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class CharacterScene : MonoBehaviour
 {
-    [Tooltip("Scenes in which the players visuals will be displayed")]
-    public List<Scene> Scenes = new List<Scene>();
-    public GameObject playerVisuals;
+    [TextArea]
+    [Tooltip("Scenes in which the players visuals will be displayed ONLY UNITY SCENE ASSETS!!!!!!!!!!!!!!!!!!!!!!!!!!!!")]
+    [SerializeField] private string important_note = "ONLY PUT UNITY SCENES IN LIST";
+    [SerializeField] private List<Object> Scenes = new List<Object>();
+    private List<string> _scenes = new List<string>();
+    [SerializeField] private GameObject playerVisuals;
 
     void Start()
     {
         SceneManager.activeSceneChanged += ChangedActiveScene;
+
+        foreach(Object obj in Scenes)
+        {
+            _scenes.Add(obj.name);
+        }
     }
 
     // Update is called once per frame
@@ -27,7 +35,7 @@ public class CharacterScene : MonoBehaviour
 
         Debug.Log($"CurrentScene: {currentName} NextScene: {nextScene.name}");
 
-        if (Scenes.Contains(nextScene))
+        if (_scenes.Contains(nextScene.name))
         {
             playerVisuals.SetActive(true);
         }else { playerVisuals.SetActive(false);}
