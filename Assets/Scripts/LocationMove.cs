@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class LocationMove : MonoBehaviour
 {
-    GameObject map = GameObject.Find("Map");
+    private GameObject map;
+    private LocationManager locationManager;
     private double userLatitude;
     private double userLongitude;
     private Vector3 previousPosition;
     private float timeSinceLastUpdate = 0f;
     private const float updateInterval = 10f; // Update every 10 seconds
+    
 
     private void Start()
     {
+        locationManager = map.GetComponent<LocationManager>();
+        map = GameObject.Find("Maps");
         previousPosition = transform.position;
+
     }
 
     private void Update()
@@ -20,7 +25,7 @@ public class LocationMove : MonoBehaviour
 
         if (timeSinceLastUpdate >= updateInterval)
         {
-            LocationManager locationManager = map.GetComponent<LocationManager>();
+            
             userLatitude = locationManager.userLatitude;
             userLongitude = locationManager.userLongitude;
 

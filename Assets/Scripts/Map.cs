@@ -24,7 +24,6 @@ using UnityEngine.Networking;
 using System;
 using System.Globalization;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
