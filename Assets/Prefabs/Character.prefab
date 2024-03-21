@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6739119256976950287}
   - component: {fileID: 3637498663142678275}
   - component: {fileID: 8635624033439804023}
+  - component: {fileID: 1720723127830214076}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f2b8e535ede784e864bb5630fbdd6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: Jason
+  playerName: InspectorName
   lvl: 1
   exp: 0
   health: 0
@@ -65,6 +66,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa4e683beb49df4d9a85573d6bd1f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1720723127830214076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80521421676826855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b1e1b3fd9b09748a8a81296cbf805b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  important_note: ONLY PUT UNITY SCENES IN LIST
+  Scenes:
+  - {fileID: 102900000, guid: 8c8affb7d8ecaa748a0d3493e8eb8fe7, type: 3}
+  playerVisuals: {fileID: 7724564562100576415}
 --- !u!1 &1159622126756355381
 GameObject:
   m_ObjectHideFlags: 0
