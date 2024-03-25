@@ -2,6 +2,7 @@ using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -16,6 +17,8 @@ public class PageHorizontalScroller : MonoBehaviour
     private Vector3 position;
     private float width;
     private float height;
+
+    public float scrollSpeed = 1;
 
 
     // Start is called before the first frame update
@@ -40,7 +43,7 @@ public class PageHorizontalScroller : MonoBehaviour
     private void ChangeToPage(Vector3 pageLocation)
     {
         StopAllCoroutines();
-        var x = new Vector3(pageLocation.x, transform.position.y, transform.position.z);
+        var x = new Vector3(pageLocation.x, transform.position.y, 0);
 
         //make smooth transition between pages with lerp
         StartCoroutine(LerpLocation(x));
@@ -56,26 +59,39 @@ public class PageHorizontalScroller : MonoBehaviour
         }
     }
 
+    private void ClosestPage()
+    {
+        StopAllCoroutines();
+        var dist = 100000f;//arbitrary large  number
+        Vector3 closestPage = Vector3.zero;
+        foreach (Transform child in transform)
+        {
+            if (Vector3.Distance(child.position, transform.position) < dist)
+            {
+                dist = Vector3.Distance(child.position, transform.position);
+                closestPage = child.position;
+            }
+        }
+       StartCoroutine(LerpLocation(closestPage));
+    }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-
-            // Move the cube if the screen has the finger moving.
+            UnityEngine.Touch touch = Input.touches[0];
             if (touch.phase == TouchPhase.Moved)
             {
-                Vector2 pos = touch.position;
-                pos.x = (pos.x - width) / width;
-                //pos.y = (pos.y - height) / height;
-                position = new Vector3(-pos.x, 0.0f, 0.0f);
-
-                // Position the cube.
-                transform.position = position;
+                Debug.Log("touch moved");
+                var x = touch.deltaPosition.x / (width * scrollSpeed);
+                transform.position = new Vector3(transform.position.x + x, transform.position.y, 0);
             }
-
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                Debug.Log("touch ended");
+                StartCoroutine(LerpLocation(canvasHome));
+            }
         }
     }
 }
