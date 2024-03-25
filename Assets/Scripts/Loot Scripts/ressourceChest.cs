@@ -26,7 +26,11 @@ public class ressourceChest : MonoBehaviour
     }
     public void OpenChest(string ChestClicked)
     {
-        OpenChestResource();
+        if(character != null)
+        {
+            OpenChestResource();
+        }else Debug.Log("Character not found");
+        
 
     }
    
