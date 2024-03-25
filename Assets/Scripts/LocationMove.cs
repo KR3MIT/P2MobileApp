@@ -12,8 +12,8 @@ public class LocationMove : MonoBehaviour
 
     public TMPro.TextMeshProUGUI locationText;
 
+    Vector3 newPosition = Vector3.zero;
 
-   
 
     private void Start()
     {
@@ -24,7 +24,7 @@ public class LocationMove : MonoBehaviour
 
     private void Update()
     {
-        Vector3 newPosition = Vector3.zero;
+        
         timeSinceLastUpdate += Time.deltaTime;
 
         if (timeSinceLastUpdate >= updateInterval)
@@ -44,7 +44,7 @@ public class LocationMove : MonoBehaviour
 
 
             }
-            locationText.text = "Latitude: " + userLatitude + " Longitude: " + userLongitude;
+            locationText.text = newPosition.ToString();
             previousPosition = newPosition;
             timeSinceLastUpdate = 0f;
         }
@@ -59,10 +59,10 @@ public class LocationMove : MonoBehaviour
         double longitudeInMeters = longitude * 111132 * Mathf.Cos((float)(Mathf.Deg2Rad * latitude));
 
         // Convert meters to Unity units using the map scale
-        float x = (float)(longitudeInMeters / (100000 * 2));
+        float x = (float)(longitudeInMeters / (1000 * 2));
         float y = (float)(latitudeInMeters / (100000 * 2));
 
-        return new Vector3(x, y, 0);
+        return new Vector3(x, y, 89.44f);
     }
 
 }
