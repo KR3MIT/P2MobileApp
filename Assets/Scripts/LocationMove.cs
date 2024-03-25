@@ -8,18 +8,16 @@ public class LocationMove : MonoBehaviour
     private double userLongitude;
     private Vector3 previousPosition;
     private float timeSinceLastUpdate = 0f;
-    private const float updateInterval = 5f; // Update every 10 seconds
+    private const float updateInterval = 5f; // Update every 
 
     public TMPro.TextMeshProUGUI locationText;
 
-    private Map radiusGetter;
 
    
 
     private void Start()
     {
         locationManager = map.GetComponent<LocationManager>();
-        radiusGetter = map.GetComponent<Map>();
         previousPosition = transform.position;
         
     }
@@ -31,10 +29,7 @@ public class LocationMove : MonoBehaviour
 
         if (timeSinceLastUpdate >= updateInterval)
         {
-            if(userLatitude == 0 || userLongitude == 0)
-            {
-                return;
-            }
+           
             userLatitude = locationManager.userLatitude;
             userLongitude = locationManager.userLongitude;
 
@@ -53,7 +48,7 @@ public class LocationMove : MonoBehaviour
             previousPosition = newPosition;
             timeSinceLastUpdate = 0f;
         }
-        // Move the object smoothly from the previous position to the new position
+    
         
     }
 
