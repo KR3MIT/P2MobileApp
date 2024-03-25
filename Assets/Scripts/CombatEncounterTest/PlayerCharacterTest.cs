@@ -8,6 +8,10 @@ using UnityEngine.UI;
 
 public class PlayerCharacterTest : MonoBehaviour
 {
+    //player ref
+    private Character player;
+
+
     // Reference to the enemy character instance and health bar instance
     public HealthBar healthBars;
 
@@ -45,6 +49,16 @@ public class PlayerCharacterTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(GameObject.FindWithTag("Player").GetComponent<Character>() != null)
+        {
+            player = GameObject.FindWithTag("Player").GetComponent<Character>();
+            playerMaxHealth = player.health;
+            playerHealth = player.health;
+            attackPower = player.AD;
+            defensePower = player.def;
+        }
+        
+
         // Create an enemyCharacter instance through the EnemyCharacterTest class to handle the enemy character
         EnemyCharacterTest enemyCharacter = new EnemyCharacterTest();
 
