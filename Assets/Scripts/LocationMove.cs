@@ -26,18 +26,21 @@ public class LocationMove : MonoBehaviour
 
     private void Update()
     {
+        Vector3 newPosition = Vector3.zero;
         timeSinceLastUpdate += Time.deltaTime;
 
         if (timeSinceLastUpdate >= updateInterval)
         {
-            
+            if(userLatitude == 0 || userLongitude == 0)
+            {
+                return;
+            }
             userLatitude = locationManager.userLatitude;
             userLongitude = locationManager.userLongitude;
 
-            Vector3 newPosition = ConvertLatLonToUnityCoords(userLatitude, userLongitude);
+            newPosition = ConvertLatLonToUnityCoords(userLatitude, userLongitude);
 
-            // Move the object smoothly from the previous position to the new position
-            transform.position = Vector3.Lerp(previousPosition, newPosition, Time.deltaTime);
+            transform.position = newPosition;
 
             if (newPosition == previousPosition)
             {
@@ -50,6 +53,8 @@ public class LocationMove : MonoBehaviour
             previousPosition = newPosition;
             timeSinceLastUpdate = 0f;
         }
+        // Move the object smoothly from the previous position to the new position
+        
     }
 
     private Vector3 ConvertLatLonToUnityCoords(double latitude, double longitude)
@@ -60,9 +65,9 @@ public class LocationMove : MonoBehaviour
 
         // Convert meters to Unity units using the map scale
         float x = (float)(longitudeInMeters / (100000 * 2));
-        float z = (float)(latitudeInMeters / (100000 * 2));
+        float y = (float)(latitudeInMeters / (100000 * 2));
 
-        return new Vector3(x, 0, z);
+        return new Vector3(x, y, 0);
     }
 
 }
