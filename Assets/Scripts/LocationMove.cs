@@ -59,8 +59,8 @@ public class LocationMove : MonoBehaviour
         double longitudeInMeters = longitude * 111132 * Mathf.Cos((float)(Mathf.Deg2Rad * latitude));
 
         // Convert meters to Unity units using the map scale
-        float x = (float)(longitudeInMeters / (1000 * 2));
-        float y = (float)(latitudeInMeters / (100000 * 2));
+        float x = (float)(longitudeInMeters);
+        float y = (float)(latitudeInMeters);
 
         return new Vector3(x, y, 89.44f);
     }
