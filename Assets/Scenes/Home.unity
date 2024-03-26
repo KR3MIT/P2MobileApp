@@ -305,6 +305,7 @@ MonoBehaviour:
   stats: {fileID: 899992667}
   home: {fileID: 420887732}
   upgrades: {fileID: 1981255788}
+  scrollSpeed: 0.5
 --- !u!4 &384459119
 Transform:
   m_ObjectHideFlags: 0
