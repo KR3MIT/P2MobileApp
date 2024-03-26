@@ -6,17 +6,21 @@ using UnityEngine.UI;
 
 public class LocationManager : MonoBehaviour
 {
-    private bool permission = false;
-    private bool isLocationEnabled = false;
+  
+    private bool canGetLocation = false;
+
     public LocationInfo currentLocation;
     public double userLongitude;
     public double userLatitude;
 
+    public double originalLongitude;
+    public double originalLatitude;
+
     public Map map;
 
     // Default location (Example: Times Square, New York)
-    private double defaultLongitude = -73.9851;
-    private double defaultLatitude = 40.7580;
+    public double defaultLongitude = -73.9851;
+    public double defaultLatitude = 40.7580;
 
     public TMPro.TextMeshProUGUI locationText;
 
@@ -28,10 +32,14 @@ public class LocationManager : MonoBehaviour
         {
             locationText.text = "Location permission is not granted";
             UnityEngine.Android.Permission.RequestUserPermission(UnityEngine.Android.Permission.FineLocation);
+            canGetLocation = false;
 
         }
-
-
+        else
+        {
+            canGetLocation = !Application.isEditor;
+        }
+    
         map = GetComponent<Map>();
 
         StartCoroutine(AskForLocation());
@@ -40,10 +48,10 @@ public class LocationManager : MonoBehaviour
     private IEnumerator AskForLocation()
     {
 
-       
+
         if (!Input.location.isEnabledByUser)
         {
-           
+
             UseDefaultLocation();
             yield break;
         }
@@ -72,36 +80,48 @@ public class LocationManager : MonoBehaviour
         }
         else
         {
-            permission = true;
-            isLocationEnabled = true;
+           
             currentLocation = Input.location.lastData;
             userLongitude = currentLocation.longitude;
             userLatitude = currentLocation.latitude;
+
+            originalLatitude = userLatitude;
+            originalLongitude = userLongitude;
+
             map.UpdateBoundingBox(userLongitude, userLatitude);
         }
 
-      
+
         yield break;
     }
 
     private void UseDefaultLocation()
     {
         Debug.Log("Using default location");
-        permission = true;
-        isLocationEnabled = true;
+      
         userLongitude = defaultLongitude;
         userLatitude = defaultLatitude;
+        originalLatitude = userLatitude;
+        originalLongitude = userLongitude;
         map.UpdateBoundingBox(userLongitude, userLatitude);
     }
-    
+
     void Update()
     {
-        if (permission && isLocationEnabled)
+        if (canGetLocation)
         {
             currentLocation = Input.location.lastData;
             userLongitude = currentLocation.longitude;
             userLatitude = currentLocation.latitude;
         }
+        else
+        {
+            userLongitude = defaultLongitude;
+            userLatitude = defaultLatitude;
+
+        }
+
     }
+
 
 }
