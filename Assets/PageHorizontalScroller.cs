@@ -96,8 +96,13 @@ public class PageHorizontalScroller : MonoBehaviour
 
     void Update()
     {
-        return;
+        
         if (buttonPressed)
+        {
+            return;
+        }
+        //Debug.Log(Vector3.Distance(transform.position, canvasUpgrades));
+        if (Vector3.Distance(transform.position, canvasStats) < 1f)//need opposite canvas position since we move the entire thing
         {
             return;
         }
