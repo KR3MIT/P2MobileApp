@@ -19,6 +19,9 @@ public class PageHorizontalScroller : MonoBehaviour
     private float height;
 
     public float scrollSpeed = 1;
+    public float dragSnapSpeed = 10f;
+
+    private bool buttonPressed = false;
 
 
     // Start is called before the first frame update
@@ -43,6 +46,9 @@ public class PageHorizontalScroller : MonoBehaviour
     private void ChangeToPage(Vector3 pageLocation)
     {
         StopAllCoroutines();
+
+        buttonPressed = true;
+
         var x = new Vector3(pageLocation.x, transform.position.y, 0);
 
         //make smooth transition between pages with lerp
@@ -54,43 +60,64 @@ public class PageHorizontalScroller : MonoBehaviour
     {
         while (transform.position != pageLocation)
         {
-            transform.position = Vector3.Lerp(transform.position, pageLocation, 0.1f);
+            transform.position = Vector3.MoveTowards(transform.position, pageLocation, dragSnapSpeed);
             yield return null;
+
+            buttonPressed = false;
         }
     }
 
     private void ClosestPage()
     {
         StopAllCoroutines();
-        var dist = 100000f;//arbitrary large  number
-        Vector3 closestPage = Vector3.zero;
-        foreach (Transform child in transform)
+
+        var closestPage = Vector3.zero;
+
+        var homeDistance = Vector3.Distance(transform.position, canvasHome);
+        var statsDistance = Vector3.Distance(transform.position, canvasStats);
+        var upgradesDistance = Vector3.Distance(transform.position, canvasUpgrades);
+
+        if (homeDistance <= statsDistance && homeDistance <= upgradesDistance)
         {
-            if (Vector3.Distance(child.position, transform.position) < dist)
-            {
-                dist = Vector3.Distance(child.position, transform.position);
-                closestPage = child.position;
-            }
+            closestPage = canvasHome;
         }
-       StartCoroutine(LerpLocation(closestPage));
+        else if (statsDistance < homeDistance && statsDistance < upgradesDistance)
+        {
+            closestPage = canvasStats;
+        }
+        else
+        {
+            closestPage = canvasUpgrades;
+        }
+
+        StartCoroutine(LerpLocation(closestPage));
     }
 
 
     void Update()
     {
+        
+        if (buttonPressed)
+        {
+            return;
+        }
+        //Debug.Log(Vector3.Distance(transform.position, canvasUpgrades));
+        if (Vector3.Distance(transform.position, canvasStats) < 1f)//need opposite canvas position since we move the entire thing
+        {
+            return;
+        }
+
         if (Input.touchCount > 0)
         {
             UnityEngine.Touch touch = Input.touches[0];
             if (touch.phase == TouchPhase.Moved)
             {
-                Debug.Log("touch moved");
                 var x = touch.deltaPosition.x / (width * scrollSpeed);
-                transform.position = new Vector3(transform.position.x + x, transform.position.y, 0);
+                transform.position = new Vector3(transform.position.x + x, 0, 0);
             }
             else if (touch.phase == TouchPhase.Ended)
             {
-                Debug.Log("touch ended");
-                StartCoroutine(LerpLocation(canvasHome));
+                ClosestPage();
             }
         }
     }

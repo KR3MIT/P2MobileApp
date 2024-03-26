@@ -62,7 +62,7 @@ public class Map : MonoBehaviour
     public void UpdateBoundingBox(double userLongitude, double userLatitude)
     {
         // Define a desired radius around the user location (adjust as needed)
-        double radiusInMeters = 1000; // Adjust for desired zoom level
+        double radiusInMeters = 10000; // Adjust for desired zoom level
 
         // Calculate bounding box based on user location and radius
         double deltaLatitude = radiusInMeters / (111132 * Mathf.Cos((float)(Mathf.Deg2Rad * userLatitude)));
