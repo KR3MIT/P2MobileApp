@@ -32,6 +32,9 @@ public class LocationMove : MonoBehaviour
 
             newPosition = ConvertLatLonToUnityCoords(locationManager.userLatitude, locationManager.userLongitude); // Convert latitude and longitude to Unity coordinates
 
+            locationText.text = " Current X: " + transform.position.x + " Current Y: " + transform.position.y;
+
+
             transform.position = newPosition; // Move the player to the new position
 
             if (newPosition == previousPosition) // Check if the player is moving
@@ -43,6 +46,7 @@ public class LocationMove : MonoBehaviour
             }
             previousPosition = newPosition;// Update the previous position
             timeSinceLastUpdate = 0f; // Reset the timer
+
         }
 
 
@@ -58,7 +62,6 @@ public class LocationMove : MonoBehaviour
         float x = (float)(longitudeInMeters);
         float y = (float)(latitudeInMeters);
 
-        locationText.text = "Latitude: " + latitude + " Longitude: " + longitude + " Unity X: " + x + " Unity Y: " + y + " Current X: " + transform.position.x + " Current Y: " + transform.position.y;
 
         return new Vector3(x, y, 89.44f);
     }
