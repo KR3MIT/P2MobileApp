@@ -393,7 +393,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 748978030}
         m_TargetAssemblyTypeName: RadarBehavior, Assembly-CSharp
-        m_MethodName: StartScanButton
+        m_MethodName: spawnObjects
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -637,6 +637,7 @@ MonoBehaviour:
   - {fileID: 919132148847374237}
   Sphere: {fileID: 748978029}
   StartScan: 0
+  minDistance: 0.5
 --- !u!23 &748978032
 MeshRenderer:
   m_ObjectHideFlags: 0
