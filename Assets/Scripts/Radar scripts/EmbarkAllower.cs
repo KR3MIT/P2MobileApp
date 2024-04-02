@@ -16,6 +16,7 @@ public class EmbarkAllower : MonoBehaviour
         Debug.Log(PlayerPrefs.GetString("previousDate"));
         Debug.Log(currentDate);
         AllowEmbark();
+        //this is proof it works :thumpsupemoji:
 
     }
     //if date change, embarkallowed = true
