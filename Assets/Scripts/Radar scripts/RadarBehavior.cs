@@ -17,11 +17,32 @@ public class RadarBehavior : MonoBehaviour
     [SerializeField] private float minDistance = .5f;
     private int maxRunAmount = 100; //max amount of times we can run the loop if we are too close to another object
 
+    public string encounterSceneName = "EncounterScene";
+    public string resourceSceneName = "ResourceScene";
+
+    private SceneStates sceneStates;
+
+    private void Start()
+    {
+        if(GameObject.FindWithTag("Player") != null)//check if player exists if it does set scenestate and if POIs exists set POIs
+        {
+            sceneStates = GameObject.FindWithTag("Player").GetComponent<SceneStates>();
+            if (sceneStates.POIs != null)
+            {
+                foreach (GameObject POI in sceneStates.POIs)
+                {
+                    POIs.Add(Instantiate(POI));
+                }
+            }
+        }
+        
+        
+    }
 
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))//just to test :):)):):)))
         {
             RaycastHit hit;//Make a raycasthit to store the information of the object that we hit
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Make a ray from the camera to the mouse position
@@ -33,6 +54,16 @@ public class RadarBehavior : MonoBehaviour
                     POIs.Remove(hit.transform.gameObject);
                     hit.transform.gameObject.SetActive(false);
                     DisableOppositePOI(hit.transform.gameObject);
+                    var POIscript = hit.transform.gameObject.GetComponent<POIscript>();
+                    if (POIscript.isEncounter)
+                    {
+                        sceneStates.POIs = POIs;
+                        UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
+                    }else if (POIscript.isResource)
+                    {
+                        sceneStates.POIs = POIs;
+                        UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
+                    }
                 }
             }
         }
@@ -89,6 +120,7 @@ public class RadarBehavior : MonoBehaviour
             }
             POIs.Add(Instantiate(toSpawn, randomCirclePosition, Quaternion.Euler (new Vector3 (0,90,-90)))); // we instantiate the chosen prop, and add to list
         }
+        
         
     }
 
