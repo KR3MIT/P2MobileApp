@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 1328753552}
+  distianceMultiplier: 0.011
   locationText: {fileID: 1444913159}
 --- !u!65 &511207916
 BoxCollider:
@@ -427,7 +428,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 89.44}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1.54, y: 1.23, z: 1.67}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -578,8 +579,8 @@ MonoBehaviour:
   originalLongitude: 0
   originalLatitude: 0
   map: {fileID: 1328753553}
-  defaultLongitude: -73.9851
-  defaultLatitude: 40.758
+  defaultLongitude: 12.542189937519085
+  defaultLatitude: 55.64970561820365
   locationText: {fileID: 1444913159}
 --- !u!1 &1444913157
 GameObject:
@@ -638,7 +639,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Test fest
+  m_text: Test fest!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
