@@ -13,26 +13,49 @@ public class RadarBehavior : MonoBehaviour
     GameObject toSpawn; // gameobjected toSpawn is created
     public bool StartScan = false;
 
-    private List<Vector3> POIPositions = new List<Vector3>();
+    private List<GameObject> POIs = new List<GameObject>();
     [SerializeField] private float minDistance = 10f;
     private int maxRunAmount = 100; //max amount of times we can run the loop if we are too close to another object
 
 
 
-    //void Update()
-    //{
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;//Make a raycasthit to store the information of the object that we hit
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Make a ray from the camera to the mouse position
+            if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
+            {
+                //If the tag of the hit object is "Prop", then do thing
+                if (hit.transform.tag == "Prop")
+                {
+                    hit.transform.gameObject.SetActive(false);
+                    DisableOppositePOI(hit.transform.gameObject);
+                }
+            }
+        }
+    }
 
-    //    if (StartScan == true)
-    //    {
-    //        spawnObjects();
-    //        StartScan = false;
-    //    }
+    private void DisableOppositePOI(GameObject hitPOI)
+    {
+        if(POIs.Count == 0 || POIs.Count == 1) { return;}
 
-    //}
-    //public void StartScanButton()
-    //{
-    //    StartScan = true;
-    //}
+        //find the POI with the longest distance to hitPOI
+        GameObject oppositePOI = null;
+        float longestDistance = 0;
+        foreach (GameObject POI in POIs)
+        {
+            if (POI == hitPOI) continue;
+            float distance = Vector3.Distance(POI.transform.position, hitPOI.transform.position);
+            if (distance > longestDistance)
+            {
+                longestDistance = distance;
+                oppositePOI = POI;
+            }
+        }
+        oppositePOI.SetActive(false);
+    }
 
     // this method checks if objects with the tag prop collides, and destroy them
     public void spawnObjects() //we are making a new method called "spawnObjects"
@@ -61,18 +84,18 @@ public class RadarBehavior : MonoBehaviour
                 i--; // we decrease i by 1
                 continue; // and continue to the next iteration
             }
-            POIPositions.Add(Instantiate(toSpawn, randomCirclePosition, Quaternion.Euler (new Vector3 (0,90,-90))).transform.position); // we instantiate the chosen prop, and add to list
+            POIs.Add(Instantiate(toSpawn, randomCirclePosition, Quaternion.Euler (new Vector3 (0,90,-90)))); // we instantiate the chosen prop, and add to list
         }
         
     }
 
     private bool IsTooClose(Vector3 pos)
     {
-        if (POIPositions.Count == 0) return false; // if the list is empty, return false
+        if (POIs.Count == 0) return false; // if the list is empty, return false
         //check if the distance between the new position and the other positions is less than 1
-        foreach (Vector3 position in POIPositions)
+        foreach (GameObject POI in POIs)
         {
-            if (Vector3.Distance(pos, position) < minDistance)
+            if (Vector3.Distance(pos, POI.transform.position) < minDistance)
             {
                 return true;
             }
