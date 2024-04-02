@@ -14,7 +14,7 @@ public class RadarBehavior : MonoBehaviour
     public bool StartScan = false;
 
     private List<GameObject> POIs = new List<GameObject>();
-    [SerializeField] private float minDistance = 10f;
+    [SerializeField] private float minDistance = .5f;
     private int maxRunAmount = 100; //max amount of times we can run the loop if we are too close to another object
 
 
@@ -30,6 +30,7 @@ public class RadarBehavior : MonoBehaviour
                 //If the tag of the hit object is "Prop", then do thing
                 if (hit.transform.tag == "Prop")
                 {
+                    POIs.Remove(hit.transform.gameObject);
                     hit.transform.gameObject.SetActive(false);
                     DisableOppositePOI(hit.transform.gameObject);
                 }
@@ -54,7 +55,9 @@ public class RadarBehavior : MonoBehaviour
                 oppositePOI = POI;
             }
         }
+        POIs.Remove(oppositePOI);
         oppositePOI.SetActive(false);
+        //Debug.Log("Removed 1 opp " + POIs.Count);
     }
 
     // this method checks if objects with the tag prop collides, and destroy them

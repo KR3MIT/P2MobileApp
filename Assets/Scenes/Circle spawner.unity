@@ -676,10 +676,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 10
-  spawnPool: []
+  spawnPool:
+  - {fileID: 6029671794544106097}
+  - {fileID: 1463822341}
   Sphere: {fileID: 748978029}
   StartScan: 0
-  minDistance: 10
+  minDistance: 0.5
 --- !u!23 &748978032
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1056,6 +1058,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1463822341 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7276972406869534604, guid: 5b23baa941f4afa4499cf133e6173a3d, type: 3}
+  m_PrefabInstance: {fileID: 6117927528532171762}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &880595557774275838
 MeshRenderer:
   m_ObjectHideFlags: 0
