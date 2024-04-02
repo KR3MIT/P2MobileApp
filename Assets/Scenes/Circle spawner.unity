@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 568581388}
   - component: {fileID: 568581387}
   m_Layer: 5
-  m_Name: Start the Scan
+  m_Name: Embark Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
