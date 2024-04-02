@@ -1,18 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EmbarkAllower : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool embarkAllowed = false;
+    DateTime currentDate;
+    DateTime previousDate;
+ 
+    //if date change, embarkallowed = true
+    public void AllowEmbark()
     {
+        currentDate = DateTime.Now.Date;
+        if (currentDate != previousDate)
+        {
+            embarkAllowed = true;
+        }   
         
+        if (!embarkAllowed)
+        {
+            Debug.Log("Embark not allowed");
+            return;
+        }
+;       Embark();
+        previousDate = currentDate;
+        embarkAllowed = false;
     }
-
-    // Update is called once per frame
-    void Update()
+    void Embark()
     {
-        
+        // start the scan from other script
     }
+   
 }
