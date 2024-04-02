@@ -22,7 +22,6 @@ public class LocationManager : MonoBehaviour
     public double defaultLongitude = -73.9851;
     public double defaultLatitude = 40.7580;
 
-    public TMPro.TextMeshProUGUI locationText;
 
     private void Start()
     {
@@ -30,7 +29,7 @@ public class LocationManager : MonoBehaviour
         // Check for Android permission
         if (!UnityEngine.Android.Permission.HasUserAuthorizedPermission(UnityEngine.Android.Permission.FineLocation))
         {
-            locationText.text = "Location permission is not granted";
+           
             UnityEngine.Android.Permission.RequestUserPermission(UnityEngine.Android.Permission.FineLocation);
             canGetLocation = false;
 
