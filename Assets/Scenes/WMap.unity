@@ -209,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 212459680}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0000008344649, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8.860001}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -426,7 +426,7 @@ Transform:
   m_GameObject: {fileID: 511207914}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.46, y: 0.39, z: 89.44}
+  m_LocalPosition: {x: 0, y: 0, z: 89.44}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -575,7 +575,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   userLongitude: 0
   userLatitude: 0
+  originalLongitude: 0
+  originalLatitude: 0
   map: {fileID: 1328753553}
+  defaultLongitude: -73.9851
+  defaultLatitude: 40.758
   locationText: {fileID: 1444913159}
 --- !u!1 &1444913157
 GameObject:

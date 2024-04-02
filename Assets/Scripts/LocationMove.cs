@@ -10,6 +10,8 @@ public class LocationMove : MonoBehaviour
     private float timeSinceLastUpdate = 0f;
     private const float updateInterval = 5f; // Update every 
 
+    public float distianceMultiplier = 1f;
+
     public TMPro.TextMeshProUGUI locationText;
 
     Vector3 newPosition = Vector3.zero;
@@ -30,7 +32,7 @@ public class LocationMove : MonoBehaviour
         if (timeSinceLastUpdate >= updateInterval)
         {
 
-            newPosition = ConvertLatLonToUnityCoords(locationManager.userLatitude, locationManager.userLongitude); // Convert latitude and longitude to Unity coordinates
+            newPosition = CalculatePositionFromGPS((float)locationManager.userLatitude, (float)locationManager.userLongitude, (float)locationManager.originalLatitude, (float)locationManager.originalLongitude); // Convert latitude and longitude to Unity coordinates
 
             locationText.text = " Current X: " + transform.position.x + " Current Y: " + transform.position.y;
 
@@ -47,22 +49,43 @@ public class LocationMove : MonoBehaviour
             previousPosition = newPosition;// Update the previous position
             timeSinceLastUpdate = 0f; // Reset the timer
 
+
+
         }
 
 
     }
 
-    private Vector3 ConvertLatLonToUnityCoords(double latitude, double longitude)// Convert latitude and longitude to Unity coordinates
+    Vector3 CalculatePositionFromGPS(float userLat, float userLon, float origLat, float origLon)
     {
-       // the following to lines will convert the latitude and longitude to meters
-        double latitudeInMeters = latitude * 111132;
-        double longitudeInMeters = longitude * 111132 * Mathf.Cos((float)(Mathf.Deg2Rad * latitude));
+        // Calculate the offset in meters (using Haversine formula or similar)
+        float distance = CalculateDistance(origLat, origLon, userLat, userLon);
+        // Determine the direction - this is a simplified approach; for more accuracy, you might need a more complex calculation
+        Vector3 direction = new Vector3(userLon - origLon, userLat - origLat, 0 ).normalized;
 
-        // Convert meters to Unity units using the map scale
-        float x = (float)(longitudeInMeters / (1000000 * 2));
-        float y = (float)(latitudeInMeters / (1000000 * 2));
+        // Convert distance to Unity units if necessary
+        float unityDistance = distance * distianceMultiplier; // Assuming 1 meter = 1 Unity unit; adjust this based on your game's scale
 
-        return new Vector3(x, y, 89.44f);
+        // Calculate the new position as an offset from the origin based on distance and direction
+        Vector3 newPosition = direction * unityDistance;
+        newPosition.z = 99.631f; // Assuming the map is flat; adjust this if you have a 3D map
+        return newPosition;
+
+
+        float CalculateDistance(float lat1, float lon1, float lat2, float lon2)
+        {
+            var R = 6378137; // Earth’s mean radius in meters
+            var dLat = Mathf.Deg2Rad * (lat2 - lat1);
+            var dLong = Mathf.Deg2Rad * (lon2 - lon1);
+
+            var a = Mathf.Sin(dLat / 2) * Mathf.Sin(dLat / 2) +
+                    Mathf.Cos(Mathf.Deg2Rad * lat1) * Mathf.Cos(Mathf.Deg2Rad * lat2) *
+                    Mathf.Sin(dLong / 2) * Mathf.Sin(dLong / 2);
+            var c = 2 * Mathf.Atan2(Mathf.Sqrt(a), Mathf.Sqrt(1 - a));
+            var distance = R * c;
+
+            return distance; // Distance in meters
+        }
+
     }
-
 }
