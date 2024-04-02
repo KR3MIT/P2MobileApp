@@ -30,6 +30,9 @@ public class EmbarkAllower : MonoBehaviour
     void Embark()
     {
         // start the scan from other script
+        //load map
+        //load player??
+        Debug.Log("Embarking");
     }
    
 }
