@@ -9,8 +9,9 @@ public class EmbarkAllower : MonoBehaviour
     private bool embarkAllowed = false;
     DateTime currentDate;
     DateTime previousDate;
+    public RadarBehavior radarBehavior;
 
-    private void Start()
+   /* private void Start()
     {
         AllowEmbark();
         Debug.Log(PlayerPrefs.GetString("previousDate"));
@@ -18,9 +19,9 @@ public class EmbarkAllower : MonoBehaviour
         AllowEmbark();
         //this is proof it works :thumpsupemoji:
 
-    }
+    } */
     //if date change, embarkallowed = true
-    public void AllowEmbark()
+    public void CheckEmbark()
     {
         currentDate = DateTime.Now.Date;
         if (currentDate != previousDate)
@@ -33,16 +34,17 @@ public class EmbarkAllower : MonoBehaviour
             Debug.Log("Embark not allowed");
             return;
         }
-;       Embark();
+;       GoEmbark();
         previousDate = currentDate;
         embarkAllowed = false;
         PlayerPrefs.SetString("previousDate", previousDate.ToString());
     }
-    void Embark()
+    void GoEmbark()
     {
         // start the scan from other script
         //load map
         //load player??
+        radarBehavior.spawnObjects();
         
         Debug.Log("Embarking");
     }
