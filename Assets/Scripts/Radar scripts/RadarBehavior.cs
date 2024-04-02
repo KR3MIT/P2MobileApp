@@ -44,7 +44,6 @@ public class RadarBehavior : MonoBehaviour
             Instantiate(toSpawn, randomCirclePosition, Quaternion.Euler (new Vector3 (0,90,-90))); // we instantiate the chosen prop, with the new vector3 positition with a default rotation
         }
 
-       
     }
         
         
