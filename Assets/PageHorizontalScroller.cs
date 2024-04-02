@@ -18,7 +18,7 @@ public class PageHorizontalScroller : MonoBehaviour
     private float width;
     private float height;
 
-    public float scrollSpeed = 1;
+    //public float scrollSpeed = 1;
     public float dragSnapSpeed = 10f;
 
     private bool buttonPressed = false;
@@ -67,58 +67,60 @@ public class PageHorizontalScroller : MonoBehaviour
         }
     }
 
-    private void ClosestPage()
-    {
-        StopAllCoroutines();
+    //NO DRAGGING GRR!!!
 
-        var closestPage = Vector3.zero;
+    //private void ClosestPage()
+    //{
+    //    StopAllCoroutines();
 
-        var homeDistance = Vector3.Distance(transform.position, canvasHome);
-        var statsDistance = Vector3.Distance(transform.position, canvasStats);
-        var upgradesDistance = Vector3.Distance(transform.position, canvasUpgrades);
+    //    var closestPage = Vector3.zero;
 
-        if (homeDistance <= statsDistance && homeDistance <= upgradesDistance)
-        {
-            closestPage = canvasHome;
-        }
-        else if (statsDistance < homeDistance && statsDistance < upgradesDistance)
-        {
-            closestPage = canvasStats;
-        }
-        else
-        {
-            closestPage = canvasUpgrades;
-        }
+    //    var homeDistance = Vector3.Distance(transform.position, canvasHome);
+    //    var statsDistance = Vector3.Distance(transform.position, canvasStats);
+    //    var upgradesDistance = Vector3.Distance(transform.position, canvasUpgrades);
 
-        StartCoroutine(LerpLocation(closestPage));
-    }
+    //    if (homeDistance <= statsDistance && homeDistance <= upgradesDistance)
+    //    {
+    //        closestPage = canvasHome;
+    //    }
+    //    else if (statsDistance < homeDistance && statsDistance < upgradesDistance)
+    //    {
+    //        closestPage = canvasStats;
+    //    }
+    //    else
+    //    {
+    //        closestPage = canvasUpgrades;
+    //    }
+
+    //    StartCoroutine(LerpLocation(closestPage));
+    //}
 
 
-    void Update()
-    {
+    //void Update()
+    //{
         
-        if (buttonPressed)
-        {
-            return;
-        }
-        //Debug.Log(Vector3.Distance(transform.position, canvasUpgrades));
-        if (Vector3.Distance(transform.position, canvasStats) < 1f)//need opposite canvas position since we move the entire thing
-        {
-            return;
-        }
+    //    if (buttonPressed)
+    //    {
+    //        return;
+    //    }
+    //    //Debug.Log(Vector3.Distance(transform.position, canvasUpgrades));
+    //    if (Vector3.Distance(transform.position, canvasStats) < 1f)//need opposite canvas position since we move the entire thing
+    //    {
+    //        return;
+    //    }
 
-        if (Input.touchCount > 0)
-        {
-            UnityEngine.Touch touch = Input.touches[0];
-            if (touch.phase == TouchPhase.Moved)
-            {
-                var x = touch.deltaPosition.x / (width * scrollSpeed);
-                transform.position = new Vector3(transform.position.x + x, 0, 0);
-            }
-            else if (touch.phase == TouchPhase.Ended)
-            {
-                ClosestPage();
-            }
-        }
-    }
+    //    if (Input.touchCount > 0)
+    //    {
+    //        UnityEngine.Touch touch = Input.touches[0];
+    //        if (touch.phase == TouchPhase.Moved)
+    //        {
+    //            var x = touch.deltaPosition.x / (width * scrollSpeed);
+    //            transform.position = new Vector3(transform.position.x + x, 0, 0);
+    //        }
+    //        else if (touch.phase == TouchPhase.Ended)
+    //        {
+    //            ClosestPage();
+    //        }
+    //    }
+    //}
 }
