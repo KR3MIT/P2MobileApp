@@ -30,14 +30,16 @@ class MapGestures : MonoBehaviour
         var Delta1 = Vector3.zero;
         var Delta2 = Vector3.zero;
 
-        //Scroll
+        // Scroll
         if (Input.touchCount >= 1)
         {
             Delta1 = PlanePositionDelta(Input.GetTouch(0));
             if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                Camera.transform.Translate(Delta1, Space.World);
+            {
+                Vector3 newPosition = Camera.transform.position + Delta1;
+                Camera.transform.position = new Vector3(newPosition.x, newPosition.y, Camera.transform.position.z);
+            }
         }
-
         //Pinch
         if (Input.touchCount >= 2)
         {
@@ -53,9 +55,9 @@ class MapGestures : MonoBehaviour
             //edge case
             if (zoom == 0 || zoom > 10)
                 return;
-
-            //Move cam amount the mid ray
-            Camera.transform.position = Vector3.LerpUnclamped(pos1, Camera.transform.position, 1 / zoom);
+            // Move cam amount the mid ray
+            Vector3 zoomPosition = Vector3.LerpUnclamped(pos1, Camera.transform.position, 1 / zoom);
+            Camera.transform.position = new Vector3(zoomPosition.x, zoomPosition.y, Camera.transform.position.z);
 
             if (Rotate && pos2b != pos2)
                 Camera.transform.RotateAround(pos1, Plane.normal, Vector3.SignedAngle(pos2 - pos1, pos2b - pos1b, Plane.normal));
