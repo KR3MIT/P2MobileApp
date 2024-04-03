@@ -159,9 +159,9 @@ public class Character : MonoBehaviour
 
     public void SetStats()
     {
-        health = 0;
-        AD = 0;
-        def = 0;
+        health = 100;
+        AD = 10;
+        def = 10;
         foreach (ShipPartObject part in shipParts)
         {
             health += part.health;
