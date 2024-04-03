@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3070fcd1406a29b4bba1321f77a597b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outerRingScript: {fileID: 0}
   radarBehavior: {fileID: 748978030}
 --- !u!4 &435131648
 Transform:
