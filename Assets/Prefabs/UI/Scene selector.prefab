@@ -384,6 +384,7 @@ MonoBehaviour:
   - Circle spawner
   - Options TEST
   - WMapCircle
+  - Data collection
 --- !u!1 &6911539271713214262
 GameObject:
   m_ObjectHideFlags: 0
