@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
@@ -8,28 +9,32 @@ using UnityEngine.UIElements;
 
 public class PageHorizontalScroller : MonoBehaviour
 {
+    [Tooltip("The time it takes to move between pages")]
+    public float smoothTime = 1f;
     public GameObject Ship;
+
     private Vector3 canvasStats, canvasHome, canvasUpgrades;
     private Vector3 pivotHome, pivotUpgrades, pivotStats;
 
-    [SerializeField] private GameObject HomePivot, UpgradesPivot, StatsPivot;
-    [SerializeField] private UnityEngine.UI.Button stats, home, upgrades;
+    [Header("Ship Pivots")]
+    [SerializeField] private GameObject HomePivot;
+    [SerializeField] private GameObject UpgradesPivot; 
+    [SerializeField] private GameObject StatsPivot;
 
-    private Vector3 position;
-    private float width;
-    private float height;
+    [Header("Canvas Buttons")]
+    [SerializeField] private UnityEngine.UI.Button stats;
+    [SerializeField] private UnityEngine.UI.Button home;
+    [SerializeField] private UnityEngine.UI.Button upgrades;
 
+    //float width;
+    //private float height;
     //public float scrollSpeed = 1;
-    public float dragSnapSpeed = 1f;
-    public float shipSnapSpeed = 1f;
-
-    private bool buttonPressed = false;
-
+    //private bool buttonPressed = false;
     // Start is called before the first frame update
     void Start()
     {
-        width = (float)Screen.width / 2.0f;
-        height = (float)Screen.height / 2.0f;
+        //width = (float)Screen.width / 2.0f;
+        //height = (float)Screen.height / 2.0f;
 
         canvasStats = transform.GetChild(0).position;
         canvasHome = transform.GetChild(1).position;
@@ -51,7 +56,7 @@ public class PageHorizontalScroller : MonoBehaviour
     {
         StopAllCoroutines();
 
-        buttonPressed = true;
+        //buttonPressed = true;
 
         var x = new Vector3(pageLocation.x, transform.position.y, 0);
 
@@ -74,13 +79,13 @@ public class PageHorizontalScroller : MonoBehaviour
 
     }
 
-    //smoothdamp ship to pivot
-
     private IEnumerator LerpShipToPivot(Vector3 pivotLocation)
     {
         while (Ship.transform.position != pivotLocation)
         {
-            Ship.transform.position = Vector3.MoveTowards(Ship.transform.position, pivotLocation, shipSnapSpeed);
+            //move ship to pivot over a set amount of time
+            Ship.transform.position = Vector3.Lerp(Ship.transform.position, pivotLocation, smoothTime * Time.deltaTime);
+
             yield return null;
         }
     }
@@ -90,10 +95,10 @@ public class PageHorizontalScroller : MonoBehaviour
     {
         while (transform.position != pageLocation)
         {
-            transform.position = Vector3.MoveTowards(transform.position, pageLocation, dragSnapSpeed);
+            transform.position = Vector3.Lerp(transform.position, pageLocation, smoothTime * Time.deltaTime);
             yield return null;
 
-            buttonPressed = false;
+            //buttonPressed = false;
         }
     }
 

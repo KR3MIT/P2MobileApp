@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Circle spawner.unity
     guid: e3572bb7c2b46a74c81f74c32abe82c9
+  - enabled: 1
+    path: Assets/Scenes/Options TEST.unity
+    guid: 0d89ed85a7f7df24c827ce1fd4295c9b
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 45addd4e2e3fb3f4aac2d75cf6d2955e, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 340c8b4777758e64da4fad885e5ed2a9, type: 2}
