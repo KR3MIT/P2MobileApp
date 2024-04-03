@@ -26,6 +26,12 @@ public class RadarBehavior : MonoBehaviour
 
     private SceneStates sceneStates;
 
+    //tocuh stuffs
+    Vector3 touchPosWorld;
+
+    //the touch phase used we use ended since we want the click yeye
+    TouchPhase touchPhase = TouchPhase.Ended;
+
     private void Start()
     {
         spawnPool.Add(encounterPOI);
@@ -83,6 +89,28 @@ public class RadarBehavior : MonoBehaviour
 
                         UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
                     }
+                }
+            }
+        }
+
+        //We check if we have more than one touch happening.
+        //We also check if the first touches phase is Ended (that the finger was lifted)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase)
+        {
+            //We transform the touch position into word space from screen space and store it.
+            //touchPosWorld = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+
+            //Vector2 touchPosWorld2D = new Vector2(touchPosWorld.x, touchPosWorld.y);
+
+            RaycastHit hit;//Make a raycasthit to store the information of the object that we hit
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); //Make a ray from the camera to the mouse position
+            if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
+            {
+                //If the tag of the hit object is "Prop", then do thing
+                if (hit.transform.tag == "Prop")
+                {
+                    Debug.Log("Hit");
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("EncounterScene");
                 }
             }
         }

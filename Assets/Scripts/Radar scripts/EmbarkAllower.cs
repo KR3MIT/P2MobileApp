@@ -9,6 +9,7 @@ public class EmbarkAllower : MonoBehaviour
     private bool embarkAllowed = false;
     DateTime currentDate;
     DateTime previousDate;
+    public OuterRingScript outerRingScript;
     public RadarBehavior radarBehavior;
 
    /* private void Start()
@@ -24,6 +25,7 @@ public class EmbarkAllower : MonoBehaviour
     public void CheckEmbark()
     {
         currentDate = DateTime.Now.Date;
+        previousDate = DateTime.Parse(PlayerPrefs.GetString("previousDate"));
         if (currentDate != previousDate)
         {
             embarkAllowed = true;
@@ -38,6 +40,7 @@ public class EmbarkAllower : MonoBehaviour
         previousDate = currentDate;
         embarkAllowed = false;
         PlayerPrefs.SetString("previousDate", previousDate.ToString());
+        // to find where the previous date is stored go to Computer\HKEY_CURRENT_USER\Software\Unity\UnityEditor\Backseat-Sloppy\P2 MobileApp
     }
     void GoEmbark()
     {
@@ -45,7 +48,7 @@ public class EmbarkAllower : MonoBehaviour
         //load map
         //load player??
         radarBehavior.spawnObjects();
-        
+        outerRingScript.StartPulse();
         Debug.Log("Embarking");
     }
    
