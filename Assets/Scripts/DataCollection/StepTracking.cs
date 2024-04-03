@@ -74,7 +74,11 @@ public class StepTracking : MonoBehaviour
 
     void Update()
     {
-        if(AndroidStepCounter.current.enabled) { 
+        if (Application.platform != RuntimePlatform.Android)
+        {
+            return;
+        }
+        if (AndroidStepCounter.current.enabled) { 
         stepText.text = AndroidStepCounter.current.stepCounter.ReadValue().ToString();
         }
     }
