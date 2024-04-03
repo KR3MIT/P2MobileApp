@@ -421,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd4342c66aed56a4dbcdea2271c5778d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
+  map: {fileID: 1328753552}
   smoothTime: 0.3
   distianceMultiplier: 0.0022
   newPosition: {x: 0, y: 0, z: 0}
