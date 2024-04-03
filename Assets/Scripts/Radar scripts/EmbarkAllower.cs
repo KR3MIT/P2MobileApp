@@ -12,18 +12,27 @@ public class EmbarkAllower : MonoBehaviour
     public OuterRingScript outerRingScript;
     public RadarBehavior radarBehavior;
 
+    public bool DebugMode = false;
+
    /* private void Start()
     {
-        AllowEmbark();
+        CheckEmbark();
         Debug.Log(PlayerPrefs.GetString("previousDate"));
         Debug.Log(currentDate);
-        AllowEmbark();
+        CheckEmbark();
         //this is proof it works :thumpsupemoji:
 
     } */
     //if date change, embarkallowed = true
     public void CheckEmbark()
     {
+        if(DebugMode)
+        {
+            embarkAllowed = true;
+            GoEmbark();
+            return;
+        }
+
         currentDate = DateTime.Now.Date;
         previousDate = DateTime.Parse(PlayerPrefs.GetString("previousDate"));
         if (currentDate != previousDate)
