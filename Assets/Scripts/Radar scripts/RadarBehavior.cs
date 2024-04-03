@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.UI;
 
 public class RadarBehavior : MonoBehaviour
 {
     public int amount; //Value for how many gameobjects that spawns.
-    public List<GameObject> spawnPool; //A list that contains the gameobjects that we wish to spawn
+
+    public Quaternion instantiatedRotation = Quaternion.Euler(new Vector3(0,90,-90));
+    public GameObject encounterPOI;
+    public GameObject resourcePOI;
+    private List<GameObject> spawnPool = new List<GameObject>(); //A list that contains the gameobjects that we wish to spawn
     public GameObject Sphere; // Sphere is the gameobject that we wish to spawn props ontop of
     int randomItem = 0; // randomItem is set to 0
     GameObject toSpawn; // gameobjected toSpawn is created
@@ -22,17 +27,33 @@ public class RadarBehavior : MonoBehaviour
 
     private SceneStates sceneStates;
 
+    [SerializeField] private Button embarkBUtton;
+
+    //tocuh stuffs
+    Vector3 touchPosWorld;
+
+    //the touch phase used we use ended since we want the click yeye
+    TouchPhase touchPhase = TouchPhase.Ended;
+
     private void Start()
     {
+        spawnPool.Add(encounterPOI);
+        spawnPool.Add(resourcePOI);
+
         if(GameObject.FindWithTag("Player") != null)//check if player exists if it does set scenestate and if POIs exists set POIs
         {
             sceneStates = GameObject.FindWithTag("Player").GetComponent<SceneStates>();
-            if (sceneStates.POIs != null)
+            if (sceneStates.POIdict.Count != 0)
             {
-                foreach (GameObject POI in sceneStates.POIs)
+                
+                foreach (KeyValuePair<Vector3, GameObject> kvp in sceneStates.POIdict)
                 {
-                    POIs.Add(Instantiate(POI));
+                    POIs.Add(Instantiate(kvp.Value, kvp.Key, instantiatedRotation));
+                    
                 }
+                GameObject.FindObjectOfType<OuterRingScript>().StartPulse();//ad
+                embarkBUtton.interactable = false ;
+                sceneStates.POIdict.Clear();
             }
         }
         
@@ -57,14 +78,59 @@ public class RadarBehavior : MonoBehaviour
                     var POIscript = hit.transform.gameObject.GetComponent<POIscript>();
                     if (POIscript.isEncounter)
                     {
-                        sceneStates.POIs = POIs;
+                        if (sceneStates != null)
+                        {
+                            SaveToPOIs();
+                        }
+                        
                         UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
                     }else if (POIscript.isResource)
                     {
-                        sceneStates.POIs = POIs;
+                        if (sceneStates != null)
+                        {
+                            SaveToPOIs();
+                        }
+
                         UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
                     }
                 }
+            }
+        }
+
+        //We check if we have more than one touch happening.
+        //We also check if the first touches phase is Ended (that the finger was lifted)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase)
+        {
+            //We transform the touch position into word space from screen space and store it.
+            //touchPosWorld = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+
+            //Vector2 touchPosWorld2D = new Vector2(touchPosWorld.x, touchPosWorld.y);
+
+            RaycastHit hit;//Make a raycasthit to store the information of the object that we hit
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); //Make a ray from the camera to the mouse position
+            if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
+            {
+                //If the tag of the hit object is "Prop", then do thing
+                if (hit.transform.tag == "Prop")
+                {
+                    Debug.Log("Hit");
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("EncounterScene");
+                }
+            }
+        }
+    }
+
+    private void SaveToPOIs()
+    {
+        foreach (GameObject POI in POIs)
+        {
+            if (POI.GetComponent<POIscript>().isEncounter)
+            {
+                sceneStates.POIdict.Add(POI.transform.position, encounterPOI);
+            }
+            else
+            {
+                sceneStates.POIdict.Add(POI.transform.position, resourcePOI);
             }
         }
     }
@@ -118,7 +184,7 @@ public class RadarBehavior : MonoBehaviour
                 i--; // we decrease i by 1
                 continue; // and continue to the next iteration
             }
-            POIs.Add(Instantiate(toSpawn, randomCirclePosition, Quaternion.Euler (new Vector3 (0,90,-90)))); // we instantiate the chosen prop, and add to list
+            POIs.Add(Instantiate(toSpawn, randomCirclePosition, instantiatedRotation)); // we instantiate the chosen prop, and add to list
         }
         
         

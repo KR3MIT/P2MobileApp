@@ -94,6 +94,7 @@ public class PlayerCharacterTest : MonoBehaviour
             // PLAYER ATTACKS THE ENEMY
             // The enemy's health is reduced by the damage taken, which is the difference between the player's attack power and the enemy's defense.
             int enemyDamageTaken = playerAttack - enemyDefense;
+            enemyDamageTaken = Mathf.Max(0, enemyDamageTaken);
             enemyHealth -= enemyDamageTaken;
 
             GameObject playerBullet = Instantiate(playerBulletPrefab, playerLocation.transform.position, Quaternion.identity, playerLocation.transform);
@@ -122,6 +123,7 @@ public class PlayerCharacterTest : MonoBehaviour
             // ENEMY ATTACKS THE PLAYER
             // The player's health is reduced by the damage taken, which is the difference between the enemy's attack power and the player's defense.
             int playerDamageTaken = enemyAttack - playerDefense;
+            playerDamageTaken = Mathf.Max(0, playerDamageTaken);
             playerHealth -= playerDamageTaken;
 
             GameObject enemyBullet = Instantiate(enemyBulletPrefab, enemyLocation.transform.position, Quaternion.identity, enemyLocation.transform);

@@ -10,7 +10,7 @@ using WebSocketSharp;
 public class StepTracking : MonoBehaviour
 {
 
-    [SerializeField] public TMP_Text text;
+    [SerializeField] private TMP_Text stepText;
 
     internal void PermissionCallbacks_PermissionDeniedAndDontAskAgain(string permissionName)
     {
@@ -58,19 +58,28 @@ public class StepTracking : MonoBehaviour
 
     }
 
-    private static void Start()
+    void Start()
     {
-
+#if PLATFORM_ANDROID
+        if(Application.platform != RuntimePlatform.Android)
+        {
+            return;
+        }
         InputSystem.EnableDevice(AndroidStepCounter.current);
 
         AndroidStepCounter.current.MakeCurrent();
         Debug.Log("shit" + AndroidStepCounter.current);
+#endif
     }
 
-    private void Update()
+    void Update()
     {
-
-        text.text = AndroidStepCounter.current.stepCounter.ReadValue().ToString();
-
+        if (Application.platform != RuntimePlatform.Android)
+        {
+            return;
+        }
+        if (AndroidStepCounter.current.enabled) { 
+        stepText.text = AndroidStepCounter.current.stepCounter.ReadValue().ToString();
+        }
     }
 }
