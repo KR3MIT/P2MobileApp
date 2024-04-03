@@ -9,7 +9,7 @@ public class Analytics : MonoBehaviour
 {
     [SerializeField] private bool consentGiven = false; // A boolean to track whether the player has given consent to collect data.
     public GameObject consentUIPrefab; // A reference to a UI element that asks for consent.
-    public int _consentGiven; // A boolean to track whether the player has given consent to collect data.
+    public int _consentGiven=0; // A boolean to track whether the player has given consent to collect data.
 
 
     async void Start()
