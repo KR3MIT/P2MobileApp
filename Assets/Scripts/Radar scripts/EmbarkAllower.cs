@@ -24,6 +24,7 @@ public class EmbarkAllower : MonoBehaviour
     public void CheckEmbark()
     {
         currentDate = DateTime.Now.Date;
+        previousDate = DateTime.Parse(PlayerPrefs.GetString("previousDate"));
         if (currentDate != previousDate)
         {
             embarkAllowed = true;
@@ -38,6 +39,7 @@ public class EmbarkAllower : MonoBehaviour
         previousDate = currentDate;
         embarkAllowed = false;
         PlayerPrefs.SetString("previousDate", previousDate.ToString());
+     
     }
     void GoEmbark()
     {
