@@ -317,7 +317,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_TargetDisplay: 0
 --- !u!114 &7593936376440642904
 MonoBehaviour:
@@ -382,6 +382,7 @@ MonoBehaviour:
   - Loot Island
   - CombatEncounterTest
   - Circle spawner
+  - Options TEST
 --- !u!1 &6911539271713214262
 GameObject:
   m_ObjectHideFlags: 0
