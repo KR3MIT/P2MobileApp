@@ -90,7 +90,6 @@ public class PageHorizontalScroller : MonoBehaviour
         }
     }
 
-
     IEnumerator LerpLocation(Vector3 pageLocation)
     {
         while (transform.position != pageLocation)
@@ -101,6 +100,8 @@ public class PageHorizontalScroller : MonoBehaviour
             //buttonPressed = false;
         }
     }
+    
+
 
     //NO DRAGGING GRR!!!
 
@@ -133,7 +134,7 @@ public class PageHorizontalScroller : MonoBehaviour
 
     //void Update()
     //{
-        
+
     //    if (buttonPressed)
     //    {
     //        return;

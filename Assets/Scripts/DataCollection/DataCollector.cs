@@ -26,9 +26,7 @@ public class DataCollector : MonoBehaviour
     void Update()
     {
         currentSteps = StepCounter.current.stepCounter.ReadValue();
-        Debug.Log("Number of steps: " + currentSteps);
-
-
+     
     }
 
     private void OnEnable() // Runs when the Gameobject this script is on is enabled (when the game starts)
