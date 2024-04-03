@@ -9,4 +9,8 @@ public class OuterRingScript : MonoBehaviour
     {
         animator.SetBool("OuterRingClicked", true);
     }
+    public void StartReversePulse()
+    {
+        animator.SetBool("Collaps", true);
+    }
 }
