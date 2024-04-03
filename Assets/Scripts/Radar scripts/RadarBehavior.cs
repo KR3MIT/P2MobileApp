@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.UI;
 
 public class RadarBehavior : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class RadarBehavior : MonoBehaviour
     public string resourceSceneName = "ResourceScene";
 
     private SceneStates sceneStates;
+
+    [SerializeField] private Button embarkBUtton;
 
     //tocuh stuffs
     Vector3 touchPosWorld;
@@ -49,6 +52,7 @@ public class RadarBehavior : MonoBehaviour
                     
                 }
                 GameObject.FindObjectOfType<OuterRingScript>().StartPulse();//ad
+                embarkBUtton.interactable = false ;
                 sceneStates.POIdict.Clear();
             }
         }

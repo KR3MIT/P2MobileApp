@@ -222,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outerRingScript: {fileID: 3160532668148138038}
   radarBehavior: {fileID: 748978030}
+  DebugMode: 1
 --- !u!4 &435131648
 Transform:
   m_ObjectHideFlags: 0
@@ -662,6 +663,7 @@ MonoBehaviour:
   minDistance: 0.5
   encounterSceneName: CombatEncounterTest
   resourceSceneName: Loot Island
+  embarkBUtton: {fileID: 568581387}
 --- !u!23 &748978032
 MeshRenderer:
   m_ObjectHideFlags: 0
