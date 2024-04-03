@@ -25,7 +25,7 @@ public class ShipSwipeRotation : MonoBehaviour
                 startPressPos = touch.position;
             }
 
-            if (touch.phase == TouchPhase.Ended)
+            if (touch.phase == TouchPhase.Moved)
             {
                 endPressPos = touch.position;
 
