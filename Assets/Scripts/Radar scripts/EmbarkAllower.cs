@@ -11,24 +11,16 @@ public class EmbarkAllower : MonoBehaviour
     DateTime currentDate;
     DateTime previousDate;
     public OuterRingScript outerRingScript;
-    public RadarBehavior radarBehavior;
     public TextMeshProUGUI CountDownText;
     public bool DebugMode = false;
+    public string SceneName;
 
    private void Start()
     {
         
         StartCoroutine(PerSecond());
     } 
-    //if date change, embarkallowed = true
-    private void Update()
-    {
-        //if (!embarkAllowed)
-        //{
-        //    CountDown();
-
-        //}
-    }
+    
     public void CheckEmbark()
     {
         if(DebugMode)
@@ -51,11 +43,9 @@ public class EmbarkAllower : MonoBehaviour
     }
     void GoEmbark()
     {
-        // start the scan from other script
-        //load map
-        //load player??
-        radarBehavior.spawnObjects();
-        outerRingScript.StartPulse();
+     
+        outerRingScript.StartReversePulse();
+        StartCoroutine(ChangeScene());
         Debug.Log("Embarking");
     }
    // this method counts down untill 00:00
@@ -88,5 +78,12 @@ public class EmbarkAllower : MonoBehaviour
         }
         yield return new WaitForSeconds(1);
         StartCoroutine(PerSecond());
+    }
+ 
+
+    IEnumerator ChangeScene()
+    {
+        yield return new WaitForSeconds(1.5f);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneName);
     }
 }
