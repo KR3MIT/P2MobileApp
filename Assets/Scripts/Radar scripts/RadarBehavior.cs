@@ -7,9 +7,12 @@ using UnityEngine.UI;
 
 public class RadarBehavior : MonoBehaviour
 {
+    public bool debugMode = false;
+
     public int amount; //Value for how many gameobjects that spawns.
 
     public Quaternion instantiatedRotation = Quaternion.Euler(new Vector3(0,90,-90));
+    public Vector3 instantiatedOffset;
     public GameObject encounterPOI;
     public GameObject resourcePOI;
     private List<GameObject> spawnPool = new List<GameObject>(); //A list that contains the gameobjects that we wish to spawn
@@ -34,6 +37,11 @@ public class RadarBehavior : MonoBehaviour
 
     //the touch phase used we use ended since we want the click yeye
     TouchPhase touchPhase = TouchPhase.Ended;
+
+    //ref to ship
+    public GameObject ship;
+    //radius for ship interaction with poi
+    [SerializeField] private float shipInteractRadius = 1f;
 
     private void Start()
     {
@@ -63,58 +71,89 @@ public class RadarBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))//just to test :):)):):)))
+        if (debugMode)
         {
-            RaycastHit hit;//Make a raycasthit to store the information of the object that we hit
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Make a ray from the camera to the mouse position
-            if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
+            if (Input.GetMouseButtonDown(0))//just to test :):)):):)))
             {
-                //If the tag of the hit object is "Prop", then do thing
-                if (hit.transform.tag == "Prop")
+                RaycastHit hit;//Make a raycasthit to store the information of the object that we hit
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Make a ray from the camera to the mouse position
+                if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
                 {
-                    POIs.Remove(hit.transform.gameObject);
-                    hit.transform.gameObject.SetActive(false);
-                    DisableOppositePOI(hit.transform.gameObject);
-                    var POIscript = hit.transform.gameObject.GetComponent<POIscript>();
-                    if (POIscript.isEncounter)
+                    //If the tag of the hit object is "Prop", then do thing
+                    if (hit.transform.tag == "Prop")
                     {
-                        if (sceneStates != null)
+                        POIs.Remove(hit.transform.gameObject);
+                        hit.transform.gameObject.SetActive(false);
+                        DisableOppositePOI(hit.transform.gameObject);
+                        var POIscript = hit.transform.gameObject.GetComponent<POIscript>();
+                        if (POIscript.isEncounter)
                         {
-                            SaveToPOIs();
-                        }
-                        
-                        UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
-                    }else if (POIscript.isResource)
-                    {
-                        if (sceneStates != null)
-                        {
-                            SaveToPOIs();
-                        }
+                            if (sceneStates != null)
+                            {
+                                SaveToPOIs();
+                            }
 
-                        UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
+                            UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
+                        }
+                        else if (POIscript.isResource)
+                        {
+                            if (sceneStates != null)
+                            {
+                                SaveToPOIs();
+                            }
+
+                            UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
+                        }
                     }
                 }
             }
         }
+        
 
-        //We check if we have more than one touch happening.
-        //We also check if the first touches phase is Ended (that the finger was lifted)
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase)
         {
-            //We transform the touch position into word space from screen space and store it.
-            //touchPosWorld = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-
-            //Vector2 touchPosWorld2D = new Vector2(touchPosWorld.x, touchPosWorld.y);
-
-            RaycastHit hit;//Make a raycasthit to store the information of the object that we hit
-            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); //Make a ray from the camera to the mouse position
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); //make a ray from the camera to the mouse position
             if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
             {
                 //If the tag of the hit object is "Prop", then do thing
                 if (hit.transform.tag == "Prop")
                 {
-                    Debug.Log("Hit");
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("EncounterScene");
+                    if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius)
+                    {
+                        Debug.Log("In range: " + Vector2.Distance(hit.transform.position, ship.transform.position));
+
+                        POIs.Remove(hit.transform.gameObject);
+                        hit.transform.gameObject.SetActive(false);
+                        DisableOppositePOI(hit.transform.gameObject);
+                        var POIscript = hit.transform.gameObject.GetComponent<POIscript>();
+
+                        if (POIscript.isEncounter)
+                        {
+                            if (sceneStates != null)
+                            {
+                                SaveToPOIs();
+                            }
+
+                            UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
+                        }
+                        else if (POIscript.isResource)
+                        {
+                            if (sceneStates != null)
+                            {
+                                SaveToPOIs();
+                            }
+
+                            UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
+                        }
+
+                    }
+                    else
+                    {
+                        Debug.Log("Out of range: " + Vector2.Distance(hit.transform.position, ship.transform.position));
+                    }
+                    
+                    //UnityEngine.SceneManagement.SceneManager.LoadScene("EncounterScene");
                 }
             }
         }
@@ -184,7 +223,7 @@ public class RadarBehavior : MonoBehaviour
                 i--; // we decrease i by 1
                 continue; // and continue to the next iteration
             }
-            POIs.Add(Instantiate(toSpawn, randomCirclePosition, instantiatedRotation)); // we instantiate the chosen prop, and add to list
+            POIs.Add(Instantiate(toSpawn, (Vector3)randomCirclePosition + instantiatedOffset, instantiatedRotation)); // we instantiate the chosen prop, and add to list
         }
         
         
