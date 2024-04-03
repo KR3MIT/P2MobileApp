@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
@@ -8,6 +9,7 @@ public class DataCollector : MonoBehaviour
 {
     // Variables
     public static int currentSteps;
+    public TextMeshProUGUI text;
 
     private void Awake()
     {
@@ -47,6 +49,8 @@ public class DataCollector : MonoBehaviour
             currentSteps = StepCounter.current.stepCounter.ReadValue();
         }
         Debug.Log("Number of steps: " + currentSteps);
+        text.text = "Number of steps: " + currentSteps;
+
     }
 
     private void OnDisable() // Runs when the Gameobject this script is on is disabled

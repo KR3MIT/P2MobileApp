@@ -33,7 +33,7 @@ public class StatsOverlay : MonoBehaviour
     {
         _character = GameObject.FindWithTag("Player").GetComponent<Character>();
         _toggleStats.onClick.AddListener(toggleStats);
-        _stats.enabled = true;
+        _stats.enabled = false;
     }
 
 
