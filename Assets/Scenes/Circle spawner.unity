@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3edd6565fa6527449a15b8eadace817c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radar: {fileID: 0}
+  radar: {fileID: 748978030}
+  outerRing: {fileID: 3160532668148138038}
 --- !u!4 &57025785
 Transform:
   m_ObjectHideFlags: 0
