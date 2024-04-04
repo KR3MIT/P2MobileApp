@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 using static Character;// so i doint have to write Character.ResourceType every time
@@ -9,6 +10,7 @@ public class ressourceChest : MonoBehaviour
     private Character character;
     public TMPro.TextMeshProUGUI resourceGainText;
     public ParticleSystem winParticle;
+    public AudioSource audioPlayer;
 
     private Dictionary<ResourceType, int> resourcesToGive = new Dictionary<ResourceType, int>
     {
@@ -22,7 +24,7 @@ public class ressourceChest : MonoBehaviour
     private void Awake()
     {
         character = FindObjectOfType<Character>();
-      
+     
     }
     public void OpenChest(string ChestClicked)
     {
@@ -51,7 +53,8 @@ public class ressourceChest : MonoBehaviour
             settings.startColor = new ParticleSystem.MinMaxGradient(Color.green);
 
             character.AddResource(ResourceType.Wood, resourcesToGive[ResourceType.Wood]);
-            resourceGainText.text = "You found " + resourcesToGive[ResourceType.Wood] + " " + "Wood";
+            StartCoroutine(TextDelay("Wood", resourcesToGive[ResourceType.Wood]));
+            
 
         }
         else if (random < 70)
@@ -65,7 +68,7 @@ public class ressourceChest : MonoBehaviour
             settings.startColor = new ParticleSystem.MinMaxGradient(Color.grey);
 
             character.AddResource(ResourceType.Metal, resourcesToGive[ResourceType.Metal]);
-            resourceGainText.text = "You found " + resourcesToGive[ResourceType.Metal] + " " + "Scrap Metal";
+            StartCoroutine(TextDelay("Scrap Metal", resourcesToGive[ResourceType.Metal]));
         }
         else if (random < 90)
         {
@@ -78,7 +81,7 @@ public class ressourceChest : MonoBehaviour
             settings.startColor = new ParticleSystem.MinMaxGradient(Color.yellow);
 
             character.AddResource(ResourceType.Gold, resourcesToGive[ResourceType.Gold]);
-            resourceGainText.text = "You found " + resourcesToGive[ResourceType.Gold] + " " + "Gold Ingot";
+            StartCoroutine(TextDelay("Gold Ingot", resourcesToGive[ResourceType.Gold]));
         }
         else
         {
@@ -91,9 +94,22 @@ public class ressourceChest : MonoBehaviour
             settings.startColor = new ParticleSystem.MinMaxGradient(Color.cyan);
 
             character.AddResource(ResourceType.Diamonds, resourcesToGive[ResourceType.Diamonds]);
-            resourceGainText.text = "You found " + resourcesToGive[ResourceType.Diamonds] + " " + "Shiny Diamond";
+            StartCoroutine(TextDelay("Shiny Diamonds", resourcesToGive[ResourceType.Diamonds]));
+          
 
         }
+        
+        IEnumerator TextDelay(string stringType, int resourceToGive)
+        {
+            yield return new WaitForSeconds(1.5f);
+            audioPlayer.Play();
+            yield return new WaitForSeconds(0.5f);
+            resourceGainText.text = "You found " + resourceToGive + " " + stringType;
+
+          
+        
+        }
+        
     }
 
 

@@ -25,7 +25,13 @@ public class Character : MonoBehaviour
     [Tooltip("Defence")]
     public int def = 0;
 
+    [Tooltip("Level up stat scale")]
+    public int lvlScale = 5;
 
+
+    private int defaultHealth = 100;
+    private int defaultDef = 10;
+    private int defaultAD = 10;
 
     //[Header("Resources")]
     //public int wood, metal, diamonds, gold;
@@ -96,7 +102,11 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        cloudSave = GetComponent<CloudSave>();
+        if(TryGetComponent(out CloudSave _cloudSave))
+        {
+            cloudSave = _cloudSave;
+        }
+        
 
         SetStats();
     }
@@ -154,14 +164,19 @@ public class Character : MonoBehaviour
     private void SaveData()
     {
         MakeStructFromClass(shipParts);
-        cloudSave.SaveData();
+
+        if(cloudSave != null)
+        {
+            cloudSave.SaveData();
+        }
+        
     }
 
     public void SetStats()
     {
-        health = 100;
-        AD = 10;
-        def = 10;
+        health = defaultHealth + (lvlScale*lvl);
+        AD = defaultAD + (lvlScale * lvl);
+        def = defaultDef + (lvlScale * lvl);
         foreach (ShipPartObject part in shipParts)
         {
             health += part.health;
@@ -240,5 +255,15 @@ public class Character : MonoBehaviour
     {
         resources[resource] += amount;
         Debug.Log("resources added " + resources[resource]);
+    }
+
+    public void AddResource(int xp)
+    {
+        exp += xp;
+        if(exp >= 100)
+        {
+            exp -= 100;
+            lvl++;
+        }
     }
 }

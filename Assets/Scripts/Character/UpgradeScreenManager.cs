@@ -103,13 +103,13 @@ public class UpgradeScreenManager : MonoBehaviour
 
     private void Upgrade()
     {
-        if(partIsSelected)
+        if (partIsSelected)
         {
             character.LevelUpPart(selectedPart);
             UpdateAllText();
             headerStats.UpdateTexts();
 
-            if(character.CanLevelUp(selectedPart))
+            if (character.CanLevelUp(selectedPart))
             {
                 upgradeButton.interactable = true;
             }
@@ -131,7 +131,6 @@ public class UpgradeScreenManager : MonoBehaviour
     private void UpdateText(ShipPartObject selectedPart)
     {
         selectedPart.instanciateShipPart.transform.GetChild(0).GetComponent<TMP_Text>().text = selectedPart.partName + " lvl " + selectedPart.lvl;
-
         string costText = "";
         foreach (Character.ResourceType type in selectedPart.upgradeTypes)
         {

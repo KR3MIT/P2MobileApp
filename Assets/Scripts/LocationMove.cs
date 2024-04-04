@@ -32,15 +32,22 @@ public class LocationMove : MonoBehaviour
 
         if (timeSinceLastUpdate >= updateInterval)
         {
+            Vector3 oldPosition = newPosition;
             newPosition = CalculatePositionFromGPS((float)locationManager.userLatitude, (float)locationManager.userLongitude, (float)locationManager.originalLatitude, (float)locationManager.originalLongitude); // Convert latitude and longitude to Unity coordinates
+
+            Vector3 direction = newPosition - oldPosition;
+            if (direction != Vector3.zero) // Avoid setting rotation if there's no movement
+            {
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(angle, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+            }
 
             previousPosition = newPosition;// Update the previous position
             timeSinceLastUpdate = 0f; // Reset the timer
         }
 
         // Use SmoothDamp to gradually change the position of the object
-         transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
-        
+        transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
     }
 
     Vector3 CalculatePositionFromGPS(float userLat, float userLon, float origLat, float origLon)
