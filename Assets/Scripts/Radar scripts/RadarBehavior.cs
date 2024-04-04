@@ -30,11 +30,6 @@ public class RadarBehavior : MonoBehaviour
 
     private SceneStates sceneStates;
 
-    [SerializeField] private Button embarkBUtton;
-
-    //tocuh stuffs
-    Vector3 touchPosWorld;
-
     //the touch phase used we use ended since we want the click yeye
     TouchPhase touchPhase = TouchPhase.Ended;
 
@@ -60,9 +55,16 @@ public class RadarBehavior : MonoBehaviour
                     
                 }
                 GameObject.FindObjectOfType<OuterRingScript>().StartPulse();//ad
-                embarkBUtton.interactable = false ;
                 sceneStates.POIdict.Clear();
+            }else 
+            {
+                spawnObjects();
+                GameObject.FindObjectOfType<OuterRingScript>().StartPulse();//ad
             }
+        }
+        else
+        {
+            Debug.LogWarning("Player not found");
         }
         
         
