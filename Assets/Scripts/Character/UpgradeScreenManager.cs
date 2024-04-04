@@ -103,13 +103,18 @@ public class UpgradeScreenManager : MonoBehaviour
 
     private void Upgrade()
     {
-        if(partIsSelected)
+        Debug.Log("gaga upgrade ran partisselected: " + partIsSelected);
+        if (partIsSelected)
         {
+            Debug.Log("gaga first in partissselcted");
             character.LevelUpPart(selectedPart);
+            Debug.Log("gaga 2");
             UpdateAllText();
+            Debug.Log("gaga 3");
             headerStats.UpdateTexts();
+            Debug.Log("gaga upgrade ran with selected part");
 
-            if(character.CanLevelUp(selectedPart))
+            if (character.CanLevelUp(selectedPart))
             {
                 upgradeButton.interactable = true;
             }
@@ -118,10 +123,12 @@ public class UpgradeScreenManager : MonoBehaviour
                 upgradeButton.interactable = false;
             }
         }
+        Debug.Log("gaga upgrade ran end of upgrade partisselected: " + partIsSelected);
     }
 
     private void UpdateAllText()
     {
+        Debug.Log("gaga alltext ran");
         foreach (ShipPartObject part in character.shipParts)
         {
             UpdateText(part);
@@ -131,7 +138,7 @@ public class UpgradeScreenManager : MonoBehaviour
     private void UpdateText(ShipPartObject selectedPart)
     {
         selectedPart.instanciateShipPart.transform.GetChild(0).GetComponent<TMP_Text>().text = selectedPart.partName + " lvl " + selectedPart.lvl;
-
+        Debug.Log("gaga " + selectedPart.lvl);
         string costText = "";
         foreach (Character.ResourceType type in selectedPart.upgradeTypes)
         {
