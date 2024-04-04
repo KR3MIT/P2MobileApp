@@ -23,4 +23,7 @@ public class LaunchProjectile : MonoBehaviour
         // The projectile is destroyed after a set duration.
         Destroy(gameObject, (float)duration);
     }
+    
+
+
 }
