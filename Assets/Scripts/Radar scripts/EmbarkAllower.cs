@@ -19,6 +19,7 @@ public class EmbarkAllower : MonoBehaviour
     {
         
         StartCoroutine(PerSecond());
+        
     } 
     
     public void CheckEmbark()
