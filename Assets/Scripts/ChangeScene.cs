@@ -9,6 +9,19 @@ public class ChangeScene : MonoBehaviour
 
     public void ChangeSceneToNext(string nextSceneName)
     {
+        if(GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<SceneStates>();
+            if(player.POIdict.Count == 0 && player.isEmbarked)
+            {
+                player.isEmbarked = false;
+                SceneManager.LoadScene("Home");
+                
+                return;
+            }
+        }
+            
+
         SceneManager.LoadScene(nextSceneName);
     }
 }
