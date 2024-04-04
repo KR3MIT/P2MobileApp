@@ -77,7 +77,7 @@ public class PlayerCharacterTest : MonoBehaviour
     void InitiateCombat()
     {
         // Create an instance of the HealthBar class to handle the health bar and damage text
-        healthBars = new HealthBar();
+        //healthBars = new HealthBar();
 
         // The Coroutine CombatSequence is started, which simulates the combat between the player and the enemy.
         StartCoroutine(CombatSequence());
@@ -100,7 +100,7 @@ public class PlayerCharacterTest : MonoBehaviour
             enemyDamageTaken = Mathf.Max(0, enemyDamageTaken);
             enemyHealth -= enemyDamageTaken;
 
-            GameObject playerBullet = Instantiate(playerBulletPrefab, playerLocation.transform.position, Quaternion.identity, playerLocation.transform);
+            GameObject playerBullet = Instantiate(playerBulletPrefab, playerLocation.transform.position, Quaternion.identity/*, playerLocation.transform*/);
             playerBullet.GetComponent<LaunchProjectile>().Attack(enemyLocation.transform);
 
             yield return new WaitForSeconds(bulletDelay);
@@ -130,7 +130,7 @@ public class PlayerCharacterTest : MonoBehaviour
             playerDamageTaken = Mathf.Max(0, playerDamageTaken);
             playerHealth -= playerDamageTaken;
 
-            GameObject enemyBullet = Instantiate(enemyBulletPrefab, enemyLocation.transform.position, Quaternion.identity, enemyLocation.transform);
+            GameObject enemyBullet = Instantiate(enemyBulletPrefab, enemyLocation.transform.position, Quaternion.identity/*, enemyLocation.transform*/);
             enemyBullet.GetComponent<LaunchProjectile>().Attack(playerLocation.transform);
 
             yield return new WaitForSeconds(bulletDelay);
