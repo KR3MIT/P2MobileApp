@@ -18,17 +18,10 @@ public class DataCollector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        StartCoroutine(WaitSeconds());
     }
         
-    // Update is called once per frame
-    void Update()
-    {
-       
-
-
-    }
-
+ 
     private void OnEnable() // Runs when the Gameobject this script is on is enabled (when the game starts)
     {
         if (!Permission.HasUserAuthorizedPermission("android.permission.ACTIVITY_RECOGNITION"))
@@ -46,14 +39,18 @@ public class DataCollector : MonoBehaviour
             InputSystem.EnableDevice(StepCounter.current);
             currentSteps = StepCounter.current.stepCounter.ReadValue();
         }
-        StartCoroutine(WaitSeconds());
+
 
     }
 
     private void OnDisable() // Runs when the Gameobject this script is on is disabled
     {
-        // Disable the step counter
-        InputSystem.DisableDevice(StepCounter.current);
+        if (StepCounter.current != null)
+        {
+            // Disable the step counter
+            InputSystem.DisableDevice(StepCounter.current);
+        }
+       
     }
 
     // coroutine that waits for 2 seconds before disabling the step counter

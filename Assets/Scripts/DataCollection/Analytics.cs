@@ -13,6 +13,7 @@ public class Analytics : MonoBehaviour
 
     async void Start()
     {
+
         await UnityServices.InitializeAsync(); // Initialize the Unity Services SDK.
         _consentGiven = PlayerPrefs.GetInt("ConsentGiven");
         Debug.Log("Consentgiven on start: " + _consentGiven);
