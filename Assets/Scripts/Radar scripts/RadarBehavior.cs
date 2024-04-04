@@ -46,6 +46,7 @@ public class RadarBehavior : MonoBehaviour
         if(GameObject.FindWithTag("Player") != null)//check if player exists if it does set scenestate and if POIs exists set POIs
         {
             sceneStates = GameObject.FindWithTag("Player").GetComponent<SceneStates>();
+            sceneStates.isEmbarked = true;
             if (sceneStates.POIdict.Count != 0)
             {
                 
