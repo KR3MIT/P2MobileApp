@@ -215,6 +215,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1001 &411139656
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 80521421676826855, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_Name
+      value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 80521421676826855, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
 --- !u!1001 &423194339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -771,7 +832,6 @@ MonoBehaviour:
   minDistance: 0.5
   encounterSceneName: CombatEncounterTest
   resourceSceneName: Loot Island
-  embarkBUtton: {fileID: 0}
   ship: {fileID: 1198653910}
   shipInteractRadius: 0.75
 --- !u!64 &1383944061
@@ -1137,3 +1197,4 @@ SceneRoots:
   - {fileID: 1356478226}
   - {fileID: 1383944064}
   - {fileID: 451904925}
+  - {fileID: 411139656}
