@@ -35,9 +35,4 @@ public class ChestAnimatorManager : MonoBehaviour
         animator3.SetBool("ChestClicked", true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
