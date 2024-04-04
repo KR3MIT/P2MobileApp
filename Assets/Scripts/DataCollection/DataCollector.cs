@@ -18,7 +18,6 @@ public class DataCollector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(TwoSecondWait());
 
     }
         
@@ -47,8 +46,7 @@ public class DataCollector : MonoBehaviour
             InputSystem.EnableDevice(StepCounter.current);
             currentSteps = StepCounter.current.stepCounter.ReadValue();
         }
-        Debug.Log("Number of steps: " + currentSteps);
-        text.text = "Number of steps: " + currentSteps;
+        StartCoroutine(WaitSeconds());
 
     }
 
@@ -60,11 +58,19 @@ public class DataCollector : MonoBehaviour
 
     // coroutine that waits for 2 seconds before disabling the step counter
 
-    IEnumerator TwoSecondWait()
+    IEnumerator WaitSeconds()
     {
-        currentSteps = StepCounter.current.stepCounter.ReadValue();
-        text.text = "Number of steps: " + currentSteps;
-        yield return new WaitForSeconds(2);
-        StartCoroutine(TwoSecondWait());
+        if (StepCounter.current == null)
+        {
+            Debug.LogError("StepCounter is not connected");
+        }
+        else
+        {
+            currentSteps = StepCounter.current.stepCounter.ReadValue();
+            text.text = "Number of steps: " + currentSteps;
+        }
+        Debug.Log("THE STEPS TAKEN UPDATED!!");
+        yield return new WaitForSeconds(5);
+        StartCoroutine(WaitSeconds());
     }
 }
