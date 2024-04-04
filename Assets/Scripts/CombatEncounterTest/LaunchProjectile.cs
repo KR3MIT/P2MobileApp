@@ -9,6 +9,11 @@ using UnityEngine.UIElements;
 
 public class LaunchProjectile : MonoBehaviour
 {
+    private AudioSource AudioPlayer;
+    private void Start()
+    {
+         AudioPlayer = GetComponent<AudioSource>();
+    }
     // The attack method is called when the player character attacks the enemy character. The method launches the projectile from the player's location to the enemy's location.
     public void Attack(Transform enemyLocation)
     {
@@ -20,7 +25,13 @@ public class LaunchProjectile : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce((enemyLocation.position - transform.position).normalized * force);
 
+       
         // The projectile is destroyed after a set duration.
         Destroy(gameObject, (float)duration);
+        AudioPlayer.Play();
     }
+    
+    
+
+
 }

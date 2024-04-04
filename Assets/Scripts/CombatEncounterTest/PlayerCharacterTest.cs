@@ -45,6 +45,7 @@ public class PlayerCharacterTest : MonoBehaviour
     int enemyDefensePower;
     float enemyMaxHealth;
     float enemyHealth;
+    int xpToGive = 25;
 
     // Start is called before the first frame update
     void Start()
@@ -119,6 +120,7 @@ public class PlayerCharacterTest : MonoBehaviour
             if (enemyHealth <= 0)
             {
                 Debug.Log("Enemy has been defeated");
+                player.AddResource(xpToGive + Random.Range(-5, 5));
                 break;
             }
             
