@@ -102,7 +102,11 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        cloudSave = GetComponent<CloudSave>();
+        if(TryGetComponent(out CloudSave _cloudSave))
+        {
+            cloudSave = _cloudSave;
+        }
+        
 
         SetStats();
     }
@@ -160,7 +164,12 @@ public class Character : MonoBehaviour
     private void SaveData()
     {
         MakeStructFromClass(shipParts);
-        cloudSave.SaveData();
+
+        if(cloudSave != null)
+        {
+            cloudSave.SaveData();
+        }
+        
     }
 
     public void SetStats()
