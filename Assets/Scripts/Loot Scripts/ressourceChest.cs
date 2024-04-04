@@ -10,6 +10,7 @@ public class ressourceChest : MonoBehaviour
     private Character character;
     public TMPro.TextMeshProUGUI resourceGainText;
     public ParticleSystem winParticle;
+    public AudioSource audioPlayer;
 
     private Dictionary<ResourceType, int> resourcesToGive = new Dictionary<ResourceType, int>
     {
@@ -23,7 +24,7 @@ public class ressourceChest : MonoBehaviour
     private void Awake()
     {
         character = FindObjectOfType<Character>();
-      
+     
     }
     public void OpenChest(string ChestClicked)
     {
@@ -100,7 +101,9 @@ public class ressourceChest : MonoBehaviour
         
         IEnumerator TextDelay(string stringType, int resourceToGive)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(1);
+            audioPlayer.Play();
+            yield return new WaitForSeconds(1);
             resourceGainText.text = "You found " + resourceToGive + " " + stringType;
 
           
