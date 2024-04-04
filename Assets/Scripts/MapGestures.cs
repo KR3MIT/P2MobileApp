@@ -35,7 +35,10 @@ class MapGestures : MonoBehaviour
             float diff = currentMag - prevMag;
 
             Camera.orthographicSize -= diff * 0.002f;
-            Camera.orthographicSize = Mathf.Max(Camera.orthographicSize, 0.001f);
+            Camera.orthographicSize = Mathf.Clamp(Camera.orthographicSize, 1.5f, 7.5f);
+
+            Debug.Log("zoom level in a weird ass unit " + Camera.orthographicSize);
+
         }
     }
 }
