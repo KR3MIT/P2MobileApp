@@ -101,9 +101,9 @@ public class ressourceChest : MonoBehaviour
         
         IEnumerator TextDelay(string stringType, int resourceToGive)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1.5f);
             audioPlayer.Play();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
             resourceGainText.text = "You found " + resourceToGive + " " + stringType;
 
           
