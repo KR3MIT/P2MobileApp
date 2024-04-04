@@ -25,9 +25,10 @@ public class LaunchProjectile : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce((enemyLocation.position - transform.position).normalized * force);
 
-        AudioPlayer.Play();
+       
         // The projectile is destroyed after a set duration.
         Destroy(gameObject, (float)duration);
+        AudioPlayer.Play();
     }
     
     
