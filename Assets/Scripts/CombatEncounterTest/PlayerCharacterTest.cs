@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEditor.Experimental.GraphView;
 
 //This script was developed with the help of Github Co-pilot.
 
@@ -47,10 +49,17 @@ public class PlayerCharacterTest : MonoBehaviour
     float enemyHealth;
     int xpToGive = 25;
 
+    // win or lose bools and gameobjects >:(
+   public bool lose = false;
+   public bool win = false;
+    public GameObject continueButton;
+ 
     // Start is called before the first frame update
     void Start()
     {
-        if(GameObject.FindWithTag("Player").GetComponent<Character>() != null)
+        continueButton.SetActive(false);
+       
+        if (GameObject.FindWithTag("Player").GetComponent<Character>() != null)
         {
             player = GameObject.FindWithTag("Player").GetComponent<Character>();
             playerMaxHealth = player.health;
@@ -124,8 +133,10 @@ public class PlayerCharacterTest : MonoBehaviour
             {
                 Debug.Log("Enemy has been defeated");
                 player.AddResource(xpToGive + Random.Range(-5, 5));
+                ContinueButton(true);
                 break;
             }
+            
             
             // ENEMY ATTACKS THE PLAYER
             // The player's health is reduced by the damage taken, which is the difference between the enemy's attack power and the player's defense.
@@ -155,6 +166,22 @@ public class PlayerCharacterTest : MonoBehaviour
         if (playerHealth < enemyHealth)
         {
             Debug.Log("Player has been defeated");
+            ContinueButton(false);
         }
+    }
+    public void ContinueButton(bool isWin)
+    {
+        if(isWin)
+        {
+            
+            continueButton.SetActive(true);
+            continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("Loot Island"));
+        }
+        else
+        {
+            continueButton.SetActive(true);
+            continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("WMapCircle"));
+        }
+        
     }
 }
