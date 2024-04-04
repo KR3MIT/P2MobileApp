@@ -28,7 +28,7 @@ public class PlayerCharacterTest : MonoBehaviour
     public GameObject playerBulletPrefab;
     public GameObject enemyLocation;
     public GameObject enemyBulletPrefab;
-    float bulletDelay = 1.5f;
+    float bulletDelay = 0.5f;
     
     // Reference to the damage taken text and its location
     public GameObject enemyDamageTakenText;
@@ -53,11 +53,15 @@ public class PlayerCharacterTest : MonoBehaviour
    public bool lose = false;
    public bool win = false;
     public GameObject continueButton;
+    public SpriteRenderer winImage;
+    public SpriteRenderer loseImage;
  
     // Start is called before the first frame update
     void Start()
     {
         continueButton.SetActive(false);
+        winImage.enabled = false;
+        loseImage.enabled = false;
        
         if (GameObject.FindWithTag("Player").GetComponent<Character>() != null)
         {
@@ -109,7 +113,7 @@ public class PlayerCharacterTest : MonoBehaviour
             enemyDamageTaken = Mathf.Max(0, enemyDamageTaken);
             enemyHealth -= enemyDamageTaken;
 
-            FindObjectOfType<AudioManager>().Play("Canon");
+           // FindObjectOfType<AudioManager>().Play("Canon");
             yield return new WaitForSeconds(0.5f);
             GameObject playerBullet = Instantiate(playerBulletPrefab, playerLocation.transform.position, Quaternion.identity/*, playerLocation.transform*/);
             playerBullet.GetComponent<LaunchProjectile>().Attack(enemyLocation.transform);
@@ -144,7 +148,7 @@ public class PlayerCharacterTest : MonoBehaviour
             playerDamageTaken = Mathf.Max(0, playerDamageTaken);
             playerHealth -= playerDamageTaken;
 
-            FindObjectOfType<AudioManager>().Play("Canon");
+            //FindObjectOfType<AudioManager>().Play("Canon");
             yield return new WaitForSeconds(0.5f);
             GameObject enemyBullet = Instantiate(enemyBulletPrefab, enemyLocation.transform.position, Quaternion.identity/*, enemyLocation.transform*/);
             enemyBullet.GetComponent<LaunchProjectile>().Attack(playerLocation.transform);
@@ -173,12 +177,14 @@ public class PlayerCharacterTest : MonoBehaviour
     {
         if(isWin)
         {
-            
+            winImage.enabled = true;
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("Loot Island"));
+
         }
         else
         {
+            loseImage.enabled = true;
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("WMapCircle"));
         }
