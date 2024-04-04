@@ -57,10 +57,12 @@ public class PlayerCharacterTest : MonoBehaviour
             attackPower = player.AD;
             defensePower = player.def;
         }
-        
+
 
         // Create an enemyCharacter instance through the EnemyCharacterTest class to handle the enemy character
-        EnemyCharacterTest enemyCharacter = new EnemyCharacterTest();
+        
+        //EnemyCharacterTest enemyCharacter = new EnemyCharacterTest(); //commented out since you should not create a new instance of a monobehaviour class, maybe make it a struct??
+        EnemyCharacterTest enemyCharacter = gameObject.AddComponent<EnemyCharacterTest>();
 
         // The enemy character's health, attack power, and defense are randomly generated within given ranges. enemyMaxHealth is set to the enemy's initial health.
         enemyDefensePower = enemyCharacter.defensePower = Random.Range(4, 6);
