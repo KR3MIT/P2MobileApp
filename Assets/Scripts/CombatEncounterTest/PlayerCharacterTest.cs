@@ -26,7 +26,7 @@ public class PlayerCharacterTest : MonoBehaviour
     public GameObject playerBulletPrefab;
     public GameObject enemyLocation;
     public GameObject enemyBulletPrefab;
-    float bulletDelay = 0.5f;
+    float bulletDelay = 1.5f;
     
     // Reference to the damage taken text and its location
     public GameObject enemyDamageTakenText;
@@ -100,8 +100,11 @@ public class PlayerCharacterTest : MonoBehaviour
             enemyDamageTaken = Mathf.Max(0, enemyDamageTaken);
             enemyHealth -= enemyDamageTaken;
 
+            FindObjectOfType<AudioManager>().Play("Canon");
+            yield return new WaitForSeconds(0.5f);
             GameObject playerBullet = Instantiate(playerBulletPrefab, playerLocation.transform.position, Quaternion.identity/*, playerLocation.transform*/);
             playerBullet.GetComponent<LaunchProjectile>().Attack(enemyLocation.transform);
+            
 
             yield return new WaitForSeconds(bulletDelay);
 
@@ -130,6 +133,8 @@ public class PlayerCharacterTest : MonoBehaviour
             playerDamageTaken = Mathf.Max(0, playerDamageTaken);
             playerHealth -= playerDamageTaken;
 
+            FindObjectOfType<AudioManager>().Play("Canon");
+            yield return new WaitForSeconds(0.5f);
             GameObject enemyBullet = Instantiate(enemyBulletPrefab, enemyLocation.transform.position, Quaternion.identity/*, enemyLocation.transform*/);
             enemyBullet.GetComponent<LaunchProjectile>().Attack(playerLocation.transform);
 
