@@ -18,15 +18,16 @@ public class DataCollector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(TwoSecondWait());
 
     }
         
     // Update is called once per frame
     void Update()
     {
-        currentSteps = StepCounter.current.stepCounter.ReadValue();
-     
+       
+
+
     }
 
     private void OnEnable() // Runs when the Gameobject this script is on is enabled (when the game starts)
@@ -55,5 +56,15 @@ public class DataCollector : MonoBehaviour
     {
         // Disable the step counter
         InputSystem.DisableDevice(StepCounter.current);
+    }
+
+    // coroutine that waits for 2 seconds before disabling the step counter
+
+    IEnumerator TwoSecondWait()
+    {
+        currentSteps = StepCounter.current.stepCounter.ReadValue();
+        text.text = "Number of steps: " + currentSteps;
+        yield return new WaitForSeconds(2);
+        StartCoroutine(TwoSecondWait());
     }
 }
