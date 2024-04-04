@@ -11,13 +11,14 @@ public class ChangeScene : MonoBehaviour
     {
         if(GameObject.FindGameObjectWithTag("Player") != null)
         {
-            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<SceneStates>();
-            if(player.POIdict.Count == 0 && player.isEmbarked)
+            if(TryGetComponent(out SceneStates sceneStates))
             {
-                player.isEmbarked = false;
-                SceneManager.LoadScene("Home");
-                
-                return;
+                if(sceneStates.POIdict.Count == 0 && sceneStates.isEmbarked)
+                {
+                    sceneStates.isEmbarked = false;
+                    SceneManager.LoadScene("Home");
+                    return;
+                }
             }
         }
             

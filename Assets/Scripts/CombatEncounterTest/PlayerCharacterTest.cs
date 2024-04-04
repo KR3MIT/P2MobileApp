@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEditor.Experimental.GraphView;
 
 //This script was developed with the help of Github Co-pilot.
 
@@ -26,7 +28,7 @@ public class PlayerCharacterTest : MonoBehaviour
     public GameObject playerBulletPrefab;
     public GameObject enemyLocation;
     public GameObject enemyBulletPrefab;
-    float bulletDelay = 1.5f;
+    float bulletDelay = 0.5f;
     
     // Reference to the damage taken text and its location
     public GameObject enemyDamageTakenText;
@@ -47,10 +49,21 @@ public class PlayerCharacterTest : MonoBehaviour
     float enemyHealth;
     int xpToGive = 25;
 
+    // win or lose bools and gameobjects >:(
+   public bool lose = false;
+   public bool win = false;
+    public GameObject continueButton;
+    public SpriteRenderer winImage;
+    public SpriteRenderer loseImage;
+ 
     // Start is called before the first frame update
     void Start()
     {
-        if(GameObject.FindWithTag("Player").GetComponent<Character>() != null)
+        continueButton.SetActive(false);
+        winImage.enabled = false;
+        loseImage.enabled = false;
+       
+        if (GameObject.FindWithTag("Player").GetComponent<Character>() != null)
         {
             player = GameObject.FindWithTag("Player").GetComponent<Character>();
             playerMaxHealth = player.health;
@@ -100,7 +113,7 @@ public class PlayerCharacterTest : MonoBehaviour
             enemyDamageTaken = Mathf.Max(0, enemyDamageTaken);
             enemyHealth -= enemyDamageTaken;
 
-            FindObjectOfType<AudioManager>().Play("Canon");
+           // FindObjectOfType<AudioManager>().Play("Canon");
             yield return new WaitForSeconds(0.5f);
             GameObject playerBullet = Instantiate(playerBulletPrefab, playerLocation.transform.position, Quaternion.identity/*, playerLocation.transform*/);
             playerBullet.GetComponent<LaunchProjectile>().Attack(enemyLocation.transform);
@@ -124,8 +137,10 @@ public class PlayerCharacterTest : MonoBehaviour
             {
                 Debug.Log("Enemy has been defeated");
                 player.AddResource(xpToGive + Random.Range(-5, 5));
+                ContinueButton(true);
                 break;
             }
+            
             
             // ENEMY ATTACKS THE PLAYER
             // The player's health is reduced by the damage taken, which is the difference between the enemy's attack power and the player's defense.
@@ -133,7 +148,7 @@ public class PlayerCharacterTest : MonoBehaviour
             playerDamageTaken = Mathf.Max(0, playerDamageTaken);
             playerHealth -= playerDamageTaken;
 
-            FindObjectOfType<AudioManager>().Play("Canon");
+            //FindObjectOfType<AudioManager>().Play("Canon");
             yield return new WaitForSeconds(0.5f);
             GameObject enemyBullet = Instantiate(enemyBulletPrefab, enemyLocation.transform.position, Quaternion.identity/*, enemyLocation.transform*/);
             enemyBullet.GetComponent<LaunchProjectile>().Attack(playerLocation.transform);
@@ -155,6 +170,24 @@ public class PlayerCharacterTest : MonoBehaviour
         if (playerHealth < enemyHealth)
         {
             Debug.Log("Player has been defeated");
+            ContinueButton(false);
         }
+    }
+    public void ContinueButton(bool isWin)
+    {
+        if(isWin)
+        {
+            winImage.enabled = true;
+            continueButton.SetActive(true);
+            continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("Loot Island"));
+
+        }
+        else
+        {
+            loseImage.enabled = true;
+            continueButton.SetActive(true);
+            continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("WMapCircle"));
+        }
+        
     }
 }
