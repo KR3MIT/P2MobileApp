@@ -16,7 +16,7 @@ public class Analytics : MonoBehaviour
         await UnityServices.InitializeAsync(); // Initialize the Unity Services SDK.
         _consentGiven = PlayerPrefs.GetInt("ConsentGiven");
         Debug.Log("Consentgiven on start: " + _consentGiven);
-        if (_consentGiven == 1 || _consentGiven == 0)
+        if (_consentGiven == 0)
         {
             AskForConsent(); // Ask the player for consent to collect data.
         }
