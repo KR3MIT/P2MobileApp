@@ -455,7 +455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -558.0003}
+  m_AnchoredPosition: {x: 0, y: -557.99994}
   m_SizeDelta: {x: 800, y: 1716}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &183364367
@@ -3647,10 +3647,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outerRingScript: {fileID: 1468584840}
-  radarBehavior: {fileID: 0}
   CountDownText: {fileID: 880905554}
   DebugMode: 1
-  SceneName: Circle spawner
+  SceneName: WMapCircle
 --- !u!4 &1389355366
 Transform:
   m_ObjectHideFlags: 0
@@ -5072,8 +5071,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1726027459}
   m_HandleRect: {fileID: 1726027458}
   m_Direction: 2
-  m_Value: 1.0000004
-  m_Size: 0.34935322
+  m_Value: 1
+  m_Size: 0.34964973
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
