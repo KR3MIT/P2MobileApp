@@ -43,8 +43,13 @@ public class RadarBehavior : MonoBehaviour
     [SerializeField] private GameObject encounterClickCanvas;
     private bool encounterCanvasActive = false;
 
+    //player
+    private Character player;
+
     private void Start()
     {
+        player = GameObject.FindWithTag("Player").GetComponent<Character>();
+
         encounterClickCanvas = Instantiate(encounterClickCanvas, Vector3.zero, Quaternion.identity);//make an instance of prefab and save in its variable
         encounterClickCanvas.transform.GetComponentInChildren<Button>().onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName));//add listener to button
         encounterClickCanvas.SetActive(false);//set it to false
@@ -247,7 +252,9 @@ public class RadarBehavior : MonoBehaviour
                 i--; // we decrease i by 1
                 continue; // and continue to the next iteration
             }
-            POIs.Add(Instantiate(toSpawn, (Vector3)randomCirclePosition + instantiatedOffset, instantiatedRotation)); // we instantiate the chosen prop, and add to list
+            GameObject poi = Instantiate(toSpawn, (Vector3)randomCirclePosition + instantiatedOffset, instantiatedRotation);
+            poi.GetComponent<POIscript>().RandomizeLevel(player.lvl);
+            POIs.Add(poi); // we instantiate the chosen prop, and add to list
         }
         
         
