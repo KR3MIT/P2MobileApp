@@ -2962,7 +2962,7 @@ MonoBehaviour:
   winImage: {fileID: 268476231}
   loseImage: {fileID: 400376526}
   soundManager: {fileID: 1204608475}
-  mainMixer: {fileID: 0}
+  mainMixer: {fileID: 24100000, guid: 8b897615e4374f34e8c6f44da2772d34, type: 2}
 --- !u!33 &1057768539374981705
 MeshFilter:
   m_ObjectHideFlags: 0
