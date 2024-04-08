@@ -7,4 +7,10 @@ public class SceneStates : MonoBehaviour
 {
     [HideInInspector] public Dictionary<Vector3, GameObject> POIdict = new Dictionary<Vector3, GameObject>();
     [HideInInspector] public bool isEmbarked;
+
+    public void ClearData()
+    {
+        POIdict.Clear();
+        isEmbarked = false;
+    }
 }
