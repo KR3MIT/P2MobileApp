@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winSound: {fileID: 1007988378436251898}
   loseSound: {fileID: 1475567960231899726}
+  music: {fileID: 1515776706611495255}
   mainMixer: {fileID: 24100000, guid: 8b897615e4374f34e8c6f44da2772d34, type: 2}
 --- !u!82 &1515776706611495255
 AudioSource:

@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] AudioSource winSound;
     [SerializeField] AudioSource loseSound;
+    [SerializeField] AudioSource music;
     public static SoundManager instance;
     public AudioMixer mainMixer;
 
@@ -24,11 +25,27 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void StopMusic()
+    {
+        // Stop the music
+        music.Stop();
+    }
+
+    public void PlayMusic()
+    {
+        // Play the music
+        music.Play();
+    }
+
     public void CombatMusicMixerVolume(float volume)
     {
+        // Set the volume of the music mixer for combat music
+        mainMixer.SetFloat("MusicVolume", volume);
+    }
 
-
-        // Set the volume of the music mixer
+    public void ResetMusicMixerVolume(float volume)
+    {
+        // Reset the volume of the music mixer back to player set volume
         mainMixer.SetFloat("MusicVolume", volume);
     }
 

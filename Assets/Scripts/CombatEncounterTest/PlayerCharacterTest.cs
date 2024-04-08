@@ -55,15 +55,11 @@ public class PlayerCharacterTest : MonoBehaviour
     public GameObject continueButton;
     public SpriteRenderer winImage;
     public SpriteRenderer loseImage;
- 
-    public SoundManager soundManager;
-    float playerMusicVol;
-    float combatMusicVol = -80f;
 
     // Start is called before the first frame update
     void Start()
     {
-        soundManager.CombatMusicMixerVolume(combatMusicVol);
+        FindObjectOfType<AudioManager>().Stop("music");
         continueButton.SetActive(false);
         winImage.enabled = false;
         loseImage.enabled = false;
@@ -180,21 +176,21 @@ public class PlayerCharacterTest : MonoBehaviour
     }
     public void ContinueButton(bool isWin)
     {
-        if(isWin)
+        if (isWin)
         {
             winImage.enabled = true;
-            soundManager.WinOrLoseSound(isWin);// The Win sound is played through the SoundManager instance.
+            FindObjectOfType<AudioManager>().Play("winningSound");
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("Loot Island"));
 
         }
         else
         {
-            loseImage.enabled = true;           
-            soundManager.WinOrLoseSound(isWin); // The Lose sound is played through the SoundManager instance.
+            loseImage.enabled = true;
+            FindObjectOfType<AudioManager>().Play("losingSound");
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("WMapCircle"));
         }
-        
+        FindObjectOfType<AudioManager>().Play("music");
     }
 }
