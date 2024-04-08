@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-// This script was developed with the help of Github Co-pilot.
-//this script is dead no longer used death dead
-
 public class EnemyCharacterTest : MonoBehaviour
 {
     public int level;

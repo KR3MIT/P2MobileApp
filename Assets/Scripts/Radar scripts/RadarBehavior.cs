@@ -55,7 +55,7 @@ public class RadarBehavior : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponent<Character>();
 
         encounterClickCanvas = Instantiate(encounterClickCanvas, Vector3.zero, Quaternion.identity);//make an instance of prefab and save in its variable
-        encounterClickCanvas.transform.GetComponentInChildren<Button>().onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName));//add listener to button
+        encounterClickCanvas.transform.GetComponentInChildren<Button>().onClick.AddListener(AttackButton);//add listener to button
         encounterClickCanvas.SetActive(false);//set it to false
         
 
@@ -184,6 +184,14 @@ public class RadarBehavior : MonoBehaviour
         }
     }
 
+    private void AttackButton()
+    {
+        var poiScript = hit.transform.gameObject.GetComponent<POIscript>();
+
+        sceneStates.SetPOIStats(poiScript.level, poiScript.health, poiScript.attackPower, poiScript.defensePower);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
+    }
+
     private void EncounterClick(Vector3 position)
     {
         encounterClickCanvas.SetActive(!encounterClickCanvas.activeSelf);//toggle canvas
@@ -192,7 +200,11 @@ public class RadarBehavior : MonoBehaviour
 
         encounterCanvasActive = encounterClickCanvas.activeSelf;
 
-        hit = new RaycastHit(); //reset hit data
+        if(!encounterCanvasActive)
+        {
+            hit = new RaycastHit(); //reset hit data if close menu
+        }
+        
     }
 
     private void SaveToPOIs()
