@@ -9,47 +9,51 @@ public class SettingsMenu : MonoBehaviour
 {
     public AudioMixer audioMixer;
 
-    public TMP_Dropdown resolutionDropdown;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button backButton;
+    [SerializeField] private Button AbandonButton;
+    [SerializeField] private GameObject settingsPanel;
+
+    private SceneStates player;
 
     Resolution[] resolutions;
 
+    void ToggleSettings()
+    {
+        if (player.isEmbarked)
+        {
+            AbandonButton.gameObject.SetActive(true);
+        }
+        
+        if (settingsPanel.activeSelf)
+        {
+            Debug.Log("Settings Panel is not active");
+            settingsPanel.SetActive(false);
+            settingsButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Settings Panel is active");
+            settingsPanel.SetActive(true);
+            settingsButton.gameObject.SetActive(false);
+        }
+    }
+
+    void Abandon()
+    {
+        player.ClearData();
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Home");
+    }
+
     private void Start()
     {
-        resolutions = Screen.resolutions;
+        AbandonButton.gameObject.SetActive(false);
 
-        resolutionDropdown.ClearOptions();
+        player = GameObject.FindWithTag("Player").GetComponent<SceneStates>();
 
-        List<string> options = new List<string>();
-
-        int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
-
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = i;
-            }
-        }
-
-        //resolutionDropdown.AddOptions(options);
-        //resolutionDropdown.value = currentResolutionIndex;
-        //resolutionDropdown.RefreshShownValue();
-    }
-
-    //--------------DISPLAY SETTINGS-------------\\
-    public void SetResolution(int resolutionIndex)
-    {
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-    }
-
-
-    public void SetFullscreen(bool isFullscreen)
-    {
-        FindObjectOfType<AudioManager>().Play("SFX");
-        Screen.fullScreen = isFullscreen;
+        settingsButton.onClick.AddListener(ToggleSettings);
+        backButton.onClick.AddListener(ToggleSettings);
+        AbandonButton.onClick.AddListener(Abandon);
     }
 
     public void SetQuality(int qualityIndex)
