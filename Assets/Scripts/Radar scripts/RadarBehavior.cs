@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
@@ -45,6 +46,9 @@ public class RadarBehavior : MonoBehaviour
 
     //player
     private Character player;
+
+    //raycasthit
+    RaycastHit hit;
 
     private void Start()
     {
@@ -131,7 +135,7 @@ public class RadarBehavior : MonoBehaviour
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase)
         {
 
-            RaycastHit hit;
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); //make a ray from the camera to the mouse position
             if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
             {
@@ -184,8 +188,11 @@ public class RadarBehavior : MonoBehaviour
     {
         encounterClickCanvas.SetActive(!encounterClickCanvas.activeSelf);//toggle canvas
         encounterClickCanvas.transform.position = position;//set position of canvas
+        encounterClickCanvas.transform.GetComponentInChildren<TMP_Text>().text = "Enemy lvl: " + hit.transform.gameObject.GetComponent<POIscript>().level;
 
         encounterCanvasActive = encounterClickCanvas.activeSelf;
+
+        hit = new RaycastHit(); //reset hit data
     }
 
     private void SaveToPOIs()
