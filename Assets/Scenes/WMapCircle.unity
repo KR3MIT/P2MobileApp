@@ -866,6 +866,7 @@ MonoBehaviour:
   resourceSceneName: Loot Island
   ship: {fileID: 1198653910}
   shipInteractRadius: 0.75
+  encounterClickCanvas: {fileID: 1470087896231912136, guid: d527917013f804549bb9035478b1cf06, type: 3}
 --- !u!64 &1383944061
 MeshCollider:
   m_ObjectHideFlags: 0
