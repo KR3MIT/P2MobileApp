@@ -41,6 +41,7 @@ public class RadarBehavior : MonoBehaviour
 
     //encounter click cancas
     [SerializeField] private GameObject encounterClickCanvas;
+    private bool encounterCanvasActive = false;
 
     private void Start()
     {
@@ -121,6 +122,7 @@ public class RadarBehavior : MonoBehaviour
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase)
         {
+
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); //make a ray from the camera to the mouse position
             if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
