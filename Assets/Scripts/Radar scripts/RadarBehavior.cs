@@ -52,6 +52,7 @@ public class RadarBehavior : MonoBehaviour
 
     private void Start()
     {
+        FindObjectOfType<AudioManager>().Play("radarSound");
         player = GameObject.FindWithTag("Player").GetComponent<Character>();
 
         encounterClickCanvas = Instantiate(encounterClickCanvas, Vector3.zero, Quaternion.identity);//make an instance of prefab and save in its variable
