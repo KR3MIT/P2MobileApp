@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
@@ -38,8 +39,13 @@ public class RadarBehavior : MonoBehaviour
     //radius for ship interaction with poi
     [SerializeField] private float shipInteractRadius = 1f;
 
+    //encounter click cancas
+    [SerializeField] private GameObject encounterClickCanvas;
+
     private void Start()
     {
+        encounterClickCanvas = Instantiate(encounterClickCanvas, Vector3.zero, Quaternion.identity);//make an instance of prefab and save in its variable
+
         spawnPool.Add(encounterPOI);
         spawnPool.Add(resourcePOI);
 
@@ -111,7 +117,7 @@ public class RadarBehavior : MonoBehaviour
                 }
             }
         }
-        
+        //debug above real below
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase)
         {
@@ -122,33 +128,35 @@ public class RadarBehavior : MonoBehaviour
                 //If the tag of the hit object is "Prop", then do thing
                 if (hit.transform.tag == "Prop")
                 {
-                    if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius)
+                    if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius)//must be close to interact
                     {
                         Debug.Log("In range: " + Vector2.Distance(hit.transform.position, ship.transform.position));
 
-                        POIs.Remove(hit.transform.gameObject);
-                        hit.transform.gameObject.SetActive(false);
-                        DisableOppositePOI(hit.transform.gameObject);
-                        var POIscript = hit.transform.gameObject.GetComponent<POIscript>();
+                        EncounterClick(new Vector3(hit.transform.position.x, hit.transform.position.y, 95));
 
-                        if (POIscript.isEncounter)
-                        {
-                            if (sceneStates != null)
-                            {
-                                SaveToPOIs();
-                            }
+                        //POIs.Remove(hit.transform.gameObject);
+                        //hit.transform.gameObject.SetActive(false);
+                        //DisableOppositePOI(hit.transform.gameObject);
+                        //var POIscript = hit.transform.gameObject.GetComponent<POIscript>();
 
-                            UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
-                        }
-                        else if (POIscript.isResource)
-                        {
-                            if (sceneStates != null)
-                            {
-                                SaveToPOIs();
-                            }
+                        //if (POIscript.isEncounter)
+                        //{
+                        //    if (sceneStates != null)
+                        //    {
+                        //        SaveToPOIs();
+                        //    }
 
-                            UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
-                        }
+                        //    UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
+                        //}
+                        //else if (POIscript.isResource)
+                        //{
+                        //    if (sceneStates != null)
+                        //    {
+                        //        SaveToPOIs();
+                        //    }
+
+                        //    UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
+                        //}
 
                     }
                     else
@@ -160,6 +168,12 @@ public class RadarBehavior : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void EncounterClick(Vector3 position)
+    {
+        encounterClickCanvas.SetActive(!encounterClickCanvas.activeSelf);//toggle canvas
+        encounterClickCanvas.transform.position = position;//set position of canvas
     }
 
     private void SaveToPOIs()
