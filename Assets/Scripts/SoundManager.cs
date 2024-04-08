@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] AudioSource winSound;
     [SerializeField] AudioSource loseSound;
     public static SoundManager instance;
+    public AudioMixer mainMixer;
 
     void Awake()
     {
@@ -20,6 +22,14 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void CombatMusicMixerVolume(float volume)
+    {
+
+
+        // Set the volume of the music mixer
+        mainMixer.SetFloat("MusicVolume", volume);
     }
 
     public void WinOrLoseSound(bool isWin)

@@ -43,7 +43,6 @@ public class Map : MonoBehaviour
     private double planeWidth;
     private double planeHeight;
 
-    public TMPro.TMP_Text text;
 
     // Start is called before the first frame update
     void Start()
