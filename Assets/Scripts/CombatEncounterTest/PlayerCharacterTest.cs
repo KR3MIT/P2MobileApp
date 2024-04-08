@@ -57,15 +57,13 @@ public class PlayerCharacterTest : MonoBehaviour
     public SpriteRenderer loseImage;
  
     public SoundManager soundManager;
-    public AudioMixer mainMixer;
     float playerMusicVol;
     float combatMusicVol = -80f;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerMusicVol = PlayerPrefs.GetFloat("MusicVol");
-        mainMixer.SetFloat("MusicVol",combatMusicVol);
+        soundManager.CombatMusicMixerVolume(combatMusicVol);
         continueButton.SetActive(false);
         winImage.enabled = false;
         loseImage.enabled = false;
