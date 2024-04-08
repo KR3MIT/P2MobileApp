@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Services.Core;
 using Unity.Services.Analytics;
 
+//This script was developed with the help of Github Co-pilot.
 
 
 // This class is responsible for initializing the Unity Services SDK and starting data collection.
