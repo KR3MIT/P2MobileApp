@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
@@ -43,10 +44,19 @@ public class RadarBehavior : MonoBehaviour
     [SerializeField] private GameObject encounterClickCanvas;
     private bool encounterCanvasActive = false;
 
+    //player
+    private Character player;
+
+    //raycasthit
+    RaycastHit hit;
+
     private void Start()
     {
+        FindObjectOfType<AudioManager>().Play("radarSound");
+        player = GameObject.FindWithTag("Player").GetComponent<Character>();
+
         encounterClickCanvas = Instantiate(encounterClickCanvas, Vector3.zero, Quaternion.identity);//make an instance of prefab and save in its variable
-        encounterClickCanvas.transform.GetComponentInChildren<Button>().onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName));//add listener to button
+        encounterClickCanvas.transform.GetComponentInChildren<Button>().onClick.AddListener(AttackButton);//add listener to button
         encounterClickCanvas.SetActive(false);//set it to false
         
 
@@ -126,7 +136,7 @@ public class RadarBehavior : MonoBehaviour
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase)
         {
 
-            RaycastHit hit;
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); //make a ray from the camera to the mouse position
             if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
             {
@@ -175,12 +185,27 @@ public class RadarBehavior : MonoBehaviour
         }
     }
 
+    private void AttackButton()
+    {
+        var poiScript = hit.transform.gameObject.GetComponent<POIscript>();
+
+        sceneStates.SetPOIStats(poiScript.level, poiScript.health, poiScript.attackPower, poiScript.defensePower);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
+    }
+
     private void EncounterClick(Vector3 position)
     {
         encounterClickCanvas.SetActive(!encounterClickCanvas.activeSelf);//toggle canvas
         encounterClickCanvas.transform.position = position;//set position of canvas
+        encounterClickCanvas.transform.GetComponentInChildren<TMP_Text>().text = "Enemy lvl: " + hit.transform.gameObject.GetComponent<POIscript>().level;
 
         encounterCanvasActive = encounterClickCanvas.activeSelf;
+
+        if(!encounterCanvasActive)
+        {
+            hit = new RaycastHit(); //reset hit data if close menu
+        }
+        
     }
 
     private void SaveToPOIs()
@@ -247,7 +272,9 @@ public class RadarBehavior : MonoBehaviour
                 i--; // we decrease i by 1
                 continue; // and continue to the next iteration
             }
-            POIs.Add(Instantiate(toSpawn, (Vector3)randomCirclePosition + instantiatedOffset, instantiatedRotation)); // we instantiate the chosen prop, and add to list
+            GameObject poi = Instantiate(toSpawn, (Vector3)randomCirclePosition + instantiatedOffset, instantiatedRotation);
+            poi.GetComponent<POIscript>().RandomizeLevel(player.lvl);
+            POIs.Add(poi); // we instantiate the chosen prop, and add to list
         }
         
         
