@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 
 //This script was developed with the help of Github Co-pilot.
@@ -12,7 +13,6 @@ public class PlayerCharacterTest : MonoBehaviour
 {
     //player ref
     private Character player;
-
 
     // Reference to the enemy character instance and health bar instance
     public HealthBar healthBars;
@@ -56,9 +56,16 @@ public class PlayerCharacterTest : MonoBehaviour
     public SpriteRenderer winImage;
     public SpriteRenderer loseImage;
  
+    public SoundManager soundManager;
+    public AudioMixer mainMixer;
+    float playerMusicVol;
+    float combatMusicVol = -80f;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerMusicVol = PlayerPrefs.GetFloat("MusicVol");
+        mainMixer.SetFloat("MusicVol",combatMusicVol);
         continueButton.SetActive(false);
         winImage.enabled = false;
         loseImage.enabled = false;
@@ -178,13 +185,15 @@ public class PlayerCharacterTest : MonoBehaviour
         if(isWin)
         {
             winImage.enabled = true;
+            soundManager.WinOrLoseSound(isWin);// The Win sound is played through the SoundManager instance.
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("Loot Island"));
 
         }
         else
         {
-            loseImage.enabled = true;
+            loseImage.enabled = true;           
+            soundManager.WinOrLoseSound(isWin); // The Lose sound is played through the SoundManager instance.
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("WMapCircle"));
         }
