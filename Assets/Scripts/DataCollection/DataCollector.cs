@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
 
+//This script was developed with the help of Github Co-pilot.
+
 public class DataCollector : MonoBehaviour
 {
     // Variables
