@@ -55,15 +55,22 @@ public class PlayerCharacterTest : MonoBehaviour
     public GameObject continueButton;
     public SpriteRenderer winImage;
     public SpriteRenderer loseImage;
- 
-    public SoundManager soundManager;
+
+    private SoundManager soundManager;
     float playerMusicVol;
     float combatMusicVol = -80f;
+
+    void Awake()
+    {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        //soundManager.CombatMusicMixerVolume(combatMusicVol);
+        soundManager.StopMusic();
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        soundManager.CombatMusicMixerVolume(combatMusicVol);
         continueButton.SetActive(false);
         winImage.enabled = false;
         loseImage.enabled = false;
@@ -180,7 +187,7 @@ public class PlayerCharacterTest : MonoBehaviour
     }
     public void ContinueButton(bool isWin)
     {
-        if(isWin)
+        if (isWin)
         {
             winImage.enabled = true;
             soundManager.WinOrLoseSound(isWin);// The Win sound is played through the SoundManager instance.
@@ -195,6 +202,6 @@ public class PlayerCharacterTest : MonoBehaviour
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("WMapCircle"));
         }
-        
+        soundManager.PlayMusic();
     }
 }
