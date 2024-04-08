@@ -56,15 +56,13 @@ public class PlayerCharacterTest : MonoBehaviour
     public SpriteRenderer winImage;
     public SpriteRenderer loseImage;
 
-    private SoundManager soundManager;
-    float playerMusicVol;
-    float combatMusicVol = -80f;
+    //private SoundManager soundManager;
 
     void Awake()
     {
-        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        //soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         //soundManager.CombatMusicMixerVolume(combatMusicVol);
-        soundManager.StopMusic();
+        //soundManager.StopMusic();
     }
 
 
@@ -190,18 +188,21 @@ public class PlayerCharacterTest : MonoBehaviour
         if (isWin)
         {
             winImage.enabled = true;
-            soundManager.WinOrLoseSound(isWin);// The Win sound is played through the SoundManager instance.
+            FindObjectOfType<AudioManager>().Play("winningSound");
+            //soundManager.WinOrLoseSound(isWin);// The Win sound is played through the SoundManager instance.
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("Loot Island"));
 
         }
         else
         {
-            loseImage.enabled = true;           
-            soundManager.WinOrLoseSound(isWin); // The Lose sound is played through the SoundManager instance.
+            loseImage.enabled = true;
+            FindObjectOfType<AudioManager>().Play("losingSound");
+            //soundManager.WinOrLoseSound(isWin); // The Lose sound is played through the SoundManager instance.
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("WMapCircle"));
         }
-        soundManager.PlayMusic();
+        //soundManager.PlayMusic();
+        FindObjectOfType<AudioManager>().Play("music");
     }
 }
