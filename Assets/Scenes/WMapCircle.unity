@@ -231,6 +231,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3637498663142678275, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
+      propertyPath: defaultDef
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -854,7 +858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f282d8585fbc7345bf76f856d433d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 0
+  debugMode: 1
   amount: 10
   instantiatedRotation: {x: -0.49999997, y: 0.49999997, z: -0.49999997, w: 0.49999997}
   instantiatedOffset: {x: 0, y: 0, z: 99}
@@ -868,6 +872,7 @@ MonoBehaviour:
   ship: {fileID: 1198653910}
   shipInteractRadius: 0.75
   encounterClickCanvas: {fileID: 1470087896231912136, guid: d527917013f804549bb9035478b1cf06, type: 3}
+  resourceClickCanvas: {fileID: 1470087896231912136, guid: ae78639d39fc4d64e86580d39de0ea0f, type: 3}
 --- !u!64 &1383944061
 MeshCollider:
   m_ObjectHideFlags: 0

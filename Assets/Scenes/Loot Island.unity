@@ -442,7 +442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &516717840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,6 +462,9 @@ MonoBehaviour:
   AD: 0
   def: 0
   lvlScale: 5
+  defaultHealth: 100
+  defaultDef: 0
+  defaultAD: 10
   coal: 0
 --- !u!4 &516717841
 Transform:

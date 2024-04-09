@@ -57,6 +57,8 @@ public class PlayerCharacterTest : MonoBehaviour
     public SpriteRenderer loseImage;
 
     // Start is called before the first frame update
+
+    
     void Start()
     {
         if(FindObjectOfType<AudioManager>() != null)
@@ -191,7 +193,10 @@ public class PlayerCharacterTest : MonoBehaviour
         if (isWin)
         {
             winImage.enabled = true;
-            FindObjectOfType<AudioManager>().Play("winningSound");
+            if (FindObjectOfType<AudioManager>() != null)
+            {
+                FindObjectOfType<AudioManager>().Play("winningSound");
+            }
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("Loot Island"));
 
@@ -199,10 +204,16 @@ public class PlayerCharacterTest : MonoBehaviour
         else
         {
             loseImage.enabled = true;
-            FindObjectOfType<AudioManager>().Play("losingSound");
+            if (FindObjectOfType<AudioManager>() != null)
+            {
+                FindObjectOfType<AudioManager>().Play("losingSound");
+            }
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("WMapCircle"));
         }
-        FindObjectOfType<AudioManager>().Play("music");
+        if (FindObjectOfType<AudioManager>() != null)
+        {
+            FindObjectOfType<AudioManager>().Play("music");
+        }
     }
 }
