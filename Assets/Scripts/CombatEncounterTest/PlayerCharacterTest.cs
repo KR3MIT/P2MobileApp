@@ -61,10 +61,11 @@ public class PlayerCharacterTest : MonoBehaviour
     
     void Start()
     {
-        if(FindObjectOfType<AudioManager>() != null)
+        if(AudioManager.instance != null)
         {
-            FindObjectOfType<AudioManager>().Stop("music"); //make me get 10000 errors
+            AudioManager.instance.Stop("music");
         }
+        
         
         continueButton.SetActive(false);
         winImage.enabled = false;
@@ -193,9 +194,9 @@ public class PlayerCharacterTest : MonoBehaviour
         if (isWin)
         {
             winImage.enabled = true;
-            if (FindObjectOfType<AudioManager>() != null)
+            if (AudioManager.instance != null)
             {
-                FindObjectOfType<AudioManager>().Play("winningSound");
+                AudioManager.instance.Play("winningSound");
             }
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("Loot Island"));
@@ -204,16 +205,16 @@ public class PlayerCharacterTest : MonoBehaviour
         else
         {
             loseImage.enabled = true;
-            if (FindObjectOfType<AudioManager>() != null)
+            if (AudioManager.instance != null)
             {
-                FindObjectOfType<AudioManager>().Play("losingSound");
+                AudioManager.instance.Play("losingSound");
             }
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("WMapCircle"));
         }
-        if (FindObjectOfType<AudioManager>() != null)
+        if (AudioManager.instance != null)
         {
-            FindObjectOfType<AudioManager>().Play("music");
+            AudioManager.instance.Play("music");
         }
     }
 }
