@@ -64,9 +64,9 @@ public class RadarBehavior : MonoBehaviour
             shipInteractRadius = 1000f;
         }
 
-        if (FindObjectOfType<AudioManager>() != null)
+        if (AudioManager.instance != null)
         {
-            FindObjectOfType<AudioManager>().Play("radarSound"); 
+            AudioManager.instance.Play("radarSound");
         }
         player = GameObject.FindWithTag("Player").GetComponent<Character>();
 
