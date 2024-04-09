@@ -16337,9 +16337,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1919042773338645804, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4038178710790758836, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
       propertyPath: m_Name
       value: Turtorials
+      objectReference: {fileID: 0}
+    - target: {fileID: 5581943346334893422, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5581943346334893422, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5581943346334893422, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7503083525862235194, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
       propertyPath: m_LocalPosition.x

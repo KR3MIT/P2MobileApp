@@ -298,7 +298,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bb27b827be03bbf4fb5a6424c6081fef, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.21920311, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -317,8 +317,8 @@ Transform:
   m_GameObject: {fileID: 268476230}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2979297, y: -0.8178822, z: -5.6700606}
-  m_LocalScale: {x: 0.882124, y: 1.0884683, z: 0.6947079}
+  m_LocalPosition: {x: 0.2, y: -3.79, z: -5.6700606}
+  m_LocalScale: {x: 0.882124, y: 1.23, z: 0.6947079}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1752805860}
@@ -479,7 +479,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5ece2e57f9822fc468f19024b8cd538a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -498,7 +498,7 @@ Transform:
   m_GameObject: {fileID: 400376525}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2679297, y: -1.3178822, z: -5.7270603}
+  m_LocalPosition: {x: 0.2679297, y: -3.8, z: -5.7270603}
   m_LocalScale: {x: 1.0627, y: 0.99978, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1328,6 +1328,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4801250056999484961, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310661719055672526, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310661719055672526, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310661719055672526, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7503083525862235194, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
