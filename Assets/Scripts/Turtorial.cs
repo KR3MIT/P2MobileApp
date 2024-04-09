@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,7 +25,7 @@ public class Turtorial : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "TestFest":
-               if (TTtestFest == 0)
+                if (TTtestFest == 0)
                 {
                     tutorialPanel.SetActive(true);
                     Debug.Log("TestFest");
@@ -56,6 +57,7 @@ public class Turtorial : MonoBehaviour
                     tutorialPanel4.SetActive(true);
                     Debug.Log("TCombatEncounter");
                     PlayerPrefs.SetInt("TCombatEncounter", 1);
+                    Time.timeScale = 0;
                 }
                 break;
 
@@ -68,5 +70,9 @@ public class Turtorial : MonoBehaviour
                 }
                 break;
         }
+    }
+    void Resume()
+    {
+        Time.timeScale = 1;
     }
 }
