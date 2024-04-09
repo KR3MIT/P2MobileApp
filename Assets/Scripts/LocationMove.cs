@@ -10,6 +10,8 @@ public class LocationMove : MonoBehaviour
     private float timeSinceLastUpdate = 0f;
     private const float updateInterval = 5f; // Update every 
 
+    public float distanceWalked = 0f;
+
     private Vector3 velocity = Vector3.zero;
     public float smoothTime = 0.3f;
 
@@ -65,6 +67,9 @@ public class LocationMove : MonoBehaviour
         targetPosition.z = 99.631f; // Assuming the map is flat; adjust this if you have a 3D map
 
         return targetPosition;
+
+
+        
     }
 
     float CalculateDistance(float lat1, float lon1, float lat2, float lon2)
@@ -78,7 +83,9 @@ public class LocationMove : MonoBehaviour
                 Mathf.Sin(dLong / 2) * Mathf.Sin(dLong / 2);
         var c = 2 * Mathf.Atan2(Mathf.Sqrt(a), Mathf.Sqrt(1 - a));
         var distance = R * c;
-
+        
+        distanceWalked += distance; // Add the distance to the total distance walked
+        Debug.Log("Distance walked: " + distanceWalked); // Log the distance walked in one embark
         return distance; // Distance in meters
     }
 }

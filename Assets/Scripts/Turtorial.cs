@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Turtorial : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class Turtorial : MonoBehaviour
     {
         TTtestFest = PlayerPrefs.GetInt("TTtestFest");
         tutorialPanel.SetActive(false);
-        switch (Application.loadedLevelName)
+        switch (SceneManager.GetActiveScene().name)
         {
             case "TestFest":
                if (TTtestFest == 0)
