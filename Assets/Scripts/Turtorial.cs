@@ -31,38 +31,38 @@ public class Turtorial : MonoBehaviour
                 }
                 break;
 
-            case "Level2":
+            case "TWmapCircle":
                 if (TWmapCircle == 0)
                 {
                     tutorialPanel2.SetActive(true);
-                    Debug.Log("Level2");
+                    Debug.Log("TWmapCircle");
                     PlayerPrefs.SetInt("TWmapCircle", 1);
                 }
                 break;
 
-            case "Level3":
+            case "THome":
                 if (THome == 0)
                 {
                     tutorialPanel3.SetActive(true);
-                    Debug.Log("Level3");
+                    Debug.Log("THome");
                     PlayerPrefs.SetInt("THome", 1);
                 }
                 break;
 
-            case "Level4":
+            case "TCombatEncounter":
                 if (TCombatEncounter == 0)
                 {
                     tutorialPanel4.SetActive(true);
-                    Debug.Log("Level4");
+                    Debug.Log("TCombatEncounter");
                     PlayerPrefs.SetInt("TCombatEncounter", 1);
                 }
                 break;
 
-            case "Level5":
+            case "TLootIsland":
                 if (TLootIsland == 0)
                 {
                     tutorialPanel5.SetActive(true);
-                    Debug.Log("Level5");
+                    Debug.Log("TLootIsland");
                     PlayerPrefs.SetInt("TLootIsland", 1);
                 }
                 break;
