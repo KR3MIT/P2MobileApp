@@ -859,7 +859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f282d8585fbc7345bf76f856d433d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 1
+  debugMode: 0
   amount: 10
   instantiatedRotation: {x: -0.49999997, y: 0.49999997, z: -0.49999997, w: 0.49999997}
   instantiatedOffset: {x: 0, y: 0, z: 99}
