@@ -28,10 +28,10 @@ public class Character : MonoBehaviour
     [Tooltip("Level up stat scale")]
     public int lvlScale = 5;
 
-
-    private int defaultHealth = 100;
-    private int defaultDef = 10;
-    private int defaultAD = 10;
+    [Header("Actual start values changing the above wont do anything :)")]
+    public int defaultHealth = 100;
+    public int defaultDef = 10;
+    public int defaultAD = 10;
 
     //[Header("Resources")]
     //public int wood, metal, diamonds, gold;

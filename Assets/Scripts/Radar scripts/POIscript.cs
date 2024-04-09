@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class POIscript : MonoBehaviour
@@ -12,27 +13,27 @@ public class POIscript : MonoBehaviour
     [HideInInspector] public int defensePower;
     [HideInInspector] public int attackPower;
 
-    private void ScaleLevel(int lvl)
+    private void ScaleLevel(Character player)
     {
-        health = 93 + (lvl * 7);
-        defensePower = 3 + (lvl * 7);
-        attackPower = 3 + (lvl * 7);
+        health = player.defaultHealth - 7 + (player.lvl * 7);
+        defensePower = player.defaultDef - 7 + (player.lvl * 7);
+        attackPower = player.defaultAD - 7 + (player.lvl * 7);
     }
 
-    public void RandomizeLevel(int lvl)
+    public void RandomizeLevel(Character player)
     {
 
-        level = Random.Range(-2, lvl + 2);
+        level = Random.Range(-2 + player.lvl, player.lvl + 2);
         if (level < 1)
         {
             level = 1;
         }
-        ScaleLevel(level);
+        ScaleLevel(player);
     }
 
     void Start()
-    {
-        if(isEncounter == false && isResource == false)
+    {   
+        if (isEncounter == false && isResource == false)
         {
             Debug.LogError("POI is not set to be an encounter or a resource");
         }

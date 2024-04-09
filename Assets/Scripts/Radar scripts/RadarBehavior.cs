@@ -280,7 +280,7 @@ public class RadarBehavior : MonoBehaviour
                 continue; // and continue to the next iteration
             }
             GameObject poi = Instantiate(toSpawn, (Vector3)randomCirclePosition + instantiatedOffset, instantiatedRotation);
-            poi.GetComponent<POIscript>().RandomizeLevel(player.lvl);
+            poi.GetComponent<POIscript>().RandomizeLevel(player);
             POIs.Add(poi); // we instantiate the chosen prop, and add to list
         }
         
