@@ -3,9 +3,27 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
+
+public struct stats
+{
+    public int level;
+    public float health;
+    public int ad;
+    public int def;
+    public Vector3 pos;
+
+    public stats(Vector3 pos, int lvl, float hp, int atk, int def)
+    {
+        level = lvl;
+        health = hp;
+        ad = atk;
+        this.def = def;
+        this.pos = pos;
+    }
+}
 public class SceneStates : MonoBehaviour
 {
-    [HideInInspector] public Dictionary<Vector3, GameObject> POIdict = new Dictionary<Vector3, GameObject>();
+    [HideInInspector] public Dictionary<stats, GameObject> POIdict = new Dictionary<stats, GameObject>();
     [HideInInspector] public bool isEmbarked;
     [HideInInspector] public int level, ad, def;//from poi
     [HideInInspector] public float health;
@@ -20,7 +38,7 @@ public class SceneStates : MonoBehaviour
         def = 0;
     }
 
-    public void SetPOIStats(int lvl, float hp, int atk, int def)
+    public void SetPOIStats(int lvl, float hp, int atk, int def) //only used for the combatencounter
     {
         level = lvl;
         health = hp;

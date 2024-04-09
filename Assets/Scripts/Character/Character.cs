@@ -28,9 +28,9 @@ public class Character : MonoBehaviour
     [Tooltip("Level up stat scale")]
     public int lvlScale = 5;
 
-    [Header("Actual start values changing the above wont do anything :)")]
+    [Header("Actual start values changing the above wont do anything :) also modified by lvl")]
     public int defaultHealth = 100;
-    public int defaultDef = 10;
+    public int defaultDef = 0;
     public int defaultAD = 10;
 
     //[Header("Resources")]
@@ -107,6 +107,7 @@ public class Character : MonoBehaviour
             cloudSave = _cloudSave;
         }
         
+
 
         SetStats();
     }

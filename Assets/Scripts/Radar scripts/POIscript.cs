@@ -8,16 +8,29 @@ public class POIscript : MonoBehaviour
     public bool isEncounter = false;
     public bool isResource = false;
 
-    [HideInInspector] public int level;
+    public int level; //exposed for debug
     [HideInInspector] public float health;
     [HideInInspector] public int defensePower;
     [HideInInspector] public int attackPower;
 
-    private void ScaleLevel(Character player)
+    private void ScaleLevel(Character player, int lvl)
     {
-        health = player.defaultHealth - 7 + (player.lvl * 7);
-        defensePower = player.defaultDef - 7 + (player.lvl * 7);
-        attackPower = player.defaultAD - 7 + (player.lvl * 7);
+        health = player.defaultHealth - 7 + (lvl * 7);
+        defensePower = player.defaultDef - 7 + (lvl * 7);
+        attackPower = player.defaultAD - 7 + (lvl * 7);
+
+        if(health < 1)
+        {
+            health = 1;
+        }
+        if(defensePower < 1)
+        {
+            defensePower = 1;
+        }
+        if(attackPower < 1)
+        {
+            attackPower = 1;
+        }
     }
 
     public void RandomizeLevel(Character player)
@@ -28,7 +41,15 @@ public class POIscript : MonoBehaviour
         {
             level = 1;
         }
-        ScaleLevel(player);
+        ScaleLevel(player, level);
+    }
+
+    public void SetStats(float health, int ad, int def, int lvl)//set the stats when instantiated from the struct on scenestates ie. not the first time they are loaded
+    {
+        this.health = health;
+        this.attackPower = ad;
+        this.defensePower = def;
+        this.level = lvl;
     }
 
     void Start()
