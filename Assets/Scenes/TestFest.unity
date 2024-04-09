@@ -2260,14 +2260,14 @@ RectTransform:
   m_GameObject: {fileID: 1393212866}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6666665, y: 3.333333, z: 1.6949153}
+  m_LocalScale: {x: 1.3452793, y: 2.1924052, z: 1.6949153}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1772082652}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -88.3999, y: 370.32092}
+  m_AnchoredPosition: {x: -71.35351, y: 243.5682}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1393212868
@@ -2290,7 +2290,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Test Fest
+  m_text: 'You have entered your first encounter!
+
+    Follow along as your ship
+    fights for glory against the combatant!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2353,7 +2356,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -570.8752, y: -1403.7993, z: -666.9839, w: -1622.0629}
+  m_margin: {x: -340.392, y: -550.6129, z: -468.07947, w: -754.7744}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2753,7 +2756,7 @@ RectTransform:
   m_GameObject: {fileID: 1553088228}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8.17, y: 16.34, z: 8.3084755}
+  m_LocalScale: {x: 6.5945606, y: 10.747172, z: 8.3084755}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 578358443}
@@ -2761,7 +2764,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20, y: -1235}
+  m_AnchoredPosition: {x: 16.143324, y: -1261}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1553088230
@@ -3236,7 +3239,7 @@ RectTransform:
   m_GameObject: {fileID: 1772082651}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.3, z: 0.59}
+  m_LocalScale: {x: 0.74334, y: 0.45612004, z: 0.59}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2104997965}
@@ -3438,7 +3441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1880999073
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3660,14 +3663,14 @@ RectTransform:
   m_GameObject: {fileID: 2104997964}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.43, y: 3.333333, z: 1.6949153}
+  m_LocalScale: {x: 1.1542497, y: 2.1924052, z: 1.6949153}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1772082652}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.06665039, y: 1383}
+  m_AnchoredPosition: {x: -0.053759225, y: 1324}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2104997966
@@ -3690,7 +3693,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'TUTORIAL
+  m_text: 'ENCOUNTER
 
 '
   m_isRightToLeft: 0
@@ -3719,8 +3722,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 200
-  m_fontSizeBase: 200
+  m_fontSize: 140
+  m_fontSizeBase: 140
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
