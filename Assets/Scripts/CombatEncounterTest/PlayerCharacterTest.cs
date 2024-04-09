@@ -84,6 +84,10 @@ public class PlayerCharacterTest : MonoBehaviour
         //EnemyCharacterTest enemyCharacter = gameObject.AddComponent<EnemyCharacterTest>();
 
         // The enemy character's health, attack power, and defense are randomly generated within given ranges. enemyMaxHealth is set to the enemy's initial health.
+        if(player.gameObject.GetComponent<SceneStates>() == null)
+        {
+            Debug.LogError("no player scene states gg ff");
+        }
         SceneStates sceneStates = player.gameObject.GetComponent<SceneStates>();// get the values from the map scene using scenestates script on player
 
         enemyDefensePower = sceneStates.def;

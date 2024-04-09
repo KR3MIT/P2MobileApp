@@ -51,7 +51,7 @@ public class RadarBehavior : MonoBehaviour
     RaycastHit hit;
 
     //cnahit
-    private bool canAttack = false;
+    private float maxXPos = .85f;
 
     private void Start()
     {
@@ -100,48 +100,51 @@ public class RadarBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (debugMode)
-        {
-            if (Input.GetMouseButtonDown(0))//just to test :):)):):)))
-            {
-                RaycastHit hit;//Make a raycasthit to store the information of the object that we hit
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Make a ray from the camera to the mouse position
-                if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
-                {
-                    //If the tag of the hit object is "Prop", then do thing
-                    if (hit.transform.tag == "Prop")
-                    {
-                        POIs.Remove(hit.transform.gameObject);
-                        hit.transform.gameObject.SetActive(false);
-                        DisableOppositePOI(hit.transform.gameObject);
-                        var POIscript = hit.transform.gameObject.GetComponent<POIscript>();
-                        if (POIscript.isEncounter)
-                        {
-                            if (sceneStates != null)
-                            {
-                                SaveToPOIs();
-                            }
+        //if (debugMode)
+        //{
+        //    if (Input.GetMouseButtonDown(0))//just to test :):)):):)))
+        //    {
+        //        RaycastHit hit;//Make a raycasthit to store the information of the object that we hit
+        //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Make a ray from the camera to the mouse position
+        //        if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
+        //        {
+        //            //If the tag of the hit object is "Prop", then do thing
+        //            if (hit.transform.tag == "Prop")
+        //            {
+        //                POIs.Remove(hit.transform.gameObject);
+        //                hit.transform.gameObject.SetActive(false);
+        //                DisableOppositePOI(hit.transform.gameObject);
+        //                var POIscript = hit.transform.gameObject.GetComponent<POIscript>();
+        //                if (POIscript.isEncounter)
+        //                {
+        //                    if (sceneStates != null)
+        //                    {
+        //                        SaveToPOIs();
+        //                    }
 
-                            UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
-                        }
-                        else if (POIscript.isResource)
-                        {
-                            if (sceneStates != null)
-                            {
-                                SaveToPOIs();
-                            }
+        //                    UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
+        //                }
+        //                else if (POIscript.isResource)
+        //                {
+        //                    if (sceneStates != null)
+        //                    {
+        //                        SaveToPOIs();
+        //                    }
 
-                            UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
-                        }
-                    }
-                }
-            }
-        }
-        //debug above real below
+        //                    UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+        ////debug above real below
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase)
         {
-
+            if (encounterCanvasActive)
+            {
+                EncounterClick();//disable the canvas if its active
+            }
             
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); //make a ray from the camera to the mouse position
             if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
@@ -152,25 +155,8 @@ public class RadarBehavior : MonoBehaviour
 
                     if (hit.transform.GetComponent<POIscript>().isEncounter)
                     {
-                        EncounterClick(new Vector3(hit.transform.position.x, hit.transform.position.y, 95));
+                        EncounterClick();
                     }
-                    
-
-                    if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius)//must be close to interact
-                    {
-                        Debug.Log("In range: " + Vector2.Distance(hit.transform.position, ship.transform.position));
-
-                        
-
-                        
-
-                    }
-                    else
-                    {
-                        Debug.Log("Out of range: " + Vector2.Distance(hit.transform.position, ship.transform.position));
-                    }
-                    
-                    //UnityEngine.SceneManagement.SceneManager.LoadScene("EncounterScene");
                 }
             }
         }
@@ -178,20 +164,7 @@ public class RadarBehavior : MonoBehaviour
 
     private void AttackButton()
     {
-        var button = encounterClickCanvas.transform.GetComponentInChildren<Button>();
-        if (!canAttack)
-        {
-            button.interactable = false;
-            button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Too far away";
-            return;
-        }
-        else
-        {
-            encounterClickCanvas.transform.GetComponentInChildren<Button>().interactable = true;
-            button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Attack";
-        }
         var poiScript = hit.transform.gameObject.GetComponent<POIscript>();
-        
 
         POIs.Remove(hit.transform.gameObject);
         hit.transform.gameObject.SetActive(false);
@@ -207,31 +180,39 @@ public class RadarBehavior : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
     }
 
-    private void EncounterClick(Vector3 position)
+    private void EncounterClick()
     {
         encounterClickCanvas.SetActive(!encounterClickCanvas.activeSelf);//toggle canvas
-        encounterClickCanvas.transform.position = position;//set position of canvas
+        encounterClickCanvas.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, 95);//set position of canvas
+        if(encounterClickCanvas.transform.position.x > maxXPos)//no out of bounds canvas
+        {
+            encounterClickCanvas.transform.position = new Vector3(maxXPos, encounterClickCanvas.transform.position.y, 95);
+        }else if(encounterClickCanvas.transform.position.x < -maxXPos)
+        {
+            encounterClickCanvas.transform.position = new Vector3(-maxXPos, encounterClickCanvas.transform.position.y, 95);
+        }
+        
         encounterClickCanvas.transform.GetComponentInChildren<TMP_Text>().text = "Enemy lvl: " + hit.transform.gameObject.GetComponent<POIscript>().level;
 
         encounterCanvasActive = encounterClickCanvas.activeSelf;
 
+        var button = encounterClickCanvas.transform.GetComponentInChildren<Button>();
         if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius)
         {
-            canAttack = true;
+            encounterClickCanvas.transform.GetComponentInChildren<Button>().interactable = true;
+            button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Attack";
         }
         else
         {
-            canAttack = false;
+            button.interactable = false;
+            button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Too far";
+            
         }
 
         if(!encounterCanvasActive)
         {
             hit = new RaycastHit(); //reset hit data if close menu
         }
-
-        
-
-
     }
 
     private void SaveToPOIs()
