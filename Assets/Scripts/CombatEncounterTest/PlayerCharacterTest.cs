@@ -55,15 +55,15 @@ public class PlayerCharacterTest : MonoBehaviour
     public GameObject continueButton;
     public SpriteRenderer winImage;
     public SpriteRenderer loseImage;
- 
-    public SoundManager soundManager;
-    float playerMusicVol;
-    float combatMusicVol = -80f;
 
     // Start is called before the first frame update
     void Start()
     {
-        soundManager.CombatMusicMixerVolume(combatMusicVol);
+        if(FindObjectOfType<AudioManager>() != null)
+        {
+            FindObjectOfType<AudioManager>().Stop("music"); //make me get 10000 errors
+        }
+        
         continueButton.SetActive(false);
         winImage.enabled = false;
         loseImage.enabled = false;
@@ -81,13 +81,17 @@ public class PlayerCharacterTest : MonoBehaviour
         // Create an enemyCharacter instance through the EnemyCharacterTest class to handle the enemy character
         
         //EnemyCharacterTest enemyCharacter = new EnemyCharacterTest(); //commented out since you should not create a new instance of a monobehaviour class, maybe make it a struct??
-        EnemyCharacterTest enemyCharacter = gameObject.AddComponent<EnemyCharacterTest>();
+        //EnemyCharacterTest enemyCharacter = gameObject.AddComponent<EnemyCharacterTest>();
 
         // The enemy character's health, attack power, and defense are randomly generated within given ranges. enemyMaxHealth is set to the enemy's initial health.
-        enemyDefensePower = enemyCharacter.defensePower = Random.Range(4, 6);
-        enemyAttackPower = enemyCharacter.attackPower = Random.Range(8, 12);
-        enemyHealth = enemyCharacter.health = Random.Range(80, 120);
+        SceneStates sceneStates = player.gameObject.GetComponent<SceneStates>();// get the values from the map scene using scenestates script on player
+
+        enemyDefensePower = sceneStates.def;
+        enemyAttackPower = sceneStates.ad;
+        enemyHealth = sceneStates.health;
         enemyMaxHealth = enemyHealth;
+
+        Debug.Log("level enemy: " + sceneStates.level);
 
         InitiateCombat();
     }
@@ -180,21 +184,21 @@ public class PlayerCharacterTest : MonoBehaviour
     }
     public void ContinueButton(bool isWin)
     {
-        if(isWin)
+        if (isWin)
         {
             winImage.enabled = true;
-            soundManager.WinOrLoseSound(isWin);// The Win sound is played through the SoundManager instance.
+            FindObjectOfType<AudioManager>().Play("winningSound");
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("Loot Island"));
 
         }
         else
         {
-            loseImage.enabled = true;           
-            soundManager.WinOrLoseSound(isWin); // The Lose sound is played through the SoundManager instance.
+            loseImage.enabled = true;
+            FindObjectOfType<AudioManager>().Play("losingSound");
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("WMapCircle"));
         }
-        
+        FindObjectOfType<AudioManager>().Play("music");
     }
 }

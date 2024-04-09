@@ -1990,7 +1990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 80521421676826855, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6739119256976950287, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2893,8 +2893,6 @@ MonoBehaviour:
   continueButton: {fileID: 941606379}
   winImage: {fileID: 268476231}
   loseImage: {fileID: 400376526}
-  soundManager: {fileID: 6544859003885192157, guid: 11ffb8836a8e9684abded6170bc9ff78, type: 3}
-  mainMixer: {fileID: 24100000, guid: 8b897615e4374f34e8c6f44da2772d34, type: 2}
 --- !u!33 &1057768539374981705
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17148,9 +17146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d4f05479580964a848491fce93a38e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
+  health: 0
   defensePower: 0
   attackPower: 8
-  health: 0
 --- !u!95 &9080505310907881960
 Animator:
   serializedVersion: 5

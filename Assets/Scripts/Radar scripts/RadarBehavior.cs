@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
@@ -43,9 +44,27 @@ public class RadarBehavior : MonoBehaviour
     [SerializeField] private GameObject encounterClickCanvas;
     private bool encounterCanvasActive = false;
 
+    //player
+    private Character player;
+
+    //raycasthit
+    RaycastHit hit;
+
+    //cnahit
+    private bool canAttack = false;
+
     private void Start()
     {
+        if (FindObjectOfType<AudioManager>() != null)
+        {
+            FindObjectOfType<AudioManager>().Stop("radarSound"); //make me get 10000 errors
+        }
+        player = GameObject.FindWithTag("Player").GetComponent<Character>();
+
         encounterClickCanvas = Instantiate(encounterClickCanvas, Vector3.zero, Quaternion.identity);//make an instance of prefab and save in its variable
+        encounterClickCanvas.transform.GetComponentInChildren<Button>().onClick.AddListener(AttackButton);//add listener to button
+        encounterClickCanvas.SetActive(false);//set it to false
+        
 
         spawnPool.Add(encounterPOI);
         spawnPool.Add(resourcePOI);
@@ -123,42 +142,27 @@ public class RadarBehavior : MonoBehaviour
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == touchPhase)
         {
 
-            RaycastHit hit;
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); //make a ray from the camera to the mouse position
             if (Physics.Raycast(ray, out hit))//If the ray hits something, and set the hit info
             {
                 //If the tag of the hit object is "Prop", then do thing
                 if (hit.transform.tag == "Prop")
                 {
+
+                    if (hit.transform.GetComponent<POIscript>().isEncounter)
+                    {
+                        EncounterClick(new Vector3(hit.transform.position.x, hit.transform.position.y, 95));
+                    }
+                    
+
                     if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius)//must be close to interact
                     {
                         Debug.Log("In range: " + Vector2.Distance(hit.transform.position, ship.transform.position));
 
-                        EncounterClick(new Vector3(hit.transform.position.x, hit.transform.position.y, 95));
+                        
 
-                        //POIs.Remove(hit.transform.gameObject);
-                        //hit.transform.gameObject.SetActive(false);
-                        //DisableOppositePOI(hit.transform.gameObject);
-                        //var POIscript = hit.transform.gameObject.GetComponent<POIscript>();
-
-                        //if (POIscript.isEncounter)
-                        //{
-                        //    if (sceneStates != null)
-                        //    {
-                        //        SaveToPOIs();
-                        //    }
-
-                        //    UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
-                        //}
-                        //else if (POIscript.isResource)
-                        //{
-                        //    if (sceneStates != null)
-                        //    {
-                        //        SaveToPOIs();
-                        //    }
-
-                        //    UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
-                        //}
+                        
 
                     }
                     else
@@ -172,10 +176,62 @@ public class RadarBehavior : MonoBehaviour
         }
     }
 
+    private void AttackButton()
+    {
+        var button = encounterClickCanvas.transform.GetComponentInChildren<Button>();
+        if (!canAttack)
+        {
+            button.interactable = false;
+            button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Too far away";
+            return;
+        }
+        else
+        {
+            encounterClickCanvas.transform.GetComponentInChildren<Button>().interactable = true;
+            button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Attack";
+        }
+        var poiScript = hit.transform.gameObject.GetComponent<POIscript>();
+        
+
+        POIs.Remove(hit.transform.gameObject);
+        hit.transform.gameObject.SetActive(false);
+        DisableOppositePOI(hit.transform.gameObject);
+
+
+        sceneStates.SetPOIStats(poiScript.level, poiScript.health, poiScript.attackPower, poiScript.defensePower);
+        if (sceneStates != null)
+        {
+            SaveToPOIs();
+        }
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(encounterSceneName);
+    }
+
     private void EncounterClick(Vector3 position)
     {
         encounterClickCanvas.SetActive(!encounterClickCanvas.activeSelf);//toggle canvas
         encounterClickCanvas.transform.position = position;//set position of canvas
+        encounterClickCanvas.transform.GetComponentInChildren<TMP_Text>().text = "Enemy lvl: " + hit.transform.gameObject.GetComponent<POIscript>().level;
+
+        encounterCanvasActive = encounterClickCanvas.activeSelf;
+
+        if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius)
+        {
+            canAttack = true;
+        }
+        else
+        {
+            canAttack = false;
+        }
+
+        if(!encounterCanvasActive)
+        {
+            hit = new RaycastHit(); //reset hit data if close menu
+        }
+
+        
+
+
     }
 
     private void SaveToPOIs()
@@ -242,7 +298,9 @@ public class RadarBehavior : MonoBehaviour
                 i--; // we decrease i by 1
                 continue; // and continue to the next iteration
             }
-            POIs.Add(Instantiate(toSpawn, (Vector3)randomCirclePosition + instantiatedOffset, instantiatedRotation)); // we instantiate the chosen prop, and add to list
+            GameObject poi = Instantiate(toSpawn, (Vector3)randomCirclePosition + instantiatedOffset, instantiatedRotation);
+            poi.GetComponent<POIscript>().RandomizeLevel(player.lvl);
+            POIs.Add(poi); // we instantiate the chosen prop, and add to list
         }
         
         
