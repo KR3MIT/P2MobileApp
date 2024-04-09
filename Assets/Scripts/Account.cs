@@ -5,6 +5,7 @@ using Unity.Services.Core;
 using System.Threading.Tasks;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Account : MonoBehaviour
 {
@@ -13,10 +14,24 @@ public class Account : MonoBehaviour
     [SerializeField] private TMP_InputField usernameInput;
     [SerializeField] private TMP_InputField passwordInput;
     [SerializeField] private TMP_InputField playerNameInput;
+    [SerializeField] private Button signUpButton;
+    [SerializeField] private Button signInButton;
+    [SerializeField] private TMP_Text passwordError;
 
+    private bool signInActive = true;
+    private string pass;
+    private string userName;
+    private bool passError = false;
 
     async void Start()
     {
+        signUpButton.interactable = signInActive;
+        signInButton.interactable = signInActive;
+
+        passwordError.text = " ";
+
+        pass = passwordInput.text;
+
         await UnityServices.InitializeAsync();
         //checkSignIn();
     }
@@ -24,12 +39,29 @@ public class Account : MonoBehaviour
     //New player SIGN UP with username and password
     public async void signUp()
     {
-        string username = usernameInput.text;
-        string password = passwordInput.text;
-        await SignUpWithUsernamePassword(username, password);
-        //await SignInWithUsernamePassword(username, password);
-        checkSignIn();
-        playerNameDisplay.SetActive(true);
+        pass = passwordInput.text;
+        userName = usernameInput.text;
+
+        if (SignUpCheck())
+        {
+            checkSignIn();
+
+            string username = usernameInput.text;
+            string password = passwordInput.text;
+            await SignUpWithUsernamePassword(username, password);
+            //await SignInWithUsernamePassword(username, password);
+
+            playerNameDisplay.SetActive(true);
+            signInDisplay.SetActive(false);
+        }
+        else if(!passError)
+        {
+            passwordError.text = "username or password error";
+        }
+        else
+        {
+            passwordError.text = "password error";
+        }
     }
 
     async Task SignUpWithUsernamePassword(string username, string password)
@@ -53,6 +85,85 @@ public class Account : MonoBehaviour
         }
     }
 
+    private bool SignUpCheck()
+    {
+        if(userName.Length == 0)
+        {
+            passError = false;
+            return false; }
+
+        if(pass.Length > 30 )
+        {
+            passError = true;
+            return false; }
+
+        bool hasUpper = CheckUpper(pass);
+        if( !hasUpper)
+        {
+            passError = true;
+            return false; }
+
+        bool hasSymbol = CheckSymbol(pass);
+        if( !hasSymbol)
+        {
+            passError = true;
+            return false; }
+
+        bool hasNumber = CheckNumber(pass);
+        if( !hasNumber)
+        {
+            passError = true;
+            return false; }
+
+        return true;
+    }
+
+    bool CheckUpper(string pass)
+    {
+        string[] words = pass.Split(' ');
+
+        foreach (string word in words)
+        {
+            // Check if the word contains an uppercase letter
+            foreach (char letter in word)
+            {
+                if (char.IsUpper(letter))
+                {
+                    return true; // Return true if an uppercase letter is found
+                }
+            }
+        }
+
+        return false; // Return false if no uppercase letter is found in any word
+    }
+
+    bool CheckSymbol(string pass)
+    {
+        string symbols = "!@#$%^&*()-_+=[]{}|;:',.<>?"; // Set of symbols
+
+        foreach (char character in pass)
+        {
+            if (symbols.Contains(character.ToString()))
+            {
+                return true; // Return true if a symbol is found
+            }
+        }
+        return false; // Return false if no symbol is found
+    }
+
+    bool CheckNumber(string pass)
+    {
+        string numbers = "1234567890"; // Set of symbols
+
+        foreach (char character in pass)
+        {
+            if (numbers.Contains(character.ToString()))
+            {
+                return true; // Return true if a symbol is found
+            }
+        }
+        return false; // Return false if no symbol is found
+    }
 
     //Existing player SIGN IN with username and password
     public async void signIn()
@@ -88,6 +199,7 @@ public class Account : MonoBehaviour
             // Notify the player with the proper error message
             Debug.LogException(ex);
         }
+        
     }
 
     //Sign out
