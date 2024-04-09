@@ -66,7 +66,7 @@ public class RadarBehavior : MonoBehaviour
 
         if (FindObjectOfType<AudioManager>() != null)
         {
-            FindObjectOfType<AudioManager>().Play("radarSound"); //make me get 10000 errors
+            FindObjectOfType<AudioManager>().Play("radarSound"); 
         }
         player = GameObject.FindWithTag("Player").GetComponent<Character>();
 
@@ -90,9 +90,18 @@ public class RadarBehavior : MonoBehaviour
             if (sceneStates.POIdict.Count != 0)
             {
                 
-                foreach (KeyValuePair<Vector3, GameObject> kvp in sceneStates.POIdict)
+                foreach (KeyValuePair<stats, GameObject> kvp in sceneStates.POIdict)
                 {
-                    POIs.Add(Instantiate(kvp.Value, kvp.Key, instantiatedRotation));
+                    var poi = Instantiate(kvp.Value, kvp.Key.pos, instantiatedRotation);
+                    poi.GetComponent<POIscript>().SetStats(kvp.Key.health, kvp.Key.ad, kvp.Key.def, kvp.Key.level);
+                    POIs.Add(poi);
+
+                    //if(kvp.Value.GetComponent<POIscript>().isEncounter)
+                    //{
+                    //    Debug.Log("javla from stats " + kvp.Key.level);
+                    //    Debug.Log("javla when instantiated " + poi.GetComponent<POIscript>().level);
+                    //}
+                    
                     
                 }
                 GameObject.FindObjectOfType<OuterRingScript>().StartPulse();//ad
@@ -203,7 +212,7 @@ public class RadarBehavior : MonoBehaviour
         }
         else if (poiScript.isResource)
         {
-            Debug.Log("javla");
+            Debug.Log("javla isresoucr attackbutton");
             UnityEngine.SceneManagement.SceneManager.LoadScene(resourceSceneName);
         }
     }
@@ -301,13 +310,14 @@ public class RadarBehavior : MonoBehaviour
     {
         foreach (GameObject POI in POIs)
         {
+            var poiScript = POI.GetComponent<POIscript>();
             if (POI.GetComponent<POIscript>().isEncounter)
             {
-                sceneStates.POIdict.Add(POI.transform.position, encounterPOI);
+                sceneStates.POIdict.Add(new stats(POI.transform.position, poiScript.level, poiScript.health, poiScript.attackPower, poiScript.defensePower), encounterPOI);
             }
             else
             {
-                sceneStates.POIdict.Add(POI.transform.position, resourcePOI);
+                sceneStates.POIdict.Add(new stats(POI.transform.position, poiScript.level, poiScript.health, poiScript.attackPower, poiScript.defensePower), resourcePOI);
             }
         }
     }
