@@ -3602,7 +3602,7 @@ MonoBehaviour:
   - name: radarSound
     clip: {fileID: 8300000, guid: 37b25e7086c192247bb3970fe488775f, type: 3}
     mixer: {fileID: -5870040058163568950, guid: 8b897615e4374f34e8c6f44da2772d34, type: 2}
-    volume: 0.5
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
