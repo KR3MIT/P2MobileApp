@@ -21,37 +21,42 @@ public class Turtorial : MonoBehaviour
     void Start()
     {
         TTtestFest = PlayerPrefs.GetInt("TTtestFest");
+        TWmapCircle = PlayerPrefs.GetInt("TWmapCircle");
+        THome = PlayerPrefs.GetInt("THome");
+        TCombatEncounter = PlayerPrefs.GetInt("TCombatEncounter");
+        TLootIsland = PlayerPrefs.GetInt("TLootIsland");
+
         tutorialPanel.SetActive(false);
         switch (SceneManager.GetActiveScene().name)
         {
-            case "TestFest":
-                if (TTtestFest == 0)
-                {
-                    tutorialPanel.SetActive(true);
-                    Debug.Log("TestFest");
-                    PlayerPrefs.SetInt("TTtestFest", 1);
-                }
-                break;
-
-            case "TWmapCircle":
-                if (TWmapCircle == 0)
-                {
-                    tutorialPanel2.SetActive(true);
-                    Debug.Log("TWmapCircle");
-                    PlayerPrefs.SetInt("TWmapCircle", 1);
-                }
-                break;
-
-            case "THome":
+            case "Home":
                 if (THome == 0)
                 {
-                    tutorialPanel3.SetActive(true);
-                    Debug.Log("THome");
+                    tutorialPanel.SetActive(true);
+                    Debug.Log("Home");
                     PlayerPrefs.SetInt("THome", 1);
                 }
                 break;
 
-            case "TCombatEncounter":
+            case "WMapCircle":
+                if (TWmapCircle == 0)
+                {
+                    tutorialPanel2.SetActive(true);
+                    Debug.Log("WmapCircle");
+                    PlayerPrefs.SetInt("TWmapCircle", 1);
+                }
+                break;
+
+            case "Loot Island":
+                if (TLootIsland == 0)
+                {
+                    tutorialPanel3.SetActive(true);
+                    Debug.Log("Loot island");
+                    PlayerPrefs.SetInt("TLootIsland", 1);
+                }
+                break;
+
+            case "CombatEncounterTest":
                 if (TCombatEncounter == 0)
                 {
                     tutorialPanel4.SetActive(true);
@@ -61,17 +66,17 @@ public class Turtorial : MonoBehaviour
                 }
                 break;
 
-            case "TLootIsland":
-                if (TLootIsland == 0)
+            case "TTestFest":
+                if (TTtestFest == 0)
                 {
                     tutorialPanel5.SetActive(true);
-                    Debug.Log("TLootIsland");
-                    PlayerPrefs.SetInt("TLootIsland", 1);
+                    Debug.Log("Test Fest");
+                    PlayerPrefs.SetInt("TTestFest", 1);
                 }
                 break;
         }
     }
-    void Resume()
+    public void Resume()
     {
         Time.timeScale = 1;
     }
