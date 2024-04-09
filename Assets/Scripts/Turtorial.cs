@@ -42,7 +42,7 @@ public class Turtorial : MonoBehaviour
                 if (TWmapCircle == 0)
                 {
                     tutorialPanel2.SetActive(true);
-                    Debug.Log("WmapCircle");
+                    Debug.Log("WMapCircle");
                     PlayerPrefs.SetInt("TWmapCircle", 1);
                 }
                 break;
