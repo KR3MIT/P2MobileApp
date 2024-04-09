@@ -57,6 +57,13 @@ public class PlayerCharacterTest : MonoBehaviour
     public SpriteRenderer loseImage;
 
     // Start is called before the first frame update
+
+    private void Update()
+    {
+        Debug.Log("javla medef" + defensePower);
+        Debug.Log("javla def" + enemyDefensePower);
+        Debug.Log("javla atk" + enemyAttackPower);
+    }
     void Start()
     {
         if(FindObjectOfType<AudioManager>() != null)

@@ -18,6 +18,19 @@ public class POIscript : MonoBehaviour
         health = player.defaultHealth - 7 + (player.lvl * 7);
         defensePower = player.defaultDef - 7 + (player.lvl * 7);
         attackPower = player.defaultAD - 7 + (player.lvl * 7);
+
+        if(health < 1)
+        {
+            health = 1;
+        }
+        if(defensePower < 1)
+        {
+            defensePower = 1;
+        }
+        if(attackPower < 1)
+        {
+            attackPower = 1;
+        }
     }
 
     public void RandomizeLevel(Character player)
