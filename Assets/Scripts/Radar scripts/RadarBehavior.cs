@@ -57,7 +57,7 @@ public class RadarBehavior : MonoBehaviour
     {
         if (FindObjectOfType<AudioManager>() != null)
         {
-            FindObjectOfType<AudioManager>().Stop("radarSound"); //make me get 10000 errors
+            FindObjectOfType<AudioManager>().Play("radarSound"); //make me get 10000 errors
         }
         player = GameObject.FindWithTag("Player").GetComponent<Character>();
 
