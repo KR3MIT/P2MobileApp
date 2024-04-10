@@ -4,29 +4,34 @@ public class LocationMove : MonoBehaviour
 {
     public GameObject map;
     private LocationManager locationManager;
+    private Statistics statistics;
     private double userLatitude;
     private double userLongitude;
     private Vector3 previousPosition;
     private float timeSinceLastUpdate = 0f;
     private const float updateInterval = 5f; // Update every 
 
-    public float distanceWalked = 0f;
+    private float rotationSpeed = 1f; // Adjust this value to change the speed of rotation
 
     private Vector3 velocity = Vector3.zero;
     public float smoothTime = 0.3f;
 
     public float distianceMultiplier = 0.011f;
 
-
     public Vector3 newPosition = Vector3.zero;
 
-    private Statistics statistics;
+
 
     private void Start()
     {
 
         newPosition = transform.position;
         locationManager = map.GetComponent<LocationManager>();
+        GameObject statisticsObject = GameObject.Find("Character");
+        if (statisticsObject != null)
+        {
+            statistics = statisticsObject.GetComponent<Statistics>();
+        }
         previousPosition = transform.position;
     }
 
@@ -43,8 +48,11 @@ public class LocationMove : MonoBehaviour
             if (direction != Vector3.zero) // Avoid setting rotation if there's no movement
             {
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(angle, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+                Quaternion targetRotation = Quaternion.Euler(angle, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             }
+
 
             previousPosition = newPosition;// Update the previous position
             timeSinceLastUpdate = 0f; // Reset the timer
@@ -71,7 +79,7 @@ public class LocationMove : MonoBehaviour
         return targetPosition;
 
 
-        
+
     }
 
     float CalculateDistance(float lat1, float lon1, float lat2, float lon2)
@@ -85,11 +93,11 @@ public class LocationMove : MonoBehaviour
                 Mathf.Sin(dLong / 2) * Mathf.Sin(dLong / 2);
         var c = 2 * Mathf.Atan2(Mathf.Sqrt(a), Mathf.Sqrt(1 - a));
         var distance = R * c;
-        
-        
+
+
 
         statistics.MetersWalkedPerMonth(distance); // Add the distance to the total distance walked
-       
+
 
         return distance; // Distance in meters
     }
