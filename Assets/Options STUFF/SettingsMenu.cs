@@ -55,6 +55,7 @@ public class SettingsMenu : MonoBehaviour
     void Abandon()
     {
         player.ClearData();
+        player.SetEmbarked(false);
         UnityEngine.SceneManagement.SceneManager.LoadScene("EmbarkEndScene");
         settingsPanel.SetActive(false);
         settingsButton.gameObject.SetActive(true);
