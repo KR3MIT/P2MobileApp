@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using static Character;
 
 
 public struct stats
@@ -23,10 +24,62 @@ public struct stats
 }
 public class SceneStates : MonoBehaviour
 {
+    private Character _player;
+    private LocationMove _locationMove;
+    [HideInInspector] public int preExp;
+
     [HideInInspector] public Dictionary<stats, GameObject> POIdict = new Dictionary<stats, GameObject>();
-    [HideInInspector] public bool isEmbarked;
+    [HideInInspector] public bool isEmbarked { get; private set; } 
     [HideInInspector] public int level, ad, def;//from poi
     [HideInInspector] public float health;
+    [HideInInspector] public float moved;
+    
+
+    public Dictionary<ResourceType, int> preResources = new Dictionary<ResourceType, int>
+    {
+        { ResourceType.Wood, 0 },
+        { ResourceType.Metal, 0 },
+        { ResourceType.Diamonds, 0 },
+        { ResourceType.Gold, 0 }
+    };
+
+    private void Start()
+    {
+        _player = GetComponent<Character>();
+        
+        
+    }
+
+    public void SetPreRes()
+    {
+        preResources[ResourceType.Wood] = _player.resources[ResourceType.Wood];
+        preResources[ResourceType.Metal] = _player.resources[ResourceType.Metal];
+        preResources[ResourceType.Diamonds] = _player.resources[ResourceType.Diamonds];
+        preResources[ResourceType.Gold] = _player.resources[ResourceType.Gold];
+
+        preExp = _player.exp;
+
+        Debug.Log("ass pre embark res stored. preWood " + preResources[ResourceType.Wood]);
+
+    }
+
+    public void SetEmbarked(bool isEmbarked)
+    {
+        this.isEmbarked = isEmbarked;
+        
+        if (!isEmbarked)
+        {
+            if (GameObject.Find("ShipManager") != null)
+            {
+                _locationMove = GameObject.Find("ShipManager").GetComponent<LocationMove>();
+                moved = _locationMove.totalDistance;
+            }
+        }
+        else
+        {
+            SetPreRes();
+        }
+    }
 
     public void ClearData()
     {

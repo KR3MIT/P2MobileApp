@@ -16,8 +16,8 @@ public class ChangeScene : MonoBehaviour
             {
                 if(sceneStates.POIdict.Count == 0 && sceneStates.isEmbarked)
                 {
-                    sceneStates.isEmbarked = false;
-                    SceneManager.LoadScene("Home");
+                    sceneStates.SetEmbarked(false);
+                    SceneManager.LoadScene("EmbarkEndScene");
                     return;
                 }
             }
