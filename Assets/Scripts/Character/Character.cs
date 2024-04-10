@@ -66,14 +66,25 @@ public class Character : MonoBehaviour
 
     private CloudSave cloudSave;
 
-    //debug
+    //singleton
+    public static Character instance { get; private set; }
 
-    
 
     //Start is called before the first frame update
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+
+
+        
 
         //resources.Add(ResourceType.Wood, 0);
         //resources.Add(ResourceType.Metal, 0);

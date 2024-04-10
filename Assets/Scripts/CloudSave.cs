@@ -5,6 +5,7 @@ using Unity.Services.Core;
 using Unity.Services.Authentication;
 using Unity.Services.CloudSave;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 
 public class CloudSave : MonoBehaviour
@@ -14,6 +15,8 @@ public class CloudSave : MonoBehaviour
     private int dataCount = 0;
 
     private Dictionary<string, object> saveData = new Dictionary<string, object>();
+
+    [HideInInspector]public bool dataLoaded = false;
 
     async void Start()
     {
@@ -128,6 +131,12 @@ public class CloudSave : MonoBehaviour
             character.playerName = name.Value.GetAs<string>();
         }
 
+
+        if (!dataLoaded)//on first load go to home idk how else to do this because loadalldata is not async and i need to wait to change scene wjduiahwuidhauiwhduiawhjduiojawiodjoawi
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Home");
+            dataLoaded = true;
+        }
     }
 
 

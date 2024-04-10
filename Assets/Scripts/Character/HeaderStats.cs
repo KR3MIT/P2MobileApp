@@ -16,9 +16,10 @@ public class HeaderStats : MonoBehaviour
         namelvlText = transform.GetChild(0).transform.GetChild(0).GetComponent<TMP_Text>();
         resourcesText = transform.GetChild(0).transform.GetChild(1).GetComponent<TMP_Text>();
 
-        character = GameObject.FindWithTag("Player").GetComponent<Character>();
+        character = Character.instance;
 
         UpdateTexts();
+        //Invoke("UpdateTexts", 0f);
     }
 
     public void UpdateTexts()

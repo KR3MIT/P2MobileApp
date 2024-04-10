@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    //[SerializeField] private string nextSceneName;
+    public TMP_InputField inputField;
 
     public void ChangeSceneToNext(string nextSceneName)
     {
-        if(GameObject.FindGameObjectWithTag("Player") != null)
+        if(Character.instance != null)
         {
-            if(TryGetComponent(out SceneStates sceneStates))//does not work right??
+            if(Character.instance.TryGetComponent(out SceneStates sceneStates))//does not work right??
             {
                 if(sceneStates.POIdict.Count == 0 && sceneStates.isEmbarked)
                 {
@@ -23,6 +24,16 @@ public class ChangeScene : MonoBehaviour
         }
             
 
+
         SceneManager.LoadScene(nextSceneName);
+    }
+
+    public void IsNotEmptyChangeScene(string nextSceneName)//for auth login
+    {
+        if (inputField.text != "")
+        {
+            Character.instance.GetComponent<CloudSave>().SaveData();
+            ChangeSceneToNext(nextSceneName);
+        }
     }
 }
