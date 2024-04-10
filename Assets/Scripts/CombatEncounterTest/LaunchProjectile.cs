@@ -31,6 +31,7 @@ public class LaunchProjectile : MonoBehaviour
         Invoke("DisableVisuals", duration);
     }
     
+        
 
     
     private void DisableVisuals()
