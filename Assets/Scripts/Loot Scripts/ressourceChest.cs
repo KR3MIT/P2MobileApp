@@ -81,7 +81,7 @@ public class ressourceChest : MonoBehaviour
             settings.startColor = new ParticleSystem.MinMaxGradient(Color.yellow);
 
             character.AddResource(ResourceType.Gold, resourcesToGive[ResourceType.Gold]);
-            StartCoroutine(TextDelay("Gold Ingot", resourcesToGive[ResourceType.Gold]));
+            StartCoroutine(TextDelay("Gold Ingots", resourcesToGive[ResourceType.Gold]));
         }
         else
         {
@@ -104,7 +104,7 @@ public class ressourceChest : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             audioPlayer.Play();
             yield return new WaitForSeconds(0.5f);
-            resourceGainText.text = "You found " + resourceToGive + " " + stringType;
+            resourceGainText.text = resourceToGive + "x " + stringType;
 
           
         
