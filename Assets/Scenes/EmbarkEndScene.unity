@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 44847525}
   - component: {fileID: 44847524}
   - component: {fileID: 44847523}
+  - component: {fileID: 44847527}
   m_Layer: 5
   m_Name: EndScreen
   m_TagString: Untagged
@@ -225,6 +226,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &44847527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44847522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eeb272059bf13048be74a9899ca43fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _continue: {fileID: 1058265790}
 --- !u!1 &214172396
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +403,7 @@ GameObject:
   - component: {fileID: 481617210}
   - component: {fileID: 481617209}
   m_Layer: 5
-  m_Name: YOHOO
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1889,6 +1903,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1286512151}
   m_CullTransparentMesh: 1
+--- !u!1 &1434761543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1434761545}
+  - component: {fileID: 1434761544}
+  - component: {fileID: 1434761546}
+  m_Layer: 0
+  m_Name: dummyCharacter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1434761544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434761543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f2b8e535ede784e864bb5630fbdd6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: 
+  lvl: 1
+  exp: 0
+  health: 0
+  AD: 0
+  def: 0
+  lvlScale: 5
+  defaultHealth: 100
+  defaultDef: 0
+  defaultAD: 10
+  coal: 0
+--- !u!4 &1434761545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434761543}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 657.8176, y: 1488.9414, z: 8.514202}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1434761546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434761543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d5382841206e646883c046ea87cfae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEmbarked: 0
+  level: 0
+  ad: 0
+  def: 0
+  health: 0
 --- !u!1 &1743290746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,3 +2661,4 @@ SceneRoots:
   - {fileID: 44847526}
   - {fileID: 1974915705}
   - {fileID: 2051919320}
+  - {fileID: 1434761545}
