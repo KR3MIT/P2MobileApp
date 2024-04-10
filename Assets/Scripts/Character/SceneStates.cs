@@ -63,22 +63,25 @@ public class SceneStates : MonoBehaviour
 
     }
 
-    public void SetEmbarked(bool isEmbarked)
+    public void SetEmbarked(bool setEmbarked)
     {
-        this.isEmbarked = isEmbarked;
+        this.isEmbarked = setEmbarked;
         
-        if (!isEmbarked)
+        if (!setEmbarked)
         {
             if (GameObject.Find("ShipManager") != null)
             {
                 _locationMove = GameObject.Find("ShipManager").GetComponent<LocationMove>();
                 moved = _locationMove.totalDistance;
+                Debug.Log("bitch distance " + moved);
             }
         }
         else
         {
             SetPreRes();
         }
+
+
     }
 
     public void ClearData()

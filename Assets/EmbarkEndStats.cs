@@ -42,7 +42,7 @@ public class EmbarkEndStats : MonoBehaviour
 
         expText.text = "Exp: " + exp;
 
-        distance.text = "Distance Traveled: \n" + _state.moved;
+        distance.text = "Distance Traveled: \n" + _state.moved.ToString();
 
     }
 
