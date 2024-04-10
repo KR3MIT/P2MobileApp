@@ -105,10 +105,10 @@ public class Character : MonoBehaviour
         MakeStructFromClass(shipParts);//makes the shippartobjects stats into a struct such that it can be used with cloudsave
 
         //default resources for test
-        resources[ResourceType.Wood] = 100;
-        resources[ResourceType.Metal] = 100;
-        resources[ResourceType.Diamonds] = 100;
-        resources[ResourceType.Gold] = 100;
+        resources[ResourceType.Wood] = 1;
+        resources[ResourceType.Metal] = 3;
+        resources[ResourceType.Diamonds] = 3;
+        resources[ResourceType.Gold] = 7;
     }
 
     private void Start()
