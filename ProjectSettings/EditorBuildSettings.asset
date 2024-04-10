@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WMapCircle.unity
     guid: fa146ce2dc395574d923783cfec14b7b
+  - enabled: 1
+    path: Assets/Scenes/EmbarkEndScene.unity
+    guid: c9c07cc80aeea9d4f96b6b6f40653a50
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 45addd4e2e3fb3f4aac2d75cf6d2955e, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 340c8b4777758e64da4fad885e5ed2a9, type: 2}
