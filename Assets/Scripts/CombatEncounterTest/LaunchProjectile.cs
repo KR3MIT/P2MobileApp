@@ -30,6 +30,7 @@ public class LaunchProjectile : MonoBehaviour
         //Destroy(gameObject, (float)duration);
         Invoke("DisableVisuals", duration);
     }
+    
 
     
     private void DisableVisuals()
