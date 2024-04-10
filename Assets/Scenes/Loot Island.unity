@@ -16337,7 +16337,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 164568368561601788, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_margin.z
+      value: -360.9734
+      objectReference: {fileID: 0}
     - target: {fileID: 1919042773338645804, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307793709236906394, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -16345,16 +16353,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turtorials
       objectReference: {fileID: 0}
-    - target: {fileID: 5581943346334893422, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
-      propertyPath: m_Color.b
+    - target: {fileID: 4272469564488667322, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801250056999484961, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5581943346334893422, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
-      propertyPath: m_Color.g
-      value: 0
+    - target: {fileID: 5098549661483138335, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8.80726
       objectReference: {fileID: 0}
-    - target: {fileID: 5581943346334893422, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
-      propertyPath: m_Color.r
+    - target: {fileID: 5098549661483138335, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 21.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5098549661483138335, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 8.956536
+      objectReference: {fileID: 0}
+    - target: {fileID: 5098549661483138335, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5098549661483138335, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1152
+      objectReference: {fileID: 0}
+    - target: {fileID: 5098549661483138335, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7503083525862235194, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
