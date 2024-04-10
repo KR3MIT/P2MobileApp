@@ -44,7 +44,10 @@ public class Statistics : MonoBehaviour
         }
 
     }
-
+    /// <summary>
+    /// Updates the meters walked in the playerprefs, also resets the meters walked if the month has changed
+    /// </summary>
+    /// <param name="_metersWalked"></param>
     public void MetersWalkedPerMonth(float _metersWalked)
     {
         currentDate = DateTime.Now;
@@ -70,6 +73,9 @@ public class Statistics : MonoBehaviour
         return _metersWalked;
     }
 
+    /// <summary>
+    /// Updates the UI based on the playerprefs
+    /// </summary>
     public void UpdateStatScreen()
     {
         embarks = PlayerPrefs.GetInt("embarks");
@@ -79,7 +85,6 @@ public class Statistics : MonoBehaviour
         // Update the UI
         embarksText.text = "Embarks this month: " + embarks;
         kilometersWalkedText.text = "Kilometers walked this month: " + kilometersWalked;
-
     }
 }
 
