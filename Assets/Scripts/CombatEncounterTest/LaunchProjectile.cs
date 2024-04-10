@@ -25,12 +25,14 @@ public class LaunchProjectile : MonoBehaviour
         // The projectile is launched from the player's location to the enemy's location by using the projectile's rigidbody component.
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce((enemyLocation.position - transform.position).normalized * force);
-
+        Quaternion rotation = Quaternion.Euler(enemyLocation.position - transform.position);
         // The projectile is destroyed after a set duration.
         audioPlayer.Play();
         //Destroy(gameObject, (float)duration);
         Invoke("DisableVisuals", duration);
     }
+
+    
     private void DisableVisuals()
     {
         GetComponent<SpriteRenderer>().enabled = false;

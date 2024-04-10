@@ -56,6 +56,7 @@ public class PlayerCharacterTest : MonoBehaviour
     public SpriteRenderer winImage;
     public SpriteRenderer loseImage;
 
+    public LaunchProjectile LP;
     // Start is called before the first frame update
 
     
@@ -65,7 +66,7 @@ public class PlayerCharacterTest : MonoBehaviour
         {
             AudioManager.instance.Stop("music");
         }
-        
+
         
         continueButton.SetActive(false);
         winImage.enabled = false;
@@ -166,7 +167,8 @@ public class PlayerCharacterTest : MonoBehaviour
 
             //FindObjectOfType<AudioManager>().Play("Canon");
             yield return new WaitForSeconds(0.5f);
-            GameObject enemyBullet = Instantiate(enemyBulletPrefab, enemyLocation.transform.position, Quaternion.identity/*, enemyLocation.transform*/);
+            Quaternion rotation = Quaternion.LookRotation(playerLocation.transform.position- enemyLocation.transform.position );
+            GameObject enemyBullet = Instantiate(enemyBulletPrefab, enemyLocation.transform.position, rotation/*enemyLocation.transform*/);
             enemyBullet.GetComponent<LaunchProjectile>().Attack(playerLocation.transform);
 
             yield return new WaitForSeconds(bulletDelay);
