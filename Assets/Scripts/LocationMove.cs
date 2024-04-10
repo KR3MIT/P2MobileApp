@@ -20,6 +20,8 @@ public class LocationMove : MonoBehaviour
 
     public Vector3 newPosition = Vector3.zero;
 
+    private Statistics statistics;
+
     private void Start()
     {
 
@@ -84,8 +86,11 @@ public class LocationMove : MonoBehaviour
         var c = 2 * Mathf.Atan2(Mathf.Sqrt(a), Mathf.Sqrt(1 - a));
         var distance = R * c;
         
-        distanceWalked += distance; // Add the distance to the total distance walked
-        Debug.Log("Distance walked: " + distanceWalked); // Log the distance walked in one embark
+        
+
+        statistics.MetersWalkedPerMonth(distance); // Add the distance to the total distance walked
+       
+
         return distance; // Distance in meters
     }
 }
