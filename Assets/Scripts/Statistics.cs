@@ -4,13 +4,18 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using UnityEngine;
+using TMPro;
 
+// This script was developed with the help of Github Co-pilot.
 public class Statistics : MonoBehaviour
 {
     DateTime currentDate;
     DateTime previousDate;
     [HideInInspector] public int embarks;
     private float kilometersWalked;
+    private float metersWalked;
+    public TextMeshProUGUI embarksText;
+    public TextMeshProUGUI kilometersWalkedText;
 
     // Start is called before the first frame update
     private void Start()
@@ -18,23 +23,10 @@ public class Statistics : MonoBehaviour
         currentDate = DateTime.Now;
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    PlayerPrefs.SetString("previousDate", previousDate.ToString());
-    //}
-
-    
-    public void CountTimePlayed() 
-    {
-        TimeSpan timePlayed = currentDate - DateTime.Now;
-        PlayerPrefs.SetString("timePlayed", timePlayed.ToString());
-    }
-
     /// <summary>
     /// Adds an embark to the playerprefs, also resets the embarks if the month has changed
     /// </summary>
-    public void AddEmbark() 
+    public void AddEmbark()
     {
         currentDate = DateTime.Now;
         previousDate = DateTime.Parse(PlayerPrefs.GetString("previousDate"));
@@ -43,82 +35,56 @@ public class Statistics : MonoBehaviour
             embarks = 1;
             PlayerPrefs.SetInt("embarks", embarks);
         }
-        else {
+        else
+        {
             int embark;
             embark = PlayerPrefs.GetInt("embarks");
             embark++;
             PlayerPrefs.SetInt("embarks", embark);
         }
-        
+
+    }
+    /// <summary>
+    /// Updates the meters walked in the playerprefs, also resets the meters walked if the month has changed
+    /// </summary>
+    /// <param name="_metersWalked"></param>
+    public void MetersWalkedPerMonth(float _metersWalked)
+    {
+        currentDate = DateTime.Now;
+        previousDate = DateTime.Parse(PlayerPrefs.GetString("previousDate"));
+
+        if (currentDate.Month != previousDate.Month)
+        {
+            metersWalked = _metersWalked;
+            PlayerPrefs.SetFloat("metersWalked", metersWalked);
+        }
+        else
+        {
+            metersWalked = PlayerPrefs.GetFloat("metersWalked");
+            metersWalked += _metersWalked;
+            PlayerPrefs.SetFloat("metersWalked", metersWalked);
+        }
     }
 
-    /*
-    public void EmbarksPerWeek()
+    private float ConvertMetersToKilometers(float _metersWalked)
     {
-        
-        
-    }
-    */
-
-    public void EmbarksPerMonth()
-    {
-        embarks = PlayerPrefs.GetInt("embarks");
+        _metersWalked = PlayerPrefs.GetFloat("metersWalked");
+        _metersWalked = _metersWalked / 1000;
+        return _metersWalked;
     }
 
     /// <summary>
-    /// Saves the amount of meters walked to the playerprefs
+    /// Updates the UI based on the playerprefs
     /// </summary>
-    /// <param name="metersWalked"></param>
-    public void SetMetersWalked(float metersWalked)
+    public void UpdateStatScreen()
     {
-        PlayerPrefs.SetFloat("kilometersWalked", metersWalked);
+        embarks = PlayerPrefs.GetInt("embarks");
+        metersWalked = PlayerPrefs.GetFloat("metersWalked");
+        kilometersWalked = ConvertMetersToKilometers(metersWalked);
+
+        // Update the UI
+        embarksText.text = "Embarks this month: " + embarks;
+        kilometersWalkedText.text = "Kilometers walked this month: " + kilometersWalked;
     }
-
-    /*
-    public void KilometersWalkedPerWeek()
-    {
-        kilometersWalked = PlayerPrefs.GetFloat("kilometersWalked");
-    }
-    */
-    public void KilometersWalkedPerMonth()
-    {
-
-    }
-
-    private void ConvertMetersToKilometers()
-    {
-        kilometersWalked = PlayerPrefs.GetFloat("kilometersWalked");
-    }
-    
-
-    //public void CountDown()
-    //{
-    //    TimeSpan timeLeft = DateTime.Now.Date.AddDays(1) - DateTime.Now;
-    //    CountDownText.text = "Time left to next Embark: " + timeLeft.ToString(@"hh\:mm\:ss");
-
-    //}
-
-    //IEnumerator PerSecond()
-    //{
-    //    currentDate = DateTime.Now.Date;
-    //    previousDate = DateTime.Parse(PlayerPrefs.GetString("previousDate"));
-    //    if (currentDate != previousDate)
-    //    {
-    //        embarkAllowed = true;
-    //        CountDownText.enabled = false;
-    //    }
-    //    else
-    //    {
-    //        embarkAllowed = false;
-    //        CountDownText.enabled = true;
-    //    }
-
-    //    if (!embarkAllowed)
-    //    {
-    //        CountDown();
-
-    //    }
-    //    yield return new WaitForSeconds(1);
-    //    StartCoroutine(PerSecond());
-    //}
 }
+

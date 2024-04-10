@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3637498663142678275}
   - component: {fileID: 8635624033439804023}
   - component: {fileID: 1942181333814120145}
+  - component: {fileID: 620998472989531603}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -52,6 +53,10 @@ MonoBehaviour:
   health: 0
   AD: 0
   def: 0
+  lvlScale: 5
+  defaultHealth: 100
+  defaultDef: 0
+  defaultAD: 10
   coal: 0
 --- !u!114 &8635624033439804023
 MonoBehaviour:
@@ -77,3 +82,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d5382841206e646883c046ea87cfae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEmbarked: 0
+  level: 0
+  ad: 0
+  def: 0
+  health: 0
+--- !u!114 &620998472989531603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80521421676826855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5afad258bdb7a4eb4d8574acbfbfc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  embarks: 0
+  embarksText: {fileID: 0}
+  kilometersWalkedText: {fileID: 0}

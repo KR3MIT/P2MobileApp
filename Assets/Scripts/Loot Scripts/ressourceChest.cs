@@ -8,9 +8,10 @@ using static Character;// so i doint have to write Character.ResourceType every 
 public class ressourceChest : MonoBehaviour
 {
     private Character character;
-    public TMPro.TextMeshProUGUI resourceGainText;
-    public ParticleSystem winParticle;
-    public AudioSource audioPlayer;
+    [SerializeField] private TMPro.TextMeshProUGUI resourceGainText;
+    [SerializeField] private ParticleSystem winParticle;
+    [SerializeField] private AudioSource audioPlayer;
+    [SerializeField] private GameObject panel;
 
     private Dictionary<ResourceType, int> resourcesToGive = new Dictionary<ResourceType, int>
     {
@@ -23,6 +24,7 @@ public class ressourceChest : MonoBehaviour
 
     private void Awake()
     {
+        panel.SetActive(false);
         character = FindObjectOfType<Character>();
      
     }
@@ -81,7 +83,7 @@ public class ressourceChest : MonoBehaviour
             settings.startColor = new ParticleSystem.MinMaxGradient(Color.yellow);
 
             character.AddResource(ResourceType.Gold, resourcesToGive[ResourceType.Gold]);
-            StartCoroutine(TextDelay("Gold Ingot", resourcesToGive[ResourceType.Gold]));
+            StartCoroutine(TextDelay("Gold Ingots", resourcesToGive[ResourceType.Gold]));
         }
         else
         {
@@ -104,8 +106,8 @@ public class ressourceChest : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
             audioPlayer.Play();
             yield return new WaitForSeconds(0.5f);
-            resourceGainText.text = "You found " + resourceToGive + " " + stringType;
-
+            resourceGainText.text = resourceToGive + "x " + stringType;
+            panel.SetActive(true);
           
         
         }

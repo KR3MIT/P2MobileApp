@@ -7,6 +7,8 @@ using TMPro;
 
 public class SettingsMenu : MonoBehaviour
 {
+    public static SettingsMenu instance;
+
     public AudioMixer audioMixer;
 
     [SerializeField] private Button settingsButton;
@@ -16,7 +18,18 @@ public class SettingsMenu : MonoBehaviour
 
     private SceneStates player;
 
-    Resolution[] resolutions;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void ToggleSettings()
     {
@@ -43,6 +56,8 @@ public class SettingsMenu : MonoBehaviour
     {
         player.ClearData();
         UnityEngine.SceneManagement.SceneManager.LoadScene("Home");
+        settingsPanel.SetActive(false);
+        settingsButton.gameObject.SetActive(true);
     }
 
     private void Start()
