@@ -171,13 +171,17 @@ public class Account : MonoBehaviour
         string username = usernameInput.text;
         string password = passwordInput.text;
         await SignInWithUsernamePassword(username, password);
-        checkSignIn();
+        if (checkSignIn())
+        {
+            Character.instance.gameObject.GetComponent<CloudSave>().LoadAllData();//loads player data after login need to do it here and not onclick since we need to await the login
+            //GetComponent<ChangeScene>().ChangeSceneToNext("Home");//go to home scene
+        }
     }
 
     public async void signInDebug()
     {
         await SignInWithUsernamePassword("Matt", "Matt123!");
-        checkSignIn();
+        //checkSignIn();
     }
 
     async Task SignInWithUsernamePassword(string username, string password)
@@ -210,26 +214,27 @@ public class Account : MonoBehaviour
     }
 
   //Check if the player is signed in
-  public void checkSignIn()
+  public bool checkSignIn()
     {
-        bool isSignedIn = AuthenticationService.Instance.IsSignedIn;
-        if (isSignedIn)
-        {
-            signInDisplay.SetActive(false);
-            playerNameDisplay.SetActive(true);
-        }
+        return AuthenticationService.Instance.IsSignedIn;
+        //if (isSignedIn)
+        //{
+        //    signInDisplay.SetActive(false);
+        //    playerNameDisplay.SetActive(true);
+        //}
     }
 
     //Set player name
     public async void setPlayerName()
     {
         string playerName = playerNameInput.text;
-        await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
-        playerNameDisplay.SetActive(false);
+        //await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
+        //playerNameDisplay.SetActive(false);
         Debug.Log("Player name is set to " + playerName);
         //Access chached player name
-        string cachedPlayerName = AuthenticationService.Instance.PlayerName;
-        Debug.Log("Cached player name is " + cachedPlayerName);
+        //string cachedPlayerName = AuthenticationService.Instance.PlayerName;
+        //Debug.Log("Cached player name is " + cachedPlayerName);
+        Character.instance.playerName = playerName;
 
     }
 }
