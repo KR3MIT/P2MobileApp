@@ -23,16 +23,19 @@ public class ChestAnimatorManager : MonoBehaviour
     private void Chest1()
     {
         animator1.SetBool("ChestClicked", true);
+        
     }
 
     private void Chest2()
     {
         animator2.SetBool("ChestClicked", true);
+        
     }
 
     private void Chest3()
     {
         animator3.SetBool("ChestClicked", true);
+        
     }
 
 }

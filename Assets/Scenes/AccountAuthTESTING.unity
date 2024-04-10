@@ -1028,6 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa4e683beb49df4d9a85573d6bd1f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataLoaded: 0
 --- !u!4 &416031447
 Transform:
   m_ObjectHideFlags: 0
@@ -3874,6 +3875,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: radarSound
     clip: {fileID: 8300000, guid: 37b25e7086c192247bb3970fe488775f, type: 3}
+    mixer: {fileID: -5870040058163568950, guid: 8b897615e4374f34e8c6f44da2772d34, type: 2}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: chestSound
+    clip: {fileID: 8300000, guid: ff1de9478b3b89e4f8658797ac863f3d, type: 3}
     mixer: {fileID: -5870040058163568950, guid: 8b897615e4374f34e8c6f44da2772d34, type: 2}
     volume: 0.2
     pitch: 1

@@ -10,7 +10,6 @@ public class ressourceChest : MonoBehaviour
     private Character character;
     [SerializeField] private TMPro.TextMeshProUGUI resourceGainText;
     [SerializeField] private ParticleSystem winParticle;
-    [SerializeField] private AudioSource audioPlayer;
     [SerializeField] private GameObject panel;
 
     private Dictionary<ResourceType, int> resourcesToGive = new Dictionary<ResourceType, int>
@@ -104,7 +103,7 @@ public class ressourceChest : MonoBehaviour
         IEnumerator TextDelay(string stringType, int resourceToGive)
         {
             yield return new WaitForSeconds(1.5f);
-            audioPlayer.Play();
+            AudioManager.instance.Play("chestSound");
             yield return new WaitForSeconds(0.5f);
             resourceGainText.text = resourceToGive + "x " + stringType;
             panel.SetActive(true);
