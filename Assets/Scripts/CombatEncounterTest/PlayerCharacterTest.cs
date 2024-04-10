@@ -55,10 +55,11 @@ public class PlayerCharacterTest : MonoBehaviour
     public GameObject continueButton;
     public SpriteRenderer winImage;
     public SpriteRenderer loseImage;
-
+    public SpriteRenderer enemyDestroyed;
+    public SpriteRenderer playerDestroyed;
     // Start is called before the first frame update
 
-    
+
     void Start()
     {
         if(AudioManager.instance != null)
@@ -70,6 +71,8 @@ public class PlayerCharacterTest : MonoBehaviour
         continueButton.SetActive(false);
         winImage.enabled = false;
         loseImage.enabled = false;
+        enemyDestroyed.enabled = false;
+        playerDestroyed.enabled = false;
        
         if (GameObject.FindWithTag("Player").GetComponent<Character>() != null)
         {
@@ -194,9 +197,11 @@ public class PlayerCharacterTest : MonoBehaviour
         if (isWin)
         {
             winImage.enabled = true;
+            enemyDestroyed.enabled = true;
             if (AudioManager.instance != null)
             {
                 AudioManager.instance.Play("winningSound");
+
             }
             continueButton.SetActive(true);
             continueButton.GetComponent<Button>().onClick.AddListener(() => SceneManager.LoadScene("Loot Island"));
@@ -204,6 +209,7 @@ public class PlayerCharacterTest : MonoBehaviour
         }
         else
         {
+            playerDestroyed.enabled = true;
             loseImage.enabled = true;
             if (AudioManager.instance != null)
             {
