@@ -280,12 +280,12 @@ GameObject:
   - component: {fileID: 9207312745753017747}
   - component: {fileID: 8180877286961566756}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Analytics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6754129342135208712
 RectTransform:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 102
   m_TargetDisplay: 0
 --- !u!114 &9207312745753017747
 MonoBehaviour:
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45648122, g: 0.6037736, b: 0.2990388, a: 0.392}
+  m_Color: {r: 0.40641657, g: 0.5, b: 0.10613209, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
