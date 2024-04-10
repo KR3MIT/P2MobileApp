@@ -8,9 +8,10 @@ using static Character;// so i doint have to write Character.ResourceType every 
 public class ressourceChest : MonoBehaviour
 {
     private Character character;
-    public TMPro.TextMeshProUGUI resourceGainText;
-    public ParticleSystem winParticle;
-    public AudioSource audioPlayer;
+    [SerializeField] private TMPro.TextMeshProUGUI resourceGainText;
+    [SerializeField] private ParticleSystem winParticle;
+    [SerializeField] private AudioSource audioPlayer;
+    [SerializeField] private GameObject panel;
 
     private Dictionary<ResourceType, int> resourcesToGive = new Dictionary<ResourceType, int>
     {
@@ -23,6 +24,7 @@ public class ressourceChest : MonoBehaviour
 
     private void Awake()
     {
+        panel.SetActive(false);
         character = FindObjectOfType<Character>();
      
     }
@@ -105,7 +107,7 @@ public class ressourceChest : MonoBehaviour
             audioPlayer.Play();
             yield return new WaitForSeconds(0.5f);
             resourceGainText.text = resourceToGive + "x " + stringType;
-
+            panel.SetActive(true);
           
         
         }
