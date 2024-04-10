@@ -1015,7 +1015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &416031446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416031445}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfa4e683beb49df4d9a85573d6bd1f47, type: 3}
   m_Name: 
@@ -1056,7 +1056,7 @@ GameObject:
   - component: {fileID: 639405118}
   - component: {fileID: 639405117}
   m_Layer: 5
-  m_Name: PlayerName selection
+  m_Name: PlayerName selection sign up only
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2125,7 +2125,6 @@ GameObject:
   - component: {fileID: 1008242058}
   - component: {fileID: 1008242057}
   - component: {fileID: 1008242056}
-  - component: {fileID: 1008242059}
   m_Layer: 5
   m_Name: ButtonConfirmName
   m_TagString: Untagged
@@ -2209,9 +2208,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1008242059}
+      - m_Target: {fileID: 1772349490}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: ChangeSceneToNext
+        m_MethodName: IsNotEmptyChangeScene
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2259,18 +2258,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008242054}
   m_CullTransparentMesh: 1
---- !u!114 &1008242059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1008242054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 325c3f63a6ad84e4f88679a0eb79ff4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1033934895
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,7 +3187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1489500975
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3467,7 +3454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1613049237
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3726,6 +3713,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1772349489}
   - component: {fileID: 1772349488}
+  - component: {fileID: 1772349490}
   m_Layer: 0
   m_Name: SignIn/Up Script
   m_TagString: Untagged
@@ -3768,6 +3756,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1772349490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772349487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325c3f63a6ad84e4f88679a0eb79ff4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputField: {fileID: 669773143}
 --- !u!1 &1791592054
 GameObject:
   m_ObjectHideFlags: 0

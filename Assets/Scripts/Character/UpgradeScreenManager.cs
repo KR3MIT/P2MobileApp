@@ -28,7 +28,7 @@ public class UpgradeScreenManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        character = GameObject.FindWithTag("Player").GetComponent<Character>();
+        character = Character.instance;
 
         foreach (ShipPartObject part in character.shipParts)
         {
@@ -103,6 +103,7 @@ public class UpgradeScreenManager : MonoBehaviour
 
     private void Upgrade()
     {
+        Debug.Log($"javla name: {selectedPart.partName}  child {selectedPart.instanciateShipPart.transform.GetChild(0).name}  lvl: {selectedPart.lvl}");
         if (partIsSelected)
         {
             character.LevelUpPart(selectedPart);
@@ -130,6 +131,7 @@ public class UpgradeScreenManager : MonoBehaviour
 
     private void UpdateText(ShipPartObject selectedPart)
     {
+        
         selectedPart.instanciateShipPart.transform.GetChild(0).GetComponent<TMP_Text>().text = selectedPart.partName + " lvl " + selectedPart.lvl;
         string costText = "";
         foreach (Character.ResourceType type in selectedPart.upgradeTypes)
