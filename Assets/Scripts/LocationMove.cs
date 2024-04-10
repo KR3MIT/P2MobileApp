@@ -14,7 +14,9 @@ public class LocationMove : MonoBehaviour
     private float rotationSpeed = 1f; // Adjust this value to change the speed of rotation
 
     private Vector3 velocity = Vector3.zero;
-    public float smoothTime = 0.3f;
+    [HideInInspector]public float totalDistance = 0f;
+
+    public float smoothTime = 1f;
 
     public float distianceMultiplier = 0.011f;
 
@@ -96,8 +98,10 @@ public class LocationMove : MonoBehaviour
 
 
 
+
         statistics.MetersWalkedPerMonth(distance); // Add the distance to the total distance walked
 
+        totalDistance += distance; // Add the distance to the total distance walked
 
         return distance; // Distance in meters
     }

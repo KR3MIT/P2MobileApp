@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using UnityEngine;
 using TMPro;
 
-// This script was developed with the help of Github Co-pilot.
 public class Statistics : MonoBehaviour
 {
     DateTime currentDate;
@@ -17,19 +16,23 @@ public class Statistics : MonoBehaviour
     public TextMeshProUGUI embarksText;
     public TextMeshProUGUI kilometersWalkedText;
 
-    // Start is called before the first frame update
     private void Start()
     {
         currentDate = DateTime.Now;
     }
 
-    /// <summary>
-    /// Adds an embark to the playerprefs, also resets the embarks if the month has changed
-    /// </summary>
     public void AddEmbark()
     {
         currentDate = DateTime.Now;
-        previousDate = DateTime.Parse(PlayerPrefs.GetString("previousDate"));
+        string previousDateString = PlayerPrefs.GetString("previousDate");
+        if (!string.IsNullOrEmpty(previousDateString))
+        {
+            previousDate = DateTime.Parse(previousDateString);
+        }
+        else
+        {
+            previousDate = DateTime.Now;
+        }
         if (currentDate.Month != previousDate.Month)
         {
             embarks = 1;
@@ -37,22 +40,24 @@ public class Statistics : MonoBehaviour
         }
         else
         {
-            int embark;
-            embark = PlayerPrefs.GetInt("embarks");
+            int embark = PlayerPrefs.GetInt("embarks");
             embark++;
             PlayerPrefs.SetInt("embarks", embark);
         }
-
     }
-    /// <summary>
-    /// Updates the meters walked in the playerprefs, also resets the meters walked if the month has changed
-    /// </summary>
-    /// <param name="_metersWalked"></param>
+
     public void MetersWalkedPerMonth(float _metersWalked)
     {
         currentDate = DateTime.Now;
-        previousDate = DateTime.Parse(PlayerPrefs.GetString("previousDate"));
-
+        string previousDateString = PlayerPrefs.GetString("previousDate");
+        if (!string.IsNullOrEmpty(previousDateString))
+        {
+            previousDate = DateTime.Parse(previousDateString);
+        }
+        else
+        {
+            previousDate = DateTime.Now;
+        }
         if (currentDate.Month != previousDate.Month)
         {
             metersWalked = _metersWalked;
@@ -73,18 +78,13 @@ public class Statistics : MonoBehaviour
         return _metersWalked;
     }
 
-    /// <summary>
-    /// Updates the UI based on the playerprefs
-    /// </summary>
     public void UpdateStatScreen()
     {
         embarks = PlayerPrefs.GetInt("embarks");
         metersWalked = PlayerPrefs.GetFloat("metersWalked");
         kilometersWalked = ConvertMetersToKilometers(metersWalked);
 
-        // Update the UI
         embarksText.text = "Embarks this month: " + embarks;
         kilometersWalkedText.text = "Kilometers walked this month: " + kilometersWalked;
     }
 }
-
