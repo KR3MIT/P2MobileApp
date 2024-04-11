@@ -19,8 +19,8 @@ public class LocationManager : MonoBehaviour
     public Map map;
 
     // Default location (Example: Times Square, New York)
-    public double defaultLongitude = -73.9851;
-    public double defaultLatitude = 40.7580;
+    public double defaultLongitude;
+    public double defaultLatitude;
 
 
     private void Start()

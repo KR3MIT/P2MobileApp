@@ -49,6 +49,9 @@ public class EmbarkEndStats : MonoBehaviour
         {
             _saveData.SerializeCSV(_state.moved, "Distance traveled");
         }
+
+        Destroy(Map.instance);
+        Destroy(LocationMove.instance);
     }
 
     private void ToHome()
