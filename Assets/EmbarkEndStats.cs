@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
@@ -50,8 +51,8 @@ public class EmbarkEndStats : MonoBehaviour
             _saveData.SerializeCSV(_state.moved, "Distance traveled");
         }
 
-        Destroy(Map.instance);
-        Destroy(LocationMove.instance);
+        Destroy(Map.instance.gameObject);
+        Destroy(LocationMove.instance.gameObject);
     }
 
     private void ToHome()
