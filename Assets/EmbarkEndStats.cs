@@ -43,7 +43,7 @@ public class EmbarkEndStats : MonoBehaviour
 
         expText.text = "Exp: " + exp;
 
-        distance.text = "Distance Traveled: \n" + _state.moved.ToString() + " meters.";
+        distance.text = "Distance Traveled: \n" + _state.moved.ToString() + " m.";
 
         if (TryGetComponent<SaveDataToCSV>(out _saveData))
         {

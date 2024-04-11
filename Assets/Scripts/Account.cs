@@ -56,11 +56,11 @@ public class Account : MonoBehaviour
         }
         else if(!passError)
         {
-            passwordError.text = "username or password error";
+            passwordError.text = "username or password error, try restarting the app";
         }
         else
         {
-            passwordError.text = "password error";
+            passwordError.text = "password error, try restarting the app";
         }
     }
 
@@ -115,7 +115,32 @@ public class Account : MonoBehaviour
             passError = true;
             return false; }
 
+        bool checkSpaces = CheckSpaces(pass);
+        if( !checkSpaces)
+        {
+            passError = true;
+            return false; }
+
+        bool checkSpacesName = CheckSpaces(userName);
+        if( !checkSpaces)
+        {
+            passError = true;
+            return false; }
+
         return true;
+    }
+
+    bool CheckSpaces(string pass)
+    {
+        foreach (char character in pass)
+        {
+            if (char.IsWhiteSpace(character))
+            {
+                return true; // Return true if a space is found
+            }
+        }
+
+        return false; // Return false if no space is found
     }
 
     bool CheckUpper(string pass)
