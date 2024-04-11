@@ -11,6 +11,7 @@ public class EmbarkEndStats : MonoBehaviour
     [SerializeField] private Button _continue;
 
     private SceneStates _state;
+    private SaveDataToCSV _saveData;
 
     [SerializeField] private TMP_Text expText;
 
@@ -25,6 +26,11 @@ public class EmbarkEndStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(TryGetComponent<SaveDataToCSV> (out _saveData))
+        {
+            _saveData.SerializeCSV(_state.moved, "Distance traveled");
+        }
+
         _state = Character.instance.GetComponent<SceneStates>();
         _continue.onClick.AddListener(ToHome);
 
@@ -43,7 +49,6 @@ public class EmbarkEndStats : MonoBehaviour
         expText.text = "Exp: " + exp;
 
         distance.text = "Distance Traveled: \n" + _state.moved.ToString();
-
     }
 
     private void ToHome()
