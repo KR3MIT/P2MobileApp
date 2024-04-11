@@ -97,18 +97,18 @@ public class Character : MonoBehaviour
         ShipPartObject cannon = new ShipPartObject("Cannon", new List<ResourceType> { ResourceType.Metal, ResourceType.Gold }, ShipPartObject.StatType.AD);
         ShipPartObject engine = new ShipPartObject("Engine", new List<ResourceType> { ResourceType.Metal, ResourceType.Diamonds }, ShipPartObject.StatType.def);
         ShipPartObject balloon = new ShipPartObject("Balloon", new List<ResourceType> { ResourceType.Wood, ResourceType.Metal }, ShipPartObject.StatType.health, 15);
-        ShipPartObject bow = new ShipPartObject("Bow", new List<ResourceType> { ResourceType.Wood, ResourceType.Gold }, ShipPartObject.StatType.AD);
+        ShipPartObject ballista = new ShipPartObject("Ballista", new List<ResourceType> { ResourceType.Wood, ResourceType.Gold }, ShipPartObject.StatType.AD);
 
         shipParts.Add(cannon);
         shipParts.Add(engine);
         shipParts.Add(balloon);
-        shipParts.Add(bow);
+        shipParts.Add(ballista);
 
         MakeStructFromClass(shipParts);//makes the shippartobjects stats into a struct such that it can be used with cloudsave
 
         //default resources for test
-        resources[ResourceType.Wood] = 1;
-        resources[ResourceType.Metal] = 3;
+        resources[ResourceType.Wood] = 5;
+        resources[ResourceType.Metal] = 5;
         resources[ResourceType.Diamonds] = 3;
         resources[ResourceType.Gold] = 7;
     }
