@@ -89,7 +89,7 @@ public class Account : MonoBehaviour
     {
         if(userName.Length < 8)
         {
-            passError = false;
+            passError = true;
             return false; }
 
         if(pass.Length > 30 )
