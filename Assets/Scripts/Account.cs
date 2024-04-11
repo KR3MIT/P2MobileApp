@@ -41,7 +41,7 @@ public class Account : MonoBehaviour
     {
         pass = passwordInput.text;
         userName = usernameInput.text;
-
+        Debug.Log("fak " + SignUpCheck());
         if (SignUpCheck())
         {
             checkSignIn();
@@ -87,45 +87,59 @@ public class Account : MonoBehaviour
 
     private bool SignUpCheck()
     {
-        if(userName.Length < 8)
+        if (userName.Length < 8)
         {
             passError = true;
-            return false; }
+            Debug.Log("fak 1");
+            return false;
+        }
 
-        if(pass.Length > 30 )
+        if (pass.Length > 30)
         {
             passError = true;
-            return false; }
+            Debug.Log("fak 2");
+            return false;
+        }
 
         bool hasUpper = CheckUpper(pass);
-        if( !hasUpper)
+        if (!hasUpper)
         {
             passError = true;
-            return false; }
+            Debug.Log("fak 3");
+            return false;
+        }
 
         bool hasSymbol = CheckSymbol(pass);
-        if( !hasSymbol)
+        if (!hasSymbol)
         {
             passError = true;
-            return false; }
+            Debug.Log("fak 4");
+            return false;
+        }
 
         bool hasNumber = CheckNumber(pass);
-        if( !hasNumber)
+        if (!hasNumber)
         {
             passError = true;
-            return false; }
+            Debug.Log("fak 5");
+            return false;
+        }
 
-        bool checkSpaces = CheckSpaces(pass);
-        if( !checkSpaces)
-        {
-            passError = true;
-            return false; }
+        //bool checkSpaces = CheckSpaces(pass);
+        //if (!checkSpaces)
+        //{
+        //    passError = true;
+        //    Debug.Log("fak 6");
+        //    return false;
+        //}
 
-        bool checkSpacesName = CheckSpaces(userName);
-        if( !checkSpaces)
-        {
-            passError = true;
-            return false; }
+        //bool checkSpacesName = CheckSpaces(userName);
+        //if (!checkSpacesName)
+        //{
+        //    passError = true;
+        //    Debug.Log("fak 7");
+        //    return false;
+        //}
 
         return true;
     }
@@ -164,7 +178,7 @@ public class Account : MonoBehaviour
 
     bool CheckSymbol(string pass)
     {
-        string symbols = "!@#$%^&*()-_+=[]{}|;:',.<>?"; // Set of symbols
+        string symbols = "\"!@#$%^&*()-_+=[]{}|;:',.<>?"; // Set of symbols
 
         foreach (char character in pass)
         {
