@@ -25,7 +25,7 @@ public class EmbarkEndStats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _state = GameObject.FindWithTag("Player").GetComponent<SceneStates>();
+        _state = Character.instance.GetComponent<SceneStates>();
         _continue.onClick.AddListener(ToHome);
 
         Wood = Character.instance.resources[Character.ResourceType.Wood] - _state.preResources[Character.ResourceType.Wood];
