@@ -11,11 +11,12 @@ public class SettingsMenu : MonoBehaviour
 
     public AudioMixer audioMixer;
 
+    [SerializeField] private Button resetPrefs;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button backButton;
     [SerializeField] private Button AbandonButton;
     [SerializeField] private GameObject settingsPanel;
-
+    
     private SceneStates player;
 
     private void Awake()
@@ -70,6 +71,12 @@ public class SettingsMenu : MonoBehaviour
         settingsButton.onClick.AddListener(ToggleSettings);
         backButton.onClick.AddListener(ToggleSettings);
         AbandonButton.onClick.AddListener(Abandon);
+        resetPrefs.onClick.AddListener(ResetPlayerPrefs);
+    }
+
+    private void ResetPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
     public void SetQuality(int qualityIndex)
