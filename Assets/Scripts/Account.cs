@@ -87,7 +87,7 @@ public class Account : MonoBehaviour
 
     private bool SignUpCheck()
     {
-        if(userName.Length == 0)
+        if(userName.Length < 8)
         {
             passError = false;
             return false; }

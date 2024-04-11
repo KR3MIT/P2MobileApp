@@ -94,7 +94,7 @@ public class Character : MonoBehaviour
 
         ShipPartObject cannon = new ShipPartObject("Cannon", new List<ResourceType> { ResourceType.Metal, ResourceType.Gold }, ShipPartObject.StatType.AD);
         ShipPartObject engine = new ShipPartObject("Engine", new List<ResourceType> { ResourceType.Metal, ResourceType.Diamonds }, ShipPartObject.StatType.def);
-        ShipPartObject balloon = new ShipPartObject("Balloon", new List<ResourceType> { ResourceType.Wood, ResourceType.Metal }, ShipPartObject.StatType.health);
+        ShipPartObject balloon = new ShipPartObject("Balloon", new List<ResourceType> { ResourceType.Wood, ResourceType.Metal }, ShipPartObject.StatType.health, 15);
         ShipPartObject bow = new ShipPartObject("Bow", new List<ResourceType> { ResourceType.Wood, ResourceType.Gold }, ShipPartObject.StatType.AD);
 
         shipParts.Add(cannon);
@@ -156,7 +156,7 @@ public class Character : MonoBehaviour
         shipParts.Clear();
         foreach(ShipPart part in loadedShipParts)
         {
-            ShipPartObject shipPart = new ShipPartObject(part.partName, part.resourceTypes, part.statType, part.lvl, part.AD, part.def, part.health);
+            ShipPartObject shipPart = new ShipPartObject(part.partName, part.resourceTypes, part.statType, part.lvl, part.AD, part.def, part.health, part.upgradeImprovement);
             shipParts.Add(shipPart);
         }
         Debug.Log("Ship parts created count: " + shipParts.Count);
@@ -167,7 +167,7 @@ public class Character : MonoBehaviour
         shipPartList.Clear();
         foreach(ShipPartObject part in shipParts)
         {
-            ShipPart shipPart = new ShipPart(part.partName, part.lvl, part.AD, part.def, part.health, part.upgradeTypes, part.statToUpgrade);
+            ShipPart shipPart = new ShipPart(part.partName, part.lvl, part.AD, part.def, part.health, part.upgradeTypes, part.statToUpgrade, part.upgradeImprovement);
             shipPartList.Add(shipPart);
         }
         Debug.Log("Ship parts struct created count: " + shipPartList.Count);

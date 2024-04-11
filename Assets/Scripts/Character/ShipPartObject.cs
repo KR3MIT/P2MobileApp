@@ -38,7 +38,15 @@ public class ShipPartObject
         this.statToUpgrade = statType;
     }
 
-    public ShipPartObject(string partName, List<ResourceType> upgradeTypes, StatType statType, int lvl, int ad, int def, int health)
+    public ShipPartObject(string partName, List<ResourceType> upgradeTypes, StatType statType, int upgradeImprovement)
+    {
+        this.partName = partName;
+        this.upgradeTypes = upgradeTypes;
+        this.statToUpgrade = statType;
+        this.upgradeImprovement = upgradeImprovement;
+    }
+
+    public ShipPartObject(string partName, List<ResourceType> upgradeTypes, StatType statType, int lvl, int ad, int def, int health, int upgradeImprovement)
     {
         this.partName = partName;
         this.upgradeTypes = upgradeTypes;
@@ -47,6 +55,7 @@ public class ShipPartObject
         this.AD = ad;
         this.def = def;
         this.health = health;
+        this.upgradeImprovement = upgradeImprovement;
     }
 }
 public struct ShipPart
@@ -58,8 +67,9 @@ public struct ShipPart
     public int health;
     public List<ResourceType> resourceTypes;
     public ShipPartObject.StatType statType;
+    public int upgradeImprovement;
 
-    public ShipPart(string partName, int lvl, int ad, int def, int health, List<ResourceType> upgradeTypes, ShipPartObject.StatType statType)
+    public ShipPart(string partName, int lvl, int ad, int def, int health, List<ResourceType> upgradeTypes, ShipPartObject.StatType statType, int upgradeImprovement)
     {
         this.partName = partName;
         this.lvl = lvl;
@@ -68,5 +78,6 @@ public struct ShipPart
         this.health = health;
         this.resourceTypes = upgradeTypes;
         this.statType = statType;
+        this.upgradeImprovement = upgradeImprovement;
     }
 }
