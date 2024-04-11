@@ -11,7 +11,7 @@ public class SaveDataToCSV : MonoBehaviour
     private Character player;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         player = Character.instance;
         path = Application.persistentDataPath;
