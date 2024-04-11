@@ -51,6 +51,8 @@ public class EmbarkEndStats : MonoBehaviour
             _saveData.SerializeCSV(_state.moved, "Distance traveled");
         }
 
+        Character.instance.GetComponent<Statistics>().AddEmbark();
+
         Destroy(Map.instance.gameObject);
         Destroy(LocationMove.instance.gameObject);
     }
