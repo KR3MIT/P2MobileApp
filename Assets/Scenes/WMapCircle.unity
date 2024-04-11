@@ -842,7 +842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 1328753552}
-  distanceWalked: 0
+  totalDistance: 0
   smoothTime: 0.3
   distianceMultiplier: 0.0022
   newPosition: {x: 0, y: 0, z: 0}
@@ -6869,14 +6869,14 @@ RectTransform:
   m_GameObject: {fileID: 223316780879999485}
   m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.87, y: 7.48, z: 1.87}
+  m_LocalScale: {x: 2.44596, y: 9.78384, z: 2.44596}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2101132061738521266}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -576, y: 551}
+  m_AnchoredPosition: {x: -563.3, y: 654}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &472837180458979112
@@ -7277,8 +7277,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u2192Tap to collect loot\n\n         \u2192Tap to start an encounter\n\nTapping
-    on any icon will REMOVE THE ICON FURTHEST AWAY, so plan your jorney wisely!\n"
+  m_text: "\t\u2192Tap to collect loot\n\n\t\u2192Tap to start encounter\n\nWalk
+    in real life to the icons!\nTapping on any icon will REMOVE THE ICON FURTHEST
+    AWAY, so plan your jorney wisely!\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7312,7 +7313,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -7892,7 +7893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &3510880968035821568
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,10 +22,21 @@ public class LocationMove : MonoBehaviour
 
     public Vector3 newPosition = Vector3.zero;
 
+    public static LocationMove instance;
 
 
     private void Start()
     {
+
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
         newPosition = transform.position;
         locationManager = map.GetComponent<LocationManager>();

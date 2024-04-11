@@ -43,10 +43,22 @@ public class Map : MonoBehaviour
     private double planeWidth;
     private double planeHeight;
 
+    public static Map instance;
+
 
     // Start is called before the first frame update
     void Start()
     {
+
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
        // MatchPlaneToScreenSize();
         if (gameObject.GetComponent<MeshRenderer>() == null)
