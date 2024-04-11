@@ -31,6 +31,7 @@ public class RadarBehavior : MonoBehaviour
     public string resourceSceneName = "ResourceScene";
 
     private SceneStates sceneStates;
+    private LocationMove _locationMove;
 
     //the touch phase used we use ended since we want the click yeye
     TouchPhase touchPhase = TouchPhase.Ended;
@@ -68,7 +69,9 @@ public class RadarBehavior : MonoBehaviour
         {
             AudioManager.instance.Play("radarSound");
         }
-        player = GameObject.FindWithTag("Player").GetComponent<Character>();
+        player = Character.instance;
+
+        
 
         encounterClickCanvas = Instantiate(encounterClickCanvas, Vector3.zero, Quaternion.identity);//make an instance of prefab and save in its variable
         encounterClickCanvas.transform.GetComponentInChildren<Button>().onClick.AddListener(AttackButton);//add listener to button
@@ -83,10 +86,16 @@ public class RadarBehavior : MonoBehaviour
         spawnPool.Add(encounterPOI);
         spawnPool.Add(resourcePOI);
 
-        if(GameObject.FindWithTag("Player") != null)//check if player exists if it does set scenestate and if POIs exists set POIs
+        if(Character.instance.gameObject != null)//check if player exists if it does set scenestate and if POIs exists set POIs
         {
             sceneStates = GameObject.FindWithTag("Player").GetComponent<SceneStates>();
-            
+
+            if (GameObject.Find("ShipManager") != null)
+            {
+                _locationMove = GameObject.Find("ShipManager").GetComponent<LocationMove>();
+            }
+
+
             if (!sceneStates.isEmbarked)
             {
                 sceneStates.SetEmbarked(true);
@@ -210,6 +219,8 @@ public class RadarBehavior : MonoBehaviour
         {
             SaveToPOIs();
         }
+
+        sceneStates.moved += _locationMove.totalDistance;
 
         if (poiScript.isEncounter)
         {

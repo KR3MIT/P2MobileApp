@@ -28,6 +28,8 @@ public class Character : MonoBehaviour
     [Tooltip("Level up stat scale")]
     public int lvlScale = 5;
 
+    public int xpToLevel = 100;
+
     [Header("Actual start values changing the above wont do anything :) also modified by lvl")]
     public int defaultHealth = 100;
     public int defaultDef = 0;
@@ -272,9 +274,9 @@ public class Character : MonoBehaviour
     public void AddResource(int xp)
     {
         exp += xp;
-        if(exp >= 100)
+        if(exp >= xpToLevel)
         {
-            exp -= 100;
+            exp -= xpToLevel;
             lvl++;
         }
     }

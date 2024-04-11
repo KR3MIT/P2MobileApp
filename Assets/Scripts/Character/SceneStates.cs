@@ -72,7 +72,7 @@ public class SceneStates : MonoBehaviour
             if (GameObject.Find("ShipManager") != null)
             {
                 _locationMove = GameObject.Find("ShipManager").GetComponent<LocationMove>();
-                moved = _locationMove.totalDistance;
+                moved += _locationMove.totalDistance;
                 Debug.Log("bitch distance " + moved);
             }
         }
