@@ -84,7 +84,7 @@ public class Statistics : MonoBehaviour
         metersWalked = PlayerPrefs.GetFloat("metersWalked");
         kilometersWalked = ConvertMetersToKilometers(metersWalked);
 
-        embarksText.text = "Embarks this month: " + embarks;
-        kilometersWalkedText.text = "Kilometers walked this month: " + kilometersWalked;
+        embarksText.text = embarks.ToString();
+        kilometersWalkedText.text = kilometersWalked.ToString();
     }
 }
