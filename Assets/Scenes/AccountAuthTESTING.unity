@@ -1677,6 +1677,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene selector
       objectReference: {fileID: 0}
+    - target: {fileID: 6283804261467888158, guid: f3f11f126d287824e8235c2ef596e3d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8619702096936770433, guid: f3f11f126d287824e8235c2ef596e3d0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4115,9 +4119,9 @@ RectTransform:
   - {fileID: 79430284}
   m_Father: {fileID: 1838260797}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 378.1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -479.9}
   m_SizeDelta: {x: 800, y: 135.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2056543985
