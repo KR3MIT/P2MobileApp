@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LocationMove : MonoBehaviour
 {
@@ -73,6 +74,17 @@ public class LocationMove : MonoBehaviour
 
         // Use SmoothDamp to gradually change the position of the object
         transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
+
+        //this checks if the object is present in a scene named "CombatEncounter" and if it is, it will disable the rendering of the object
+        if (SceneManager.GetActiveScene().name == "CombatEncounter")
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+        }
+
     }
 
     Vector3 CalculatePositionFromGPS(float userLat, float userLon, float origLat, float origLon)

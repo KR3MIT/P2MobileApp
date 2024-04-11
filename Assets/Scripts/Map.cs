@@ -24,6 +24,7 @@ using UnityEngine.Networking;
 using System;
 using System.Globalization;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Map : MonoBehaviour
 {
@@ -141,5 +142,18 @@ public class Map : MonoBehaviour
         {
             mapWidthPx = 1280;
         }
+    }
+
+    public void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "CombatEncounterTest")
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+        else
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+        }
+
     }
 }
