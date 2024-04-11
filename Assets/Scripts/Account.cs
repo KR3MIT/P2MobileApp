@@ -41,7 +41,7 @@ public class Account : MonoBehaviour
     {
         pass = passwordInput.text;
         userName = usernameInput.text;
-        Debug.Log("fak " + SignUpCheck());
+        //Debug.Log("fak " + SignUpCheck());
         if (SignUpCheck())
         {
             checkSignIn();
@@ -87,14 +87,14 @@ public class Account : MonoBehaviour
 
     private bool SignUpCheck()
     {
-        if (userName.Length < 8)
+        if (userName.Length < 3 || userName.Length > 30)
         {
             passError = true;
             Debug.Log("fak 1");
             return false;
         }
 
-        if (pass.Length > 30)
+        if (pass.Length > 30 || pass.Length < 8)
         {
             passError = true;
             Debug.Log("fak 2");
@@ -125,36 +125,37 @@ public class Account : MonoBehaviour
             return false;
         }
 
-        //bool checkSpaces = CheckSpaces(pass);
-        //if (!checkSpaces)
-        //{
-        //    passError = true;
-        //    Debug.Log("fak 6");
-        //    return false;
-        //}
+        bool checkSpaces = CheckSpaces(pass);
+        if (!checkSpaces)
+        {
+            passError = true;
+            Debug.Log("fak 6");
+            return false;
+        }
 
-        //bool checkSpacesName = CheckSpaces(userName);
-        //if (!checkSpacesName)
-        //{
-        //    passError = true;
-        //    Debug.Log("fak 7");
-        //    return false;
-        //}
+        bool checkSpacesName = CheckSpaces(userName);
+        if (!checkSpacesName)
+        {
+            passError = true;
+            Debug.Log("fak 7");
+            return false;
+        }
 
         return true;
     }
 
     bool CheckSpaces(string pass)
     {
+        string space = " ";
         foreach (char character in pass)
         {
-            if (char.IsWhiteSpace(character))
+            if (space.Contains(character.ToString()))
             {
-                return true; // Return true if a space is found
+                return false;
             }
         }
 
-        return false; // Return false if no space is found
+        return true;
     }
 
     bool CheckUpper(string pass)
