@@ -8,28 +8,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AccountAuthTESTING.unity
     guid: 6acb7d4ba257faf4da1e5b764b071e6d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/WMap.unity
     guid: 75415ff7f7c3eb14187f9d619ee1252d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Chacater.unity
     guid: 8c8affb7d8ecaa748a0d3493e8eb8fe7
   - enabled: 1
     path: Assets/Scenes/Home.unity
-    guid: 3c490ab934da44a4fba6b077eb6d073e
+    guid: 04c5304ac5fa6c04180ed3639ac0d51a
   - enabled: 1
     path: Assets/Scenes/Loot Island.unity
     guid: d941393bda9c3104d9101728bb7d49a6
   - enabled: 1
     path: Assets/Scenes/CombatEncounterTest.unity
     guid: f0885a46322910d42bf0dcf0269771af
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Circle spawner.unity
     guid: e3572bb7c2b46a74c81f74c32abe82c9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Options TEST.unity
     guid: 0d89ed85a7f7df24c827ce1fd4295c9b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Data collection.unity
     guid: 78a2d11e809d9d644a780ad3139f5d72
   - enabled: 1
