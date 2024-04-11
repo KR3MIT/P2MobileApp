@@ -60,6 +60,8 @@ public class RadarBehavior : MonoBehaviour
 
     private void Start()
     {
+        ship = LocationMove.instance.gameObject;
+
         if (debugMode)
         {
             shipInteractRadius = 1000f;
