@@ -54,7 +54,7 @@ public class CloudSave : MonoBehaviour
     //Saves player data
     public async void SaveData()
     {
-        character = GetComponent<Character>();//maybe remove this line
+        character = Character.instance;
         saveData.Clear();
 
         Debug.Log("fuck resources: " + character.resources[0]);
