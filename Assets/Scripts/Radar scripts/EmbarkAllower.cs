@@ -60,7 +60,12 @@ public class EmbarkAllower : MonoBehaviour
     IEnumerator PerSecond()
     {
         currentDate = DateTime.Now.Date;
-        previousDate = DateTime.Parse(PlayerPrefs.GetString("previousDate"));
+        if (PlayerPrefs.HasKey("previousDate"))
+        {
+            previousDate = DateTime.Parse(PlayerPrefs.GetString("previousDate"));
+        }
+
+
         if (currentDate != previousDate)
         {
             embarkAllowed = true;
