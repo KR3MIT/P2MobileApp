@@ -76,7 +76,7 @@ public class LocationMove : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
 
         //this checks if the object is present in a scene named "CombatEncounter" and if it is, it will disable the rendering of the object
-        if (SceneManager.GetActiveScene().name == "CombatEncounter")
+        if (SceneManager.GetActiveScene().name == "CombatEncounterTest")
         {
             gameObject.GetComponent<MeshRenderer>().enabled = false;
         }

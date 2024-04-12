@@ -62,6 +62,9 @@ public class PlayerCharacterTest : MonoBehaviour
 
     void Start()
     {
+
+
+
         if(AudioManager.instance != null)
         {
             AudioManager.instance.Stop("music");
