@@ -4,6 +4,9 @@ using UnityEngine.EventSystems;
 
 public class AccountGUI : MonoBehaviour
 {
+    [SerializeField] private TMP_Text reqText;
+    [SerializeField] private GameObject reqPanel;
+
     [Header("User Panel")]
     [SerializeField] private GameObject userPanel;
     [SerializeField] private int userDefaultPos = 0;
@@ -19,6 +22,8 @@ public class AccountGUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
+        reqPanel.SetActive(false);
+
         userInput = userPanel.GetComponent<TMP_InputField>();
         passInput = passPanel.GetComponent<TMP_InputField>();
 
@@ -38,27 +43,31 @@ public class AccountGUI : MonoBehaviour
     {
         Debug.Log("Balls User Active"); 
         userPanel.transform.position = new Vector3(userPanel.transform.position.x, userActivePos, userPanel.transform.position.z);
+
+        reqPanel.SetActive(true);
+        reqText.text = "Must <b>not</b> contain: \n<b>Spaces</b> or more then <b>30</b> characters";
+
     }
     public void userInputDeactive()
     {
         Debug.Log("Balls User Deactive");
         userPanel.transform.position = new Vector3(userPanel.transform.position.x, userDefaultPos, userPanel.transform.position.z);
+
+        reqPanel.SetActive(false);
     }
     public void passInputActive()
     {
         Debug.Log("Balls Pass Active");
         passInput.transform.position = new Vector3(passInput.transform.position.x, passActivePos, passInput.transform.position.z);
+
+        reqPanel.SetActive(true);
+        reqText.text = "Case sensitive, min of <b>8</b> and max of <b>30</b> characters, at least <b>1</b> uppercase, <b>1</b> lowercase, <b>1</b> number and <b>1</b> symbol.";
     }
     public void passInputDeactive()
     {
         Debug.Log("Balls Pass Deactive");
         passInput.transform.position = new Vector3(passInput.transform.position.x, passDefaultPos, passInput.transform.position.z);
-    }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        reqPanel.SetActive(false);
     }
 }
