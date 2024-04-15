@@ -241,7 +241,7 @@ public class RadarBehavior : MonoBehaviour
         }
     }
 
-    private void EncounterClick(GameObject canvas, bool isEnounter)
+    private void EncounterClick(GameObject canvas, bool isEncounter)
     {
         canvas.SetActive(!canvas.activeSelf);//toggle canvas
         canvas.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, 95);//set position of canvas
@@ -257,7 +257,7 @@ public class RadarBehavior : MonoBehaviour
 
         
 
-        if (isEnounter)
+        if (isEncounter)
         {
             encounterCanvasActive = canvas.activeSelf;
             canvas.transform.GetComponentInChildren<TMP_Text>().text = "Enemy lvl: " + hit.transform.gameObject.GetComponent<POIscript>().level;
@@ -270,11 +270,11 @@ public class RadarBehavior : MonoBehaviour
         
 
         var button = canvas.transform.GetComponentInChildren<Button>();
-        if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius && isEnounter)
+        if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius && isEncounter)
         {
             canvas.transform.GetComponentInChildren<Button>().interactable = true;
             button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Attack";
-        }else if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius && !isEnounter)
+        }else if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius && !isEncounter)
         {
             canvas.transform.GetComponentInChildren<Button>().interactable = true;
             button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Go";
