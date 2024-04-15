@@ -63,7 +63,10 @@ public class PlayerCharacterTest : MonoBehaviour
     void Start()
     {
 
-
+        if(LocationMove.instance != null)
+        {
+            LocationMove.instance.gameObject.SetActive(false);
+        }
 
         if(AudioManager.instance != null)
         {

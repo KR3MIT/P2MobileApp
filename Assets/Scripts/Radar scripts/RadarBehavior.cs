@@ -60,6 +60,12 @@ public class RadarBehavior : MonoBehaviour
 
     private void Start()
     {
+
+        if (LocationMove.instance != null)
+        {
+            LocationMove.instance.gameObject.SetActive(true);
+        }
+
         ship = LocationMove.instance.gameObject;
 
         if (debugMode)
