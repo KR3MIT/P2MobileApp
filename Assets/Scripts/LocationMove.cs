@@ -119,7 +119,7 @@ public class LocationMove : MonoBehaviour
         var c = 2 * Mathf.Atan2(Mathf.Sqrt(a), Mathf.Sqrt(1 - a));
         var distance = R * c;
 
-        if (distance > 20)
+        if (distance > 200)
         {
             distance = 0;
         }
