@@ -77,6 +77,7 @@ public class SettingsMenu : MonoBehaviour
     private void ResetPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
+        Application.Quit();
     }
 
     public void SetQuality(int qualityIndex)

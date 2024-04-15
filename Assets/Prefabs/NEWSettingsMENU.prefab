@@ -2494,10 +2494,10 @@ RectTransform:
   - {fileID: 7292980083670775126}
   m_Father: {fileID: 5101587346089264749}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 800, y: 1716}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4377940180515428291
 CanvasRenderer:
@@ -2729,7 +2729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 8b897615e4374f34e8c6f44da2772d34, type: 2}
-  resetPrefs: {fileID: 0}
+  resetPrefs: {fileID: 2603400552661494811}
   settingsButton: {fileID: 8127612567750509127}
   backButton: {fileID: 3637975645373165477}
   AbandonButton: {fileID: 297147290145242459}
@@ -3729,9 +3729,9 @@ RectTransform:
   - {fileID: 2816585661806373923}
   m_Father: {fileID: 5101587346089264749}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 336, y: 1653}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 336, y: 795}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5304257792929929917
