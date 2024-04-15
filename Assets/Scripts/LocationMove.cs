@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class LocationMove : MonoBehaviour
 {
@@ -11,11 +13,15 @@ public class LocationMove : MonoBehaviour
     private Vector3 previousPosition;
     private float timeSinceLastUpdate = 0f;
     private const float updateInterval = 5f; // Update every 
+    private float previousLongtitude;
+    private float previousLatitude;
 
     private float rotationSpeed = 1f; // Adjust this value to change the speed of rotation
 
     private Vector3 velocity = Vector3.zero;
     [HideInInspector]public float totalDistance = 0f;
+
+    [SerializeField] private TMP_Text distanceText;
 
     public float smoothTime = 1f;
 
@@ -47,6 +53,9 @@ public class LocationMove : MonoBehaviour
             statistics = statisticsObject.GetComponent<Statistics>();
         }
         previousPosition = transform.position;
+        previousLatitude = (float)locationManager.userLatitude;
+        previousLongtitude = (float)locationManager.userLongitude;
+
     }
 
     private void Update()
@@ -57,7 +66,9 @@ public class LocationMove : MonoBehaviour
         {
             Vector3 oldPosition = newPosition;
             newPosition = CalculatePositionFromGPS((float)locationManager.userLatitude, (float)locationManager.userLongitude, (float)locationManager.originalLatitude, (float)locationManager.originalLongitude); // Convert latitude and longitude to Unity coordinates
-
+            //newPosition = CalculatePositionFromGPS((float)locationManager.userLatitude, (float)locationManager.userLongitude, (float)previousLatitude, (float)previousLongtitude);
+            previousLatitude = (float)locationManager.userLatitude;
+            previousLongtitude = (float)locationManager.userLongitude;
             Vector3 direction = newPosition - oldPosition;
             if (direction != Vector3.zero) // Avoid setting rotation if there's no movement
             {
@@ -91,6 +102,8 @@ public class LocationMove : MonoBehaviour
     {
         // Calculate the offset in meters (using Haversine formula or similar)
         float distance = CalculateDistance(origLat, origLon, userLat, userLon);
+        // Calculate the distance from last logged position to new position
+        CalculateTravelledDistance(previousLatitude, previousLongtitude, userLat, userLon);
         // Determine the direction - this is a simplified approach; for more accuracy, you might need a more complex calculation
         Vector3 direction = new Vector3(userLon - origLon, userLat - origLat, 0).normalized;
 
@@ -107,6 +120,28 @@ public class LocationMove : MonoBehaviour
 
     }
 
+    void CalculateTravelledDistance(float currentLat, float currentLon, float prevLat, float prevLon)
+    {
+        var R = 6378137; // Earth’s mean radius in meters
+        var dLat = Mathf.Deg2Rad * (prevLat - currentLat);
+        var dLong = Mathf.Deg2Rad * (prevLon - currentLon);
+
+        var a = Mathf.Sin(dLat / 2) * Mathf.Sin(dLat / 2) +
+                Mathf.Cos(Mathf.Deg2Rad * currentLat) * Mathf.Cos(Mathf.Deg2Rad * prevLat) *
+                Mathf.Sin(dLong / 2) * Mathf.Sin(dLong / 2);
+        var c = 2 * Mathf.Atan2(Mathf.Sqrt(a), Mathf.Sqrt(1 - a));
+        var distance = R * c;
+        if (distance > 200)
+        {
+         distance = 0;
+         }
+        distanceText.text = "Distance: " + distance.ToString("F2") + " meters";
+
+        statistics.MetersWalkedPerMonth(distance); // Add the distance to the total distance walked
+
+        totalDistance += distance; // Add the distance to the total distance walked
+    }
+
     float CalculateDistance(float lat1, float lon1, float lat2, float lon2)
     {
         var R = 6378137; // Earth’s mean radius in meters
@@ -118,16 +153,6 @@ public class LocationMove : MonoBehaviour
                 Mathf.Sin(dLong / 2) * Mathf.Sin(dLong / 2);
         var c = 2 * Mathf.Atan2(Mathf.Sqrt(a), Mathf.Sqrt(1 - a));
         var distance = R * c;
-
-        if (distance > 200)
-        {
-            distance = 0;
-        }
-
-
-        statistics.MetersWalkedPerMonth(distance); // Add the distance to the total distance walked
-
-        totalDistance += distance; // Add the distance to the total distance walked
 
         return distance; // Distance in meters
     }
