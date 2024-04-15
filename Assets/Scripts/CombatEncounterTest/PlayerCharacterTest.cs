@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEditor.Profiling.Memory.Experimental;
 
 
 //This script was developed with the help of Github Co-pilot.
@@ -13,6 +14,10 @@ public class PlayerCharacterTest : MonoBehaviour
 {
     //player ref
     private Character player;
+
+    // name of the player
+    private string name;
+    public TextMeshProUGUI playername;
 
     // Reference to the enemy character instance and health bar instance
     public HealthBar healthBars;
@@ -72,6 +77,9 @@ public class PlayerCharacterTest : MonoBehaviour
         {
             AudioManager.instance.Stop("music");
         }
+        name = Character.instance.playerName;
+        playername = GameObject.Find("PlayerName").GetComponent<TextMeshProUGUI>();
+        playername.text = name;
         
         
         continueButton.SetActive(false);
@@ -87,6 +95,7 @@ public class PlayerCharacterTest : MonoBehaviour
             playerHealth = player.health;
             attackPower = player.AD;
             defensePower = player.def;
+
         }
 
 
