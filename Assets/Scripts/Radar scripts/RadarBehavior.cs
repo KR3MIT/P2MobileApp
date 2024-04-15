@@ -270,11 +270,11 @@ public class RadarBehavior : MonoBehaviour
         
 
         var button = canvas.transform.GetComponentInChildren<Button>();
-        if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius && isEnounter)
+        if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius && isEncounter)
         {
             canvas.transform.GetComponentInChildren<Button>().interactable = true;
             button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Attack";
-        }else if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius && !isEnounter)
+        }else if (Vector2.Distance(hit.transform.position, ship.transform.position) < shipInteractRadius && !isEncounter)
         {
             canvas.transform.GetComponentInChildren<Button>().interactable = true;
             button.transform.GetChild(0).GetComponent<TMP_Text>().text = "Go";
