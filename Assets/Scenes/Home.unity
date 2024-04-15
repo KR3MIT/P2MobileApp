@@ -5359,7 +5359,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1726027458}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.3496493
+  m_Size: 0.34964895
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6522,7 +6522,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -459.2547, y: -908.0427, z: -581.1975, w: -849.1916}
+  m_margin: {x: -425.84967, y: -847.86945, z: -617.1254, w: -858.1086}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -6804,7 +6804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &6499795195706234871
 MonoBehaviour:
   m_ObjectHideFlags: 0
