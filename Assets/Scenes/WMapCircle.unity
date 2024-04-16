@@ -1332,6 +1332,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 175801473547129933, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339372247731280335, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5101587346089264749, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1415,6 +1423,44 @@ PrefabInstance:
     - target: {fileID: 5520990866342854711, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
       propertyPath: m_Name
       value: NEWSettingsMENU
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019618553574130633, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: m_Color.b
+      value: 0.06483221
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019618553574130633, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019618553574130633, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382634343889163946, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382634343889163946, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382634343889163946, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8335865451121827864, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: m_text
+      value: Stay
+      objectReference: {fileID: 0}
+    - target: {fileID: 9081794524402265449, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: m_text
+      value: 'Are you sure you want to abandon?
+
+
+        If you abandon now you
+        lose out on further rewards.
+
+        You cannot embark more today'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7129,7 +7175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.104870915, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
