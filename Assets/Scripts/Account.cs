@@ -21,7 +21,6 @@ public class Account : MonoBehaviour
     private bool signInActive = true;
     private string pass;
     private string userName;
-    private bool passError = false;
 
     async void Start()
     {
@@ -54,14 +53,6 @@ public class Account : MonoBehaviour
             playerNameDisplay.SetActive(true);
             signInDisplay.SetActive(false);
         }
-        else if(!passError)
-        {
-            passwordError.text = "username or password error, try restarting the app";
-        }
-        else
-        {
-            passwordError.text = "password error, try restarting the app";
-        }
     }
 
     async Task SignUpWithUsernamePassword(string username, string password)
@@ -89,14 +80,22 @@ public class Account : MonoBehaviour
     {
         if (userName.Length < 3 || userName.Length > 30)
         {
-            passError = true;
+            passwordError.text = "Username must be between 3 and 30 characters";
             Debug.Log("fak 1");
+            return false;
+        }
+
+        bool checkSpacesName = CheckSpaces(userName);
+        if (!checkSpacesName)
+        {
+            passwordError.text = "Username must not contain spaces";
+            Debug.Log("fak 7");
             return false;
         }
 
         if (pass.Length > 30 || pass.Length < 8)
         {
-            passError = true;
+            passwordError.text = "Password must be between 8 and 30 characters";
             Debug.Log("fak 2");
             return false;
         }
@@ -104,7 +103,7 @@ public class Account : MonoBehaviour
         bool hasUpper = CheckUpper(pass);
         if (!hasUpper)
         {
-            passError = true;
+            passwordError.text = "Password must contain at least one uppercase letter";
             Debug.Log("fak 3");
             return false;
         }
@@ -112,7 +111,7 @@ public class Account : MonoBehaviour
         bool hasSymbol = CheckSymbol(pass);
         if (!hasSymbol)
         {
-            passError = true;
+            passwordError.text = "Password must contain at least one symbol";
             Debug.Log("fak 4");
             return false;
         }
@@ -120,7 +119,7 @@ public class Account : MonoBehaviour
         bool hasNumber = CheckNumber(pass);
         if (!hasNumber)
         {
-            passError = true;
+            passwordError.text = "Password must contain at least one number";
             Debug.Log("fak 5");
             return false;
         }
@@ -128,16 +127,8 @@ public class Account : MonoBehaviour
         bool checkSpaces = CheckSpaces(pass);
         if (!checkSpaces)
         {
-            passError = true;
+            passwordError.text = "Password must not contain spaces";
             Debug.Log("fak 6");
-            return false;
-        }
-
-        bool checkSpacesName = CheckSpaces(userName);
-        if (!checkSpacesName)
-        {
-            passError = true;
-            Debug.Log("fak 7");
             return false;
         }
 

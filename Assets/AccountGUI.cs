@@ -40,7 +40,7 @@ public class AccountGUI : MonoBehaviour
         Debug.Log("Balls User Active"); 
         userPanel.transform.position = activePos.transform.position;
         reqPanel.SetActive(true);
-        reqText.text = "Must <b>not</b> contain: \n<b>Spaces</b> or more then <b>30</b> characters.";
+        reqText.text = "Must contain: <b>No</b> spaces, \nmin. of <b>3</b> and max. of <b>30</b> characters.";
     }
     public void userInputDeactive()
     {
@@ -56,7 +56,7 @@ public class AccountGUI : MonoBehaviour
         Debug.Log("Balls Pass Active");
         passPanel.transform.position = activePos.transform.position;
         reqPanel.SetActive(true);
-        reqText.text = "Case sensitive, min of <b>8</b> and max of <b>30</b> characters, at least <b>1</b> uppercase, <b>1</b> lowercase, <b>1</b> number and <b>1</b> symbol.";
+        reqText.text = "Case sensitive, min. of <b>8</b> and max. of <b>30</b> characters, at least <b>1</b> uppercase, <b>1</b> lowercase, <b>1</b> number and <b>1</b> symbol.";
     }
     public void passInputDeactive()
     {
