@@ -6579,6 +6579,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1919042773338645804, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4038178710790758836, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
       propertyPath: m_Name
       value: Turtorials
@@ -6597,15 +6601,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5326145887662017555, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5.13
+      value: 4.7458143
       objectReference: {fileID: 0}
     - target: {fileID: 5326145887662017555, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8.360374
+      value: 7.734266
       objectReference: {fileID: 0}
     - target: {fileID: 5326145887662017555, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 6.463278
+      value: 5.979243
       objectReference: {fileID: 0}
     - target: {fileID: 5326145887662017555, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6654,6 +6658,18 @@ PrefabInstance:
     - target: {fileID: 7503083525862235194, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588235542876388959, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8732759
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588235542876388959, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.56467664
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588235542876388959, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 8771764771789167506, guid: e9fdb58a51198f141bd6cc5d4cc7482f, type: 3}
       propertyPath: m_text
