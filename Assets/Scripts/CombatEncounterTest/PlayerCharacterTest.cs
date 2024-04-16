@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
-using UnityEditor.Profiling.Memory.Experimental;
 
 
 //This script was developed with the help of Github Co-pilot.
