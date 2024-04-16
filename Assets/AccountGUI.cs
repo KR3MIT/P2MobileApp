@@ -16,22 +16,31 @@ public class AccountGUI : MonoBehaviour
     private Vector3 passDefaultPos;
     private TMP_InputField passInput;
 
+    [SerializeField] private GameObject namePanel;
+    private Vector3 nameDefaultPos;    
+    private TMP_InputField nameInput;
+
     void Start()
     {
         reqPanel.SetActive(false);
 
         userInput = userPanel.GetComponent<TMP_InputField>();
         passInput = passPanel.GetComponent<TMP_InputField>();
+        nameInput = namePanel.GetComponent<TMP_InputField>();
 
         userDefaultPos = userPanel.transform.position;
         passDefaultPos = passPanel.transform.position;
-        
+        nameDefaultPos = namePanel.transform.position;
+
         //call method userinputactive when inputfield is active or pressed
         userInput.onSelect.AddListener(delegate { userInputActive(); });
         userInput.onDeselect.AddListener(delegate { userInputDeactive(); });
         //pass
         passInput.onSelect.AddListener(delegate { passInputActive(); });
         passInput.onDeselect.AddListener(delegate { passInputDeactive(); });
+
+        nameInput.onSelect.AddListener(delegate { nameInputActive(); });
+        nameInput.onDeselect.AddListener(delegate { nameInputDeactive(); });
     }
     //user panel toggle
     #region(user panel toggle)
@@ -65,4 +74,20 @@ public class AccountGUI : MonoBehaviour
         reqPanel.SetActive(false);
     }
     #endregion
+
+    #region(name input toggle)
+    public void nameInputActive()
+    {
+        Debug.Log("Balls Name Active");
+        namePanel.transform.position = activePos.transform.position;
+        reqPanel.SetActive(true);
+    }
+    public void nameInputDeactive()
+    {
+        Debug.Log("Balls Name Deactive");
+        namePanel.transform.position = nameDefaultPos;
+        reqPanel.SetActive(false);
+    }
+    #endregion
+
 }
