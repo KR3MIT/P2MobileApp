@@ -14,9 +14,13 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Button resetPrefs;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button backButton;
-    [SerializeField] private Button AbandonButton;
+    [SerializeField] private Button abandonButton;
+    [SerializeField] private Button warningAbandon;
+    [SerializeField] private Button warningReturn;
     [SerializeField] private GameObject settingsPanel;
-    
+    [SerializeField] private GameObject warningPanel;
+
+
     private SceneStates player;
 
     private void Awake()
@@ -36,7 +40,7 @@ public class SettingsMenu : MonoBehaviour
     {
         if (player.isEmbarked)
         {
-            AbandonButton.gameObject.SetActive(true);
+            abandonButton.gameObject.SetActive(true);
         }
         
         if (settingsPanel.activeSelf)
@@ -58,20 +62,33 @@ public class SettingsMenu : MonoBehaviour
         player.ClearData();
         player.SetEmbarked(false);
         UnityEngine.SceneManagement.SceneManager.LoadScene("EmbarkEndScene");
+        warningPanel.SetActive(false);
         settingsPanel.SetActive(false);
         settingsButton.gameObject.SetActive(true);
     }
 
+    void WarningPopUp()
+    {
+        warningPanel.SetActive(true);
+    }
+
+    void Return()
+    {
+        warningPanel.SetActive(false);
+    }
+
     private void Start()
     {
-        AbandonButton.gameObject.SetActive(false);
+        abandonButton.gameObject.SetActive(false);
 
         player = GameObject.FindWithTag("Player").GetComponent<SceneStates>();
 
         settingsButton.onClick.AddListener(ToggleSettings);
         backButton.onClick.AddListener(ToggleSettings);
-        AbandonButton.onClick.AddListener(Abandon);
+        abandonButton.onClick.AddListener(WarningPopUp);
         resetPrefs.onClick.AddListener(ResetPlayerPrefs);
+        warningAbandon.onClick.AddListener(Abandon);
+        warningReturn.onClick.AddListener(Return);
     }
 
     private void ResetPlayerPrefs()

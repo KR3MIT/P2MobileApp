@@ -611,7 +611,7 @@ MonoBehaviour:
 
 
     If you abandon now you lose out
-    on rewards.
+    on rewards further rewards.
 
     You cannot embark more today'
   m_isRightToLeft: 0
@@ -1804,7 +1804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &604416978
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6115,7 +6115,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1726027458}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.34961528
+  m_Size: 0.34965035
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7367,6 +7367,22 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3823623709058246466, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: warningPanel
+      value: 
+      objectReference: {fileID: 604416977}
+    - target: {fileID: 3823623709058246466, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: abandonButton
+      value: 
+      objectReference: {fileID: 4989746115733595766}
+    - target: {fileID: 3823623709058246466, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: warningReturn
+      value: 
+      objectReference: {fileID: 1294787767}
+    - target: {fileID: 3823623709058246466, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+      propertyPath: warningAbandon
+      value: 
+      objectReference: {fileID: 922944595}
     - target: {fileID: 4403829925927730113, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -7488,6 +7504,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5101587346089264749, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
   m_PrefabInstance: {fileID: 4989746115733595764}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4989746115733595766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 297147290145242459, guid: 3cff4ac2ad220084b8832d6d93ca7a95, type: 3}
+  m_PrefabInstance: {fileID: 4989746115733595764}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5254289868499758375
 MonoBehaviour:
   m_ObjectHideFlags: 0
