@@ -43,10 +43,10 @@ public class ressourceChest : MonoBehaviour
     public void OpenChestResource()
     {
         int random = Random.Range(0, 100);
-        if (random < 40)
+        if (random < 25)
         {
             Debug.Log("Wood");
-            resourcesToGive[ResourceType.Wood] = Random.Range(20, 25);
+            resourcesToGive[ResourceType.Wood] = Random.Range(15, 30);
             Debug.Log("wood amount: " + resourcesToGive[ResourceType.Wood]);
             Debug.Log(random);
 
@@ -58,10 +58,10 @@ public class ressourceChest : MonoBehaviour
             
 
         }
-        else if (random < 70)
+        else if (random < 50)
         {
             Debug.Log("Scrap Metal");
-            resourcesToGive[ResourceType.Metal] = Random.Range(20, 25);
+            resourcesToGive[ResourceType.Metal] = Random.Range(15, 30);
             Debug.Log("Scrap Metal amount: " + resourcesToGive[ResourceType.Metal]);
             Debug.Log(random);
 
@@ -71,10 +71,10 @@ public class ressourceChest : MonoBehaviour
             character.AddResource(ResourceType.Metal, resourcesToGive[ResourceType.Metal]);
             StartCoroutine(TextDelay("Scrap Metal", resourcesToGive[ResourceType.Metal]));
         }
-        else if (random < 90)
+        else if (random < 75)
         {
             Debug.Log("Gold Ingot");
-            resourcesToGive[ResourceType.Gold] = Random.Range(6, 9);
+            resourcesToGive[ResourceType.Gold] = Random.Range(15, 30);
             Debug.Log("gold amount: " + resourcesToGive[ResourceType.Gold]);
             Debug.Log(random);
 
@@ -87,7 +87,7 @@ public class ressourceChest : MonoBehaviour
         else
         {
             Debug.Log("Shiny Diamond");
-            resourcesToGive[ResourceType.Diamonds] = Random.Range(1, 4);
+            resourcesToGive[ResourceType.Diamonds] = Random.Range(15, 30);
             Debug.Log("diamond amount: " + resourcesToGive[ResourceType.Diamonds]);
             Debug.Log(random);
 
