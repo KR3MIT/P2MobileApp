@@ -7,6 +7,7 @@ public class OuterRingScript : MonoBehaviour
     public Animator animator;
     public void StartPulse()
     {
+        this.gameObject.SetActive(true);
         animator.SetBool("OuterRingClicked", true);
     }
     public void StartReversePulse()

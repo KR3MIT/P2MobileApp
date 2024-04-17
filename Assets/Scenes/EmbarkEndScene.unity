@@ -385,6 +385,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1221565636946190568, guid: 3d78cd6baa7a71440a081e5040aee508, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -422
+      objectReference: {fileID: 0}
     - target: {fileID: 1425472324613606708, guid: 3d78cd6baa7a71440a081e5040aee508, type: 3}
       propertyPath: m_Name
       value: EndScreen
@@ -474,7 +478,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4410094195933280274, guid: 3d78cd6baa7a71440a081e5040aee508, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d78cd6baa7a71440a081e5040aee508, type: 3}
