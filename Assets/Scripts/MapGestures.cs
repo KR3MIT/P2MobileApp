@@ -19,6 +19,10 @@ class MapGestures : MonoBehaviour
             {
                 Vector2 delta = touch.deltaPosition;
                 Camera.transform.Translate(-delta.x * 0.005f, -delta.y * 0.005f, 0);
+
+                float clampedX = Mathf.Clamp(Camera.transform.position.x, -5f, 7f);
+                float clampedY = Mathf.Clamp(Camera.transform.position.y, -6, 8);
+
             }
         }
         else if (Input.touchCount == 2)
