@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 779105816}
-  m_IndirectSpecularColor: {r: 0.762183, g: 0.78578395, b: 0.7304939, a: 1}
+  m_IndirectSpecularColor: {r: 0.7621802, g: 0.78578293, b: 0.7304944, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -230,15 +230,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10dbcb620fb64fd418762228b4cb2cad, type: 2}
-  m_sharedMaterial: {fileID: -7161012227215572938, guid: 10dbcb620fb64fd418762228b4cb2cad, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d6e83288da6221141bffc53133bff536, type: 2}
+  m_sharedMaterial: {fileID: -7161012227215572938, guid: d6e83288da6221141bffc53133bff536, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4283170047
+  m_fontColor: {r: 1, g: 0.98705995, b: 0.2924527, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -655,14 +655,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 807377897}
     m_Modifications:
-    - target: {fileID: 343940946402958362, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -39.0493
-      objectReference: {fileID: 0}
-    - target: {fileID: 343940946402958362, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -39.049286
-      objectReference: {fileID: 0}
     - target: {fileID: 1798253478985888410, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
@@ -746,10 +738,6 @@ PrefabInstance:
     - target: {fileID: 2161110544229946562, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3802195712177750063, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -106.60937
       objectReference: {fileID: 0}
     - target: {fileID: 6256824901138345321, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
       propertyPath: m_fontAsset
@@ -1407,7 +1395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 80521421676826855, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 620998472989531603, guid: 4b10ecfd61d26dc4e8bacba90a8e3c9a, type: 3}
       propertyPath: embarksText
@@ -3060,15 +3048,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10dbcb620fb64fd418762228b4cb2cad, type: 2}
-  m_sharedMaterial: {fileID: -7161012227215572938, guid: 10dbcb620fb64fd418762228b4cb2cad, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d6e83288da6221141bffc53133bff536, type: 2}
+  m_sharedMaterial: {fileID: -7161012227215572938, guid: d6e83288da6221141bffc53133bff536, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4283170047
+  m_fontColor: {r: 1, g: 0.9882353, b: 0.29411766, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
