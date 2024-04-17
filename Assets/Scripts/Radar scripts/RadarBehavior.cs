@@ -44,6 +44,7 @@ public class RadarBehavior : MonoBehaviour
     //encounter click cancas
     [SerializeField] private GameObject encounterClickCanvas;
     private bool encounterCanvasActive = false;
+    private int canvasoffsetZ = 90;
 
     //resourcuacwawacaw
     [SerializeField] private GameObject resourceClickCanvas;
@@ -244,14 +245,14 @@ public class RadarBehavior : MonoBehaviour
     private void EncounterClick(GameObject canvas, bool isEncounter)
     {
         canvas.SetActive(!canvas.activeSelf);//toggle canvas
-        canvas.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, 95);//set position of canvas
+        canvas.transform.position = new Vector3(hit.transform.position.x, hit.transform.position.y, canvasoffsetZ);//set position of canvas
         if (canvas.transform.position.x > maxXPos)//no out of bounds canvas
         {
-            canvas.transform.position = new Vector3(maxXPos, canvas.transform.position.y, 95);
+            canvas.transform.position = new Vector3(maxXPos, canvas.transform.position.y, canvasoffsetZ);
         }
         else if (canvas.transform.position.x < -maxXPos)
         {
-            canvas.transform.position = new Vector3(-maxXPos, canvas.transform.position.y, 95);
+            canvas.transform.position = new Vector3(-maxXPos, canvas.transform.position.y, canvasoffsetZ);
         }
 
 
@@ -265,7 +266,7 @@ public class RadarBehavior : MonoBehaviour
         else
         {
             resourceCanvasActive = canvas.activeSelf;
-            canvas.transform.GetComponentInChildren<TMP_Text>().text = "Resource!!!";
+            canvas.transform.GetComponentInChildren<TMP_Text>().text = "Resource!";
         }
         
 
