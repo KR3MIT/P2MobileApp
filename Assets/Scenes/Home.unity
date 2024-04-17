@@ -739,6 +739,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6256824901138345321, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: d6e83288da6221141bffc53133bff536, type: 2}
+    - target: {fileID: 6256824901138345321, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -7161012227215572938, guid: d6e83288da6221141bffc53133bff536, type: 2}
+    - target: {fileID: 6256824901138345321, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6946668765419057264, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
       propertyPath: m_Name
       value: Upgrade
