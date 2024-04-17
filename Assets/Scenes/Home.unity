@@ -2440,32 +2440,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1147526668 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6327951220068428486, guid: 7b1fb1ba6dfb04042874fa71defe2b50, type: 3}
-  m_PrefabInstance: {fileID: 1676950196285788988}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1147526670
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147526668}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e0e6dd67ba2d49b4ea442f7ab91cbab4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1157409115
 GameObject:
   m_ObjectHideFlags: 0
@@ -4258,10 +4232,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: steampunkship
       objectReference: {fileID: 0}
-    - target: {fileID: 1282383052703868720, guid: 7b1fb1ba6dfb04042874fa71defe2b50, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5670702766962bc47afa78d3d502ff0b, type: 2}
     - target: {fileID: 3668128085776650588, guid: 7b1fb1ba6dfb04042874fa71defe2b50, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4302,33 +4272,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4911307684133518254, guid: 7b1fb1ba6dfb04042874fa71defe2b50, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5670702766962bc47afa78d3d502ff0b, type: 2}
-    - target: {fileID: 4992054360782805217, guid: 7b1fb1ba6dfb04042874fa71defe2b50, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5670702766962bc47afa78d3d502ff0b, type: 2}
-    - target: {fileID: 5330903003465656234, guid: 7b1fb1ba6dfb04042874fa71defe2b50, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5670702766962bc47afa78d3d502ff0b, type: 2}
-    - target: {fileID: 6597427634649705574, guid: 7b1fb1ba6dfb04042874fa71defe2b50, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 137.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 7542370056605803517, guid: 7b1fb1ba6dfb04042874fa71defe2b50, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5670702766962bc47afa78d3d502ff0b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6327951220068428486, guid: 7b1fb1ba6dfb04042874fa71defe2b50, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1147526670}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b1fb1ba6dfb04042874fa71defe2b50, type: 3}
 --- !u!1001 &1792408761196917567
 PrefabInstance:
