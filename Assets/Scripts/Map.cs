@@ -28,12 +28,12 @@ using UnityEngine.SceneManagement;
 
 public class Map : MonoBehaviour
 {
-    public string accessToken = "pk.eyJ1IjoibWFkc2JlbiIsImEiOiJjbHRrMXA1a3UwdWdsMnBxdmx3anRjOHB5In0.WcbYEU3wnJ8jnCQHvyy21A";
-    public enum style { Light, Dark, Streets, Outdoors, Satellite, SatelliteStreets };
-    public style mapStyle = style.Streets;
-    public enum resolution { low = 1, high = 2 };
-    public resolution mapResolution = resolution.low;
-    public double[] BoundingBox = new double[4]; //[lon(min), lat(min), lon(max), lat(max)]
+    [SerializeField] private string accessToken = "pk.eyJ1IjoibWFkc2JlbiIsImEiOiJjbHRrMXA1a3UwdWdsMnBxdmx3anRjOHB5In0.WcbYEU3wnJ8jnCQHvyy21A";
+    [SerializeField] private enum style { Light, Dark, Streets, Outdoors, Satellite, SatelliteStreets };
+    [SerializeField] private style mapStyle = style.Streets;
+    [SerializeField] private enum resolution { low = 1, high = 2 };
+    [SerializeField] private resolution mapResolution = resolution.low;
+    [HideInInspector] public double[] BoundingBox = new double[4]; //[lon(min), lat(min), lon(max), lat(max)]
 
     private string[] styleStr = new string[] { "light-v10", "dark-v10", "streets-v11", "outdoors-v11", "satellite-v9", "satellite-streets-v11" };
     private string url = "";
@@ -46,8 +46,6 @@ public class Map : MonoBehaviour
 
     public static Map instance;
 
-
-    // Start is called before the first frame update
     void Start()
     {
 
