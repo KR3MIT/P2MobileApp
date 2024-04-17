@@ -655,6 +655,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 807377897}
     m_Modifications:
+    - target: {fileID: 260929858255704158, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 260929858255704158, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 1798253478985888410, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
@@ -738,6 +746,14 @@ PrefabInstance:
     - target: {fileID: 2161110544229946562, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240424118228952550, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
+      propertyPath: m_fontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240424118228952550, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 6256824901138345321, guid: 53efad1b841a19544be5e9d2419788f3, type: 3}
       propertyPath: m_fontAsset
