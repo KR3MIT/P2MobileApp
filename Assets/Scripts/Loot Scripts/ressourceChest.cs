@@ -12,7 +12,7 @@ public class ressourceChest : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI resourceGainText;
     [SerializeField] private GameObject winParticle;
     [SerializeField] private GameObject panel;
-    [SerializeField] private Sprite wood,wood2,wood23,metal,gold,diamond; 
+    [SerializeField] private Sprite wood,metal,gold,diamond; 
     private ParticleSystem particleSystem;
     
 
@@ -55,8 +55,7 @@ public class ressourceChest : MonoBehaviour
             Debug.Log(random);
           
           particleSystem.textureSheetAnimation.AddSprite(wood);
-            particleSystem.textureSheetAnimation.AddSprite(wood2);
-            particleSystem.textureSheetAnimation.AddSprite(wood23);
+            
 
             character.AddResource(ResourceType.Wood, resourcesToGive[ResourceType.Wood]);
             StartCoroutine(TextDelay("Wood", resourcesToGive[ResourceType.Wood]));

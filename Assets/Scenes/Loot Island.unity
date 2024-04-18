@@ -6272,11 +6272,9 @@ MonoBehaviour:
   resourceGainText: {fileID: 541370768}
   winParticle: {fileID: 1681243446}
   panel: {fileID: 2141132144}
-  wood: {fileID: 21300000, guid: f73f68fe6815f5548a6c2a61b9e49add, type: 3}
-  wood2: {fileID: 21300000, guid: e9d4143c19529834981ac6821a04aecd, type: 3}
-  wood23: {fileID: 21300000, guid: f26fa8880b3aeef4b8516c82dc12f2a5, type: 3}
-  metal: {fileID: 21300000, guid: 4d6a99baee23b654f9e4bb672ae0b438, type: 3}
-  gold: {fileID: 21300000, guid: 59fe15df67d9f0842b9eb1fd1f92e05e, type: 3}
+  wood: {fileID: 21300000, guid: c990d9e3408200a4da88982ad1cf78f2, type: 3}
+  metal: {fileID: 21300000, guid: 71cca675c1982c64d9d441edd577f31e, type: 3}
+  gold: {fileID: 21300000, guid: 866a7a55c0f078e4391dd9f195bd0b83, type: 3}
   diamond: {fileID: 21300000, guid: 59fe15df67d9f0842b9eb1fd1f92e05e, type: 3}
 --- !u!95 &1098792549
 Animator:
@@ -6350,11 +6348,9 @@ MonoBehaviour:
   resourceGainText: {fileID: 1451038140}
   winParticle: {fileID: 626167955}
   panel: {fileID: 1853816416}
-  wood: {fileID: 0}
-  wood2: {fileID: 0}
-  wood23: {fileID: 0}
-  metal: {fileID: 0}
-  gold: {fileID: 0}
+  wood: {fileID: 21300000, guid: c990d9e3408200a4da88982ad1cf78f2, type: 3}
+  metal: {fileID: 21300000, guid: 71cca675c1982c64d9d441edd577f31e, type: 3}
+  gold: {fileID: 21300000, guid: 866a7a55c0f078e4391dd9f195bd0b83, type: 3}
   diamond: {fileID: 21300000, guid: 59fe15df67d9f0842b9eb1fd1f92e05e, type: 3}
 --- !u!95 &1260194490
 Animator:
@@ -21216,11 +21212,9 @@ MonoBehaviour:
   resourceGainText: {fileID: 2016825188}
   winParticle: {fileID: 1971298074}
   panel: {fileID: 442081190}
-  wood: {fileID: 0}
-  wood2: {fileID: 0}
-  wood23: {fileID: 0}
-  metal: {fileID: 0}
-  gold: {fileID: 0}
+  wood: {fileID: 21300000, guid: c990d9e3408200a4da88982ad1cf78f2, type: 3}
+  metal: {fileID: 21300000, guid: 71cca675c1982c64d9d441edd577f31e, type: 3}
+  gold: {fileID: 21300000, guid: 866a7a55c0f078e4391dd9f195bd0b83, type: 3}
   diamond: {fileID: 21300000, guid: 59fe15df67d9f0842b9eb1fd1f92e05e, type: 3}
 --- !u!137 &7824511317059525158
 SkinnedMeshRenderer:
