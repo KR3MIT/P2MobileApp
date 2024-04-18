@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 779105816}
-  m_IndirectSpecularColor: {r: 0.762183, g: 0.78578395, b: 0.7304939, a: 1}
+  m_IndirectSpecularColor: {r: 0.76218444, g: 0.78578347, b: 0.7304936, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2736,7 +2736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outerRingScript: {fileID: 1468584840}
   CountDownText: {fileID: 880905554}
-  DebugMode: 0
+  DebugMode: 1
   SceneName: WMapCircle
 --- !u!4 &1389355366
 Transform:

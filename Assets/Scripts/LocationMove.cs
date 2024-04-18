@@ -21,8 +21,6 @@ public class LocationMove : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     [HideInInspector]public float totalDistance = 0f;
 
-    [SerializeField] private TMP_Text distanceText;
-
     public float smoothTime = 1f;
 
     public float distianceMultiplier = 0.011f;
@@ -86,7 +84,7 @@ public class LocationMove : MonoBehaviour
         // Use SmoothDamp to gradually change the position of the object
         transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
 
-        //this checks if the object is present in a scene named "CombatEncounter" and if it is, it will disable the rendering of the object
+        //this checks if the object is present in a scene named "CombatEncounter" and if it is, it will disable the rendering of the ship
         if (SceneManager.GetActiveScene().name == "CombatEncounterTest")
         {
             gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -135,7 +133,7 @@ public class LocationMove : MonoBehaviour
         {
          distance = 0;
          }
-        distanceText.text = "Distance: " + distance.ToString("F2") + " meters";
+
 
         statistics.MetersWalkedPerMonth(distance); // Add the distance to the total distance walked
 
