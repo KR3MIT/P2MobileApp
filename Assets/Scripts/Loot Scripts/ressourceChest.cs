@@ -47,7 +47,7 @@ public class ressourceChest : MonoBehaviour
     public void OpenChestResource()
     {
         int random = Random.Range(0, 100);
-        if (random < 100)
+        if (random < 25)
         {
             Debug.Log("Wood");
             resourcesToGive[ResourceType.Wood] = Random.Range(15, 30);
