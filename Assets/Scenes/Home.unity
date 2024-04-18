@@ -2736,7 +2736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outerRingScript: {fileID: 1468584840}
   CountDownText: {fileID: 880905554}
-  DebugMode: 0
+  DebugMode: 1
   SceneName: WMapCircle
 --- !u!4 &1389355366
 Transform:

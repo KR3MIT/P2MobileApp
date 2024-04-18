@@ -6273,7 +6273,7 @@ MonoBehaviour:
   winParticle: {fileID: 1681243446}
   panel: {fileID: 2141132144}
   wood: {fileID: 21300000, guid: 59fe15df67d9f0842b9eb1fd1f92e05e, type: 3}
-  metal: {fileID: 21300000, guid: 59fe15df67d9f0842b9eb1fd1f92e05e, type: 3}
+  metal: {fileID: 21300000, guid: f73f68fe6815f5548a6c2a61b9e49add, type: 3}
   gold: {fileID: 21300000, guid: 59fe15df67d9f0842b9eb1fd1f92e05e, type: 3}
   diamond: {fileID: 21300000, guid: 59fe15df67d9f0842b9eb1fd1f92e05e, type: 3}
 --- !u!95 &1098792549
@@ -17578,15 +17578,15 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10dbcb620fb64fd418762228b4cb2cad, type: 2}
-  m_sharedMaterial: {fileID: -7161012227215572938, guid: 10dbcb620fb64fd418762228b4cb2cad, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d6e83288da6221141bffc53133bff536, type: 2}
+  m_sharedMaterial: {fileID: -7161012227215572938, guid: d6e83288da6221141bffc53133bff536, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278232831
+  m_fontColor: {r: 1, g: 0.6526397, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
