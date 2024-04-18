@@ -55,6 +55,7 @@ public class ressourceChest : MonoBehaviour
             Debug.Log(random);
           
           particleSystem.textureSheetAnimation.AddSprite(wood);
+            
 
             character.AddResource(ResourceType.Wood, resourcesToGive[ResourceType.Wood]);
             StartCoroutine(TextDelay("Wood", resourcesToGive[ResourceType.Wood]));
@@ -69,6 +70,7 @@ public class ressourceChest : MonoBehaviour
             Debug.Log(random);
 
             particleSystem.textureSheetAnimation.AddSprite(metal);
+           
 
             character.AddResource(ResourceType.Metal, resourcesToGive[ResourceType.Metal]);
             StartCoroutine(TextDelay("Scrap Metal", resourcesToGive[ResourceType.Metal]));
