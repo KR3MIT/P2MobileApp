@@ -71,8 +71,8 @@ public class StatsOverlay : MonoBehaviour
 
         attributesText.text = "Stats: \n" + 
             "Health: " + _health + healthString + " \n" + 
-            "AD: " + _AD + adString + "\n" + 
-            "def: " + _def + defString;
+            "Attack: " + _AD + adString + "\n" + 
+            "Defence: " + _def + defString;
 
         
 
