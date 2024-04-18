@@ -1179,7 +1179,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 1328753552}
   totalDistance: 0
-  distanceText: {fileID: 0}
   smoothTime: 0.3
   distianceMultiplier: 0.0022
   newPosition: {x: 0, y: 0, z: 0}
@@ -10256,12 +10255,12 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 212459683}
   - {fileID: 1454038810}
   - {fileID: 1669814018}
   - {fileID: 1328753557}
   - {fileID: 423194339}
   - {fileID: 1448199454}
-  - {fileID: 212459683}
   - {fileID: 1198653909}
   - {fileID: 1356478226}
   - {fileID: 1383944064}
