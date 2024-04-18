@@ -87,7 +87,7 @@ public class ressourceChest : MonoBehaviour
         }
         else
         {
-            Debug.Log("Shiny Diamond");
+            Debug.Log("Shiny Diamond"); 
             resourcesToGive[ResourceType.Diamonds] = Random.Range(15, 30);
             Debug.Log("diamond amount: " + resourcesToGive[ResourceType.Diamonds]);
             Debug.Log(random);
