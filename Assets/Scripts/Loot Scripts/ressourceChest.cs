@@ -69,6 +69,7 @@ public class ressourceChest : MonoBehaviour
             Debug.Log(random);
 
             particleSystem.textureSheetAnimation.AddSprite(metal);
+           
 
             character.AddResource(ResourceType.Metal, resourcesToGive[ResourceType.Metal]);
             StartCoroutine(TextDelay("Scrap Metal", resourcesToGive[ResourceType.Metal]));
