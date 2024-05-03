@@ -86,13 +86,6 @@ public class CloudSave : MonoBehaviour
         HashSet<string> keyNamesHS = new HashSet<string>(_keyNames);
         var playerData = await CloudSaveService.Instance.Data.Player.LoadAsync(keyNamesHS);
 
-        //if (playerData.TryGetValue(playerData["shipParts"].Key, out var playerName))
-        //{
-        //    Debug.Log($"  {playerName.Key}: {playerName.Value.GetAs<List<ShipPartObject>>()}");
-        //    Debug.Log("count " + playerName.Value.GetAs<List<ShipPartObject>>().Count);
-        //    character.SetShipParts(playerName.Value.GetAs<List<ShipPartObject>>());
-        //}
-
         if (playerData.TryGetValue(playerData["shipParts"].Key, out var shipParts))
         {
             Debug.Log($"  {shipParts.Key}: {shipParts.Value.GetAs<List<ShipPart>>()}");
