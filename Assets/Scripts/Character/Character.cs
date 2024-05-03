@@ -133,12 +133,12 @@ public class Character : MonoBehaviour
 
         //foreach (ShipPartObject part in shipParts)
         //{
-        //    Debug.Log("fuck " + part.partName + " lvl " + part.lvl);
+        //    Debug.Log("  " + part.partName + " lvl " + part.lvl);
         //}
 
         //foreach (KeyValuePair<ResourceType, int> kvp in resources)
         //{
-        //    Debug.Log("fuck "+ kvp.Key + " value " + kvp.Value);
+        //    Debug.Log("  "+ kvp.Key + " value " + kvp.Value);
         //}
         
     }
