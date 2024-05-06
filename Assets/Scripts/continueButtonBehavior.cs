@@ -15,6 +15,7 @@ public class continueButtonBehavior : MonoBehaviour
         continueButton.interactable = false;
         for (int i = 0; i < buttons.Length; i++)
         {
+            // add a listener to each button in the list and call the method ActivateContinueButton when the button is clicked 
             buttons[i].onClick.AddListener(ActivateContinueButton);
         }
     }

@@ -20,6 +20,7 @@ public class Turtorial : MonoBehaviour
 
     void Start()
     {
+        // here we set playerprefs to 0 if they havent already been opened and set them to 1 if they have been opened
         TTtestFest = PlayerPrefs.GetInt("TTtestFest");
         TWmapCircle = PlayerPrefs.GetInt("TWmapCircle");
         THome = PlayerPrefs.GetInt("THome");
@@ -27,6 +28,8 @@ public class Turtorial : MonoBehaviour
         TLootIsland = PlayerPrefs.GetInt("TLootIsland");
 
         tutorialPanel.SetActive(false);
+        // this switch statement checks which scene is currently active and opens the tutorial panel for that scene,
+        // but only if the tutorial for that scene hasnt been opened yet / is set to 0
         switch (SceneManager.GetActiveScene().name)
         {
             case "Home":
@@ -34,6 +37,7 @@ public class Turtorial : MonoBehaviour
                 {
                     tutorialPanel.SetActive(true);
                     Debug.Log("Home");
+                    // set the playerprefs to 1 so the tutorial panel doesnt open again
                     PlayerPrefs.SetInt("THome", 1);
                 }
                 break;
@@ -43,6 +47,7 @@ public class Turtorial : MonoBehaviour
                 {
                     tutorialPanel2.SetActive(true);
                     Debug.Log("WMapCircle");
+                    // set the playerprefs to 1 so the tutorial panel doesnt open again
                     PlayerPrefs.SetInt("TWmapCircle", 1);
                 }
                 break;
@@ -52,6 +57,7 @@ public class Turtorial : MonoBehaviour
                 {
                     tutorialPanel3.SetActive(true);
                     Debug.Log("Loot island");
+                    // set the playerprefs to 1 so the tutorial panel doesnt open again
                     PlayerPrefs.SetInt("TLootIsland", 1);
                 }
                 break;
@@ -61,7 +67,10 @@ public class Turtorial : MonoBehaviour
                 {
                     tutorialPanel4.SetActive(true);
                     Debug.Log("TCombatEncounter");
+                    // set the playerprefs to 1 so the tutorial panel doesnt open again
                     PlayerPrefs.SetInt("TCombatEncounter", 1);
+                    // timescale is set to 0 to pause the automatic combat scene. the player can then read the tutorial
+                    // and press the continue button to resume the game with the Resume() method
                     Time.timeScale = 0;
                 }
                 break;
@@ -71,11 +80,13 @@ public class Turtorial : MonoBehaviour
                 {
                     tutorialPanel5.SetActive(true);
                     Debug.Log("Test Fest");
+                    // set the playerprefs to 1 so the tutorial panel doesnt open again
                     PlayerPrefs.SetInt("TTestFest", 1);
                 }
                 break;
         }
     }
+    // this method is called by the continue button in the tutorial panel to resume the game in combat encounter
     public void Resume()
     {
         Time.timeScale = 1;

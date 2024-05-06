@@ -36,7 +36,7 @@ public class Character : MonoBehaviour
     public int defaultAD = 10;
 
     //[Header("Resources")]
-    //public int wood, metal, diamonds, gold;
+    private int wood = 5, metal=5, diamonds=3, gold =7;
 
 
 
@@ -86,14 +86,6 @@ public class Character : MonoBehaviour
         }
 
 
-        
-
-        //resources.Add(ResourceType.Wood, 0);
-        //resources.Add(ResourceType.Metal, 0);
-        //resources.Add(ResourceType.Diamonds, 0);
-        //resources.Add(ResourceType.Gold, 0);
-
-
         ShipPartObject cannon = new ShipPartObject("Cannon", new List<ResourceType> { ResourceType.Metal, ResourceType.Gold }, ShipPartObject.StatType.AD);
         ShipPartObject engine = new ShipPartObject("Engine", new List<ResourceType> { ResourceType.Metal, ResourceType.Diamonds }, ShipPartObject.StatType.def);
         ShipPartObject balloon = new ShipPartObject("Balloon", new List<ResourceType> { ResourceType.Wood, ResourceType.Metal }, ShipPartObject.StatType.health, 15);
@@ -107,10 +99,10 @@ public class Character : MonoBehaviour
         MakeStructFromClass(shipParts);//makes the shippartobjects stats into a struct such that it can be used with cloudsave
 
         //default resources for test
-        resources[ResourceType.Wood] = 5;
-        resources[ResourceType.Metal] = 5;
-        resources[ResourceType.Diamonds] = 3;
-        resources[ResourceType.Gold] = 7;
+        resources[ResourceType.Wood] = wood;
+        resources[ResourceType.Metal] = metal;
+        resources[ResourceType.Diamonds] = diamonds;
+        resources[ResourceType.Gold] = gold;
     }
 
     private void Start()
@@ -133,12 +125,12 @@ public class Character : MonoBehaviour
 
         //foreach (ShipPartObject part in shipParts)
         //{
-        //    Debug.Log("fuck " + part.partName + " lvl " + part.lvl);
+        //    Debug.Log("  " + part.partName + " lvl " + part.lvl);
         //}
 
         //foreach (KeyValuePair<ResourceType, int> kvp in resources)
         //{
-        //    Debug.Log("fuck "+ kvp.Key + " value " + kvp.Value);
+        //    Debug.Log("  "+ kvp.Key + " value " + kvp.Value);
         //}
         
     }
@@ -278,6 +270,7 @@ public class Character : MonoBehaviour
         {
             exp -= xpToLevel;
             lvl++;
+            SetStats();
         }
     }
 }
