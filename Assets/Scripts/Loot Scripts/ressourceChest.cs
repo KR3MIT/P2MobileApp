@@ -126,7 +126,7 @@ public class ressourceChest : MonoBehaviour
           
         
         }
-        // this method changes the particle material depending on the resource type
+        
 
 
     }
