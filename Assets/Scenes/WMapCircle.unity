@@ -6319,6 +6319,7 @@ MonoBehaviour:
   shipInteractRadius: 0.75
   encounterClickCanvas: {fileID: 1470087896231912136, guid: d527917013f804549bb9035478b1cf06, type: 3}
   resourceClickCanvas: {fileID: 1470087896231912136, guid: ae78639d39fc4d64e86580d39de0ea0f, type: 3}
+  outerRingScript: {fileID: 451904922}
 --- !u!64 &1383944061
 MeshCollider:
   m_ObjectHideFlags: 0

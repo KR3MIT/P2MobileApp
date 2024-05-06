@@ -59,6 +59,9 @@ public class RadarBehavior : MonoBehaviour
     //cnahit
     private float maxXPos = .85f;
 
+    //
+    public OuterRingScript outerRingScript;
+
     private void Start()
     {
 
@@ -97,13 +100,12 @@ public class RadarBehavior : MonoBehaviour
 
         if(Character.instance.gameObject != null)//check if player exists if it does set scenestate and if POIs exists set POIs
         {
-            sceneStates = GameObject.FindWithTag("Player").GetComponent<SceneStates>();
+            sceneStates = Character.instance.GetComponent<SceneStates>();
 
-            if (GameObject.Find("ShipManager") != null)
+            if (GameObject.Find("ShipManager") != null)//set locationmove for moved statistic
             {
                 _locationMove = GameObject.Find("ShipManager").GetComponent<LocationMove>();
             }
-
 
             if (!sceneStates.isEmbarked)
             {
@@ -117,22 +119,14 @@ public class RadarBehavior : MonoBehaviour
                 {
                     var poi = Instantiate(kvp.Value, kvp.Key.pos, instantiatedRotation);
                     poi.GetComponent<POIscript>().SetStats(kvp.Key.health, kvp.Key.ad, kvp.Key.def, kvp.Key.level);
-                    POIs.Add(poi);
-
-                    //if(kvp.Value.GetComponent<POIscript>().isEncounter)
-                    //{
-                    //    Debug.Log("javla from stats " + kvp.Key.level);
-                    //    Debug.Log("javla when instantiated " + poi.GetComponent<POIscript>().level);
-                    //}
-                    
-                    
+                    POIs.Add(poi);       
                 }
-                GameObject.FindObjectOfType<OuterRingScript>().StartPulse();//ad
+                outerRingScript.StartPulse();
                 sceneStates.POIdict.Clear();
             }else 
             {
                 spawnObjects();
-                GameObject.FindObjectOfType<OuterRingScript>().StartPulse();//ad
+                outerRingScript.StartPulse();
             }
         }
         else
@@ -369,10 +363,9 @@ public class RadarBehavior : MonoBehaviour
         //Debug.Log("Removed 1 opp " + POIs.Count);
     }
 
-    // this method checks if objects with the tag prop collides, and destroy them
     public void spawnObjects() //we are making a new method called "spawnObjects"
     {
-        MeshCollider radar = Sphere.GetComponent<MeshCollider>(); // map is the meshcollider of the sphere gameobject
+        MeshCollider radar = Sphere.GetComponent<MeshCollider>();//circle mesh
 
         int runAmount = 0; // we set runAmount to 0 to ensure no infinite loop
         for (int i = 0; i < amount; i++)
@@ -389,8 +382,6 @@ public class RadarBehavior : MonoBehaviour
                 
                 if (runAmount > maxRunAmount) // if runAmount is greater than 1000
                 {
-                    Debug.Log("Too close " + runAmount);
-
                     break; // we break the loop
                 }
                 i--; // we decrease i by 1
@@ -404,10 +395,7 @@ public class RadarBehavior : MonoBehaviour
             }
             POIs.Add(poi); // we instantiate the chosen prop, and add to list
         }
-        
-        
     }
-
     private bool IsTooClose(Vector3 pos)
     {
         if (POIs.Count == 0) return false; // if the list is empty, return false
@@ -421,7 +409,4 @@ public class RadarBehavior : MonoBehaviour
         }
         return false;
     }
-        
-        
-    
 }
